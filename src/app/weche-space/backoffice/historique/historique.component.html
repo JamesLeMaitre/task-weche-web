@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h5 class="title-dash2">Historique des demande de APP </h5>
+  </div>
+  <div class="col-lg-12 col-sm-6">
+    <br>
+    <div class="table-responsive">
+      <table class="table">
+        <thead class="table-light">
+        <tr>
+          <th>Date de téléchargement</th>
+          <th>Type de document</th>
+          <th>Statut de la demande</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let checkRequestStatus of checkRequestStatuses">
+          <td>{{ checkRequestStatus.createdAt | customDate }}</td>
+          <td>Attestation de présence au poste </td>
+          <td>
+            <span class="status1" *ngIf="checkRequestStatus.requestStatus === 'APPROVED'">Validée</span>
+            <span class="status2" *ngIf="checkRequestStatus.requestStatus === 'REJECTED'">Rejtée</span>
+          </td>
+          <td>
+            <a class="btn-telechager btn " *ngIf="checkRequestStatus.requestStatus === 'APPROVED'" (click)="downloadPdf(checkRequestStatus.requestNumber)"><img
+                                                alt=""
+                                                class="img-enga"
+                                                src="../../../../assets/img/download-01.svg"
+            >Télécharger
+            </a>
+            <a *ngIf="checkRequestStatus.requestStatus === 'REJECTED'" class="btn-vue btn"
+               routerLink="/backoffice/detail-nomme" (click)="redirectTo(checkRequestStatus.requestNumber)"><img
+              alt="" class="img-enga" src="../../../../assets/img/eye-open.png"></a>
+          </td>
+        </tr>
+        <!--<tr>
+          <td>03 Mai 2024</td>
+          <td>Mark</td>
+          <td><span class="status2">Demande rejetée</span></td>
+          <td></td>
+        </tr>-->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

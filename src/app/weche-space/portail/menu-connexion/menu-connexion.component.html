@@ -1,0 +1,63 @@
+<section class="container-fluid top-1">
+  <div class="row ">
+    <div class="col-lg-6 d-flex justify-content-center connexion-height">
+
+      <div class="form-connect">
+        <h1><strong routerLink="/connexion">Connexion /</strong> <span class="gray" routerLink="/inscription"> Inscription</span></h1>
+        <p class="form-paraph">Entrez votre identifiant et votre mot de passe, puis connectez-vous.</p>
+
+        <form (ngSubmit)="submit()" [formGroup]="loginForm" class="topForm">
+
+          <div class="mb-3">
+            <label class="form-label" for="username">Identifiant <span class="red">*</span></label>
+            <input aria-describedby="emailHelp" class="form-control" formControlName="username" id="username" name="username" placeholder="Matricule" type="text">
+
+            <ng-container [ngTemplateOutletContext]="{validation: 'required',message: 'L\'identifiant est requis',control: loginForm.controls['username']}" [ngTemplateOutlet]="formError"></ng-container>
+            <ng-container [ngTemplateOutletContext]="{validation: 'minlength',message: 'L\'identifiant doit avoir minimum 3 caractères',control: loginForm.controls['username']}" [ngTemplateOutlet]="formError"></ng-container>
+            <ng-container [ngTemplateOutletContext]="{validation: 'maxLength',message: 'L\'identifiant should have maximum 100 symbols',control: loginForm.controls['username']}" [ngTemplateOutlet]="formError"></ng-container>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="password">Mot de passe <span  class="red">*</span></label>
+              <input class="form-control" formControlName="password" id="password" name="password" placeholder="******" type="password"/>
+
+            <ng-container [ngTemplateOutletContext]="{validation: 'required',message: 'Le mot de passe est requis',control: loginForm.controls['password']}" [ngTemplateOutlet]="formError"></ng-container>
+            <ng-container [ngTemplateOutletContext]="{validation: 'minlength',message: 'Le mot de passe doit avoir minimum 3 caractères',control: loginForm.controls['password']}" [ngTemplateOutlet]="formError"></ng-container>
+            <ng-container [ngTemplateOutletContext]="{validation: 'maxLength',message: 'Password should have maximum 100 symbols',control: loginForm.controls['password']}" [ngTemplateOutlet]="formError"></ng-container>
+
+          </div>
+
+
+            <button [disabled]="loginForm.invalid" class="btn btn-primary" id="bt4" type="submit">
+              <ng-container *ngIf="isLoading$ | async"><span [style.display]="'block'" class="indicator-progress">Patientez...
+                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+              </ng-container>
+              <ng-container *ngIf="(isLoading$ | async) === false">
+                <span class="indicator-label">Connexion</span>
+              </ng-container>
+            </button>
+
+          <!--          <button type="submit" class="btn btn-primary" id="bt4">Connexion</button> -->
+          <button class="btn btn-primary" id="bt5" type="submit">Mot de passe oublié?</button>
+        </form>
+
+      </div>
+    </div>
+    <div class="col-lg-6  d-none d-lg-block"
+         style="background-image: url('../../../../assets/img/connexion.png'); background-repeat: no-repeat; background-size: cover;  ">
+
+    </div>
+  </div>
+</section>
+
+<ng-template #formError let-control="control" let-message="message" let-validation="validation">
+  <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block">
+        <span role="alert">
+          {{ message }}
+        </span>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

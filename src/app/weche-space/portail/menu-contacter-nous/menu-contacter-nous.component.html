@@ -1,0 +1,84 @@
+<section class="container contact-height  ">
+  <div class="row top-2">
+    <div class="col-md-6 contact-bottom">
+      <h2 class=" title-contact">Nous envoyer un message</h2>
+      <div class="paraph1 ">
+        <p>Vous pouvez nous envoyer vos questions ou demandes d'informations au cas où vous n'avez pas trouvé de reponse
+          à votre
+          préocupation dans notre <span><a href="/home/faq">Foire à question (F.A.Q.)</a></span></p>
+      </div>
+
+      <form (ngSubmit)="submit()" [formGroup]="contactForm" class="row g-3">
+        <div class="col-md-6 col-6">
+          <input class="form-control" formControlName="serialNumber" id="inputEmail4" placeholder="Matricule"
+                 type="text">
+        </div>
+        <div class="col-md-6 col-6">
+          <input class="form-control" formControlName="name" id="inputPassword4" placeholder="Nom" type="text">
+        </div>
+        <div class="col-md-6 col-6">
+          <input [ngClass]="{
+          'is-invalid': contactForm.controls['phoneNumber'].invalid && (contactForm.controls['phoneNumber'].dirty || contactForm.controls['phoneNumber'].touched),
+          'is-valid': contactForm.controls['phoneNumber'].valid && (contactForm.controls['phoneNumber'].dirty || contactForm.controls['phoneNumber'].touched)
+        }" class="form-control" formControlName="phoneNumber" id="inputAddress" [minlength]="8" [maxlength]="20"
+                 placeholder="(+229) __ __ __ __"
+                 type="number"/>
+          <ng-container [ngTemplateOutletContext]="{ validation: 'required', message: 'Phone number is required', control: contactForm.controls['phoneNumber'] }" [ngTemplateOutlet]="formError"></ng-container>
+          <ng-container [ngTemplateOutletContext]="{ validation: 'minlength', message: 'Phone number must be at least 8 digits long', control: contactForm.controls['phoneNumber'] }" [ngTemplateOutlet]="formError"></ng-container>
+          <ng-container [ngTemplateOutletContext]="{ validation: 'maxlength', message: 'Phone number must be no more than 20 digits long', control: contactForm.controls['phoneNumber'] }" [ngTemplateOutlet]="formError"></ng-container>
+          <ng-container [ngTemplateOutletContext]="{ validation: 'invalidPhoneNumber', message: 'Invalid phone number', control: contactForm.controls['phoneNumber'] }" [ngTemplateOutlet]="formError"></ng-container>
+
+        </div>
+        <div class="col-md-6 col-6">
+          <input class="form-control" formControlName="email" id="inputAddress2" placeholder="Email" type="email">
+        </div>
+        <div class="col-md-12">
+          <input class="form-control" formControlName="subject" id="inputAddress3" placeholder="Objet" type="text">
+        </div>
+        <div class="col-md-12  ">
+          <textarea class="form-control" cols="30" formControlName="message" name="message" placeholder="Message"
+                    required
+                    rows="4"></textarea>
+        </div>
+        <div class="col-12 d-flex justify-content-start">
+          <button [disabled]="contactForm.invalid" class="btn btn-primary " id="bt8" type="submit">Envoyer</button>
+        </div>
+      </form>
+
+    </div>
+
+    <div class="col-md-5  offset-md-1">
+      <h2 class="title-contact ">Nous Contacter</h2>
+      <div class="paraph1 ">
+        <p>Vous pouvez aussi nous appeler ou vous rendre au service de relation avec les usagers du Ministère du Travail
+          et de la Fonction Publique.<br>
+          Du <span class="spanL">Lundi</span> au <span
+            class="spanL">Vendredi, de 9:00 à 11:30 et de 16:00 à 17:30</span></p>
+      </div>
+      <p><img alt="" class="contact-img" src="../../../../assets/img/Vector.png"><a class="contact-lien"
+                                                                                    href="tel+22921332330">(+229) 21 33
+        23
+        30</a></p>
+      <p><img alt="" class="contact-img" src="../../../../assets/img/Vector(1).png"><a class="contact-lien"
+                                                                                       href="https://travail.gouv.bj/">https://travail.gouv.bj</a>
+      </p>
+      <p><img alt="" class="contact-img" src="../../../../assets/img/Vector(2).png"><a class="contact-lien"
+                                                                                       href="mailto:contact-weche@fpbenin.net">contact-weche@fpbenin.net</a>
+      </p>
+      <p class="paraph2 "><img alt="" class="contact-img" src="../../../../assets/img/Vector(3).png">Tour administrative
+        B, Cadjèjoun, Cotonou</p>
+
+    </div>
+  </div>
+</section>
+
+
+<ng-template #formError let-control="control" let-message="message" let-validation="validation">
+  <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+    <div class="fv-plugins-message-container">
+      <span class="text-danger" role="alert">
+        {{ message }}
+      </span>
+    </div>
+  </ng-container>
+</ng-template>

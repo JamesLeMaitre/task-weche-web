@@ -1,0 +1,533 @@
+/* Add this to your CSS file to prevent flash of unstyled content */
+[ng-cloak] {
+  display: none;
+}
+
+.info-attente {
+  background-color: rgba(10, 55, 100, 1);
+  border-color: rgba(10, 55, 100, 1);
+  border-radius: 119.7px !important;
+  font-weight: 400;
+  font-size: 14.36px;
+
+  line-height: 23.94px
+
+}
+
+.info-rejeter {
+
+  background-color: #EB0000;
+  border-color: #EB0000;
+  border-radius: 119.7px !important;
+  font-weight: 400;
+  font-size: 14.36px;
+
+  line-height: 23.94px
+
+}
+
+.info-modifier {
+
+  background-color: #EF8811;
+  border-color: #EF8811;
+  border-radius: 119.7px !important;
+  font-weight: 400;
+  font-size: 14.36px;
+
+  line-height: 23.94px
+
+}
+
+.info-valider {
+
+  background-color: #47A673;
+  border-color: #47A673;
+  border-radius: 119.7px !important;
+  font-weight: 400;
+  font-size: 14.36px;
+
+  line-height: 23.94px
+
+}
+
+.titre-detail {
+  padding-top: 20px;
+  font-size: 22.89px;
+  font-family: 700;
+  line-height: 36.62px;
+  color: #3B3F5C;;
+  margin-bottom: 1px;
+}
+
+.titre-profession {
+  font-size: 16.64px;
+  font-family: 400;
+  line-height: 26.63px;
+  color: #3B3F5C;
+
+
+}
+
+.section-profile1 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.titre-detail2 {
+
+  font-size: 21.21px;
+  font-weight: 600;
+  line-height: 33.94px;
+  color: #3B3F5C;;
+  margin-bottom: 15px;
+  letter-spacing: 0.2px;
+}
+
+.ligne1 {
+  font-size: 17.68px;
+  font-weight: 400;
+  line-height: 28.28px;
+}
+
+.xxx {
+  font-size: 22.98px;
+  font-weight: 400;
+  line-height: 36.71px;
+  line-height: 36.77px;
+}
+
+.btn-lg-a {
+  border-radius: 5.51px;
+  background-color: #E7E6E6;
+  height: 49.59px;
+  font-size: 15.48px !important;
+  font-weight: 400;
+  color: #666666;
+  padding-top: 12px;
+  border-color: transparent;
+  margin-top: 10px;
+}
+
+.btn-lg-a:hover {
+  border-radius: 5.51px;
+  background-color: #E7E6E6;
+  height: 49.59px;
+  font-size: 15.48px !important;
+  font-weight: 400;
+  color: #666666;
+  padding-top: 12px;
+  border-color: transparent;
+}
+
+.img-detail {
+  width: 20px;
+  height: 20px;
+  margin-top: 5px;
+}
+
+#mt-detail {
+  margin-top: 50px;
+}
+
+.btn-accepter {
+  font-size: 15.86px;
+  font-weight: 600;
+  width: 207px;
+  border-radius: 3.84px;
+  background-color: #3DA172;
+  border-color: #3DA172;
+}
+
+.btn-modifier {
+  font-size: 15.86px;
+  font-weight: 600;
+  width: 207px;
+  border-radius: 3.84px;
+  background-color: #EFA411;
+  border-color: #EFA411;
+}
+
+.btn-refuser {
+  font-size: 15.86px;
+  font-weight: 600;
+  width: 207px;
+  border-radius: 3.84px;
+  background-color: #EB0000;
+  border-color: #EB0000;
+}
+
+.profile-img {
+  width: 118px;
+  height: 118px;
+  border-radius: 500% !important;
+  object-fit: cover;
+  justify-content: center;
+}
+
+.profile-imgd {
+  width: 110px;
+  height: 110px;
+  border-radius: 500% !important;
+  object-fit: cover;
+  justify-content: center;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 20px;;
+  top: -110px;
+  background-color: red;
+  position: absolute;
+  font-size: 45px;
+  color: #FFFFFF;
+  text-align: center;
+  border: 3px solid #F6BDBD;
+}
+
+.profile-imgd2 {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px !important;
+  object-fit: contain;
+  justify-content: center;;
+  top: -110px;
+  padding-left: 5px;
+  padding-right: 2px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #EFA411;
+  position: absolute;
+  font-size: 4px;
+  color: #FFFFFF;
+  text-align: center;
+  border: 3px solid #F6BDBD;
+}
+
+.btn-annuler {
+  background-color: #EB0000;
+  border-color: #EB0000;
+  font-size: 15.48;
+  font-weight: 600;
+}
+
+.custom-labe {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.span-nom {
+  font-weight: 700;
+}
+
+.alert .btn-close {
+  position: absolute;
+  left: 0.75rem; /* Ajustez cette valeur pour changer la position à gauche */
+  /* Ajustez cette valeur pour changer la position du haut */
+
+}
+
+.alert-warning {
+  border-color: transparent !important;
+  font-size: 14px;
+  line-height: 27.16px;
+  font-weight: 300;
+  color: #434343;
+}
+
+.btn-close {
+  background-color: transparent;
+  border: none;
+  opacity: 5; /* Opacité par défaut */
+}
+
+.alert-danger {
+  border-color: transparent !important;
+  font-size: 14px;
+  line-height: 27.16px;
+  font-weight: 300;
+  color: #434343;
+  background-color: rgba(255, 82, 82, 0.18) !important;
+}
+
+.custom-close::before {
+  content: url('../../../../assets/img/notif1.png'); /* Remplacez par le chemin de votre image SVG */
+  display: block;
+  width: 1.5rem; /* Ajustez la taille de l'icône si nécessaire */
+  height: 1.5rem; /* Ajustez la taille de l'icône si nécessaire */
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+.custom-close1::before {
+  content: url('../../../../assets/img/notif2.png'); /* Remplacez par le chemin de votre image SVG */
+  display: block;
+  width: 1.5rem; /* Ajustez la taille de l'icône si nécessaire */
+  height: 1.5rem; /* Ajustez la taille de l'icône si nécessaire */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+.custom-close1 {
+  position: relative;
+  background: none;
+  border: none;
+
+}
+
+.custom-close {
+  position: relative;
+  background: none;
+  border: none;
+
+}
+
+.custom-close svg {
+  display: none; /* Cache l'icône SVG par défaut */
+
+}
+
+.alert {
+  position: relative;
+  padding-left: 3.5rem; /* Ajustez cette valeur en fonction de la taille du bouton */
+}
+
+.btn-confirmer {
+  background-color: #0a3764;
+  border-color: #0a3764;
+  font-size: 15.48;
+  font-weight: 600;
+}
+
+.btn-confirmer:hover {
+  background-color: #0a3764;
+  border-color: #0a3764;
+}
+
+.btn-annuler:hover {
+  background-color: #EB0000;
+  border-color: #EB0000;
+}
+
+.form-floating .label {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.mt-top {
+  margin-top: 25px;
+}
+
+.paraph-notifdelete {
+
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  top: -50px
+}
+
+.modal-body {
+  position: relative;
+}
+
+.v .form-check-input {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.v label {
+  font-size: 15.48px;
+  font-weight: 400;
+  line-height: 18.56px;
+}
+
+.form-check-input:checked {
+  background-color: rgba(61, 161, 114, 1);
+  border-color: rgba(23, 162, 184, 1);
+}
+
+.form-check {
+  border-radius: 8px;
+  border: 0.73px solid rgba(66, 80, 102, 0.4) !important;
+  height: 40.56px;
+  padding-top: 7.5px;
+  margin-left: 30px !important;
+  margin-right: 30px !important;
+}
+
+@media (max-width: 767.98px) {
+
+  .alert-warning {
+    border-color: transparent !important;
+    font-size: 11.67px;
+    line-height: 27.16px;
+    font-weight: 300;
+    color: #434343;
+  }
+
+  .alert-danger {
+    border-color: transparent !important;
+    font-size: 11.67px;
+    line-height: 27.16px;
+    font-weight: 300;
+    color: #434343;
+    background-color: rgba(255, 82, 82, 0.18) !important;
+  }
+
+  .v label {
+    font-size: 12.48px;
+    font-weight: 400;
+    line-height: 10.56px;
+  }
+
+  .info-attente {
+
+    background-color: rgba(10, 55, 100, 1);
+    border-color: rgba(10, 55, 100, 1);
+    border-radius: 119.7px !important;
+    font-weight: 400;
+    font-size: 7.24px;
+
+    line-height: 12.06px
+
+  }
+
+  .info-rejeter {
+
+    background-color: #EB0000;
+    border-color: #EB0000;
+    border-radius: 119.7px !important;
+    font-weight: 400;
+    font-size: 7.24px;
+
+    line-height: 12.06px
+
+  }
+
+  .info-modifier {
+
+    background-color: #EF8811;
+    border-color: #EF8811;
+    border-radius: 119.7px !important;
+    font-weight: 400;
+    font-size: 7.24px;
+
+    line-height: 12.06px
+
+  }
+
+  .info-valider {
+
+    background-color: #47A673;
+    border-color: #47A673;
+    border-radius: 119.7px !important;
+    font-weight: 400;
+    font-size: 7.24px;
+    line-height: 12.06px
+
+  }
+
+  .img-detail {
+    width: 15.65px;
+    height: 15px;
+    margin-top: 2px;
+  }
+
+  .ligne1 {
+    font-size: 8.98px;
+    font-weight: 400;
+    line-height: 14.36px;
+  }
+
+  .xxx {
+    font-size: 11.67px;
+    font-weight: 400;
+    line-height: 18.67px;
+
+  }
+
+  .btn-lg-a {
+    border-radius: 5.51px;
+    background-color: #E7E6E6;
+    height: 31.59px;
+    font-size: 14px !important;
+    font-weight: 400;
+    color: #666666;
+    padding-top: 5px;
+    border-color: transparent;
+    margin-top: 10px;
+  }
+
+  .btn-lg-a:hover {
+    border-radius: 5.51px;
+    background-color: #E7E6E6;
+    height: 31.59px;
+    font-size: 14px !important;
+    font-weight: 400;
+    color: #666666;
+    padding-top: 5px;
+    border-color: transparent;
+    margin-top: 10px;
+  }
+
+  .titre-detail2 {
+
+    font-size: 10.77px;
+    font-weight: 600;
+    line-height: 17.23px;
+    color: #3B3F5C;;
+    margin-bottom: 15px;
+    letter-spacing: 0.2px;
+  }
+
+  .titre-detail {
+    padding-top: 20px;
+    font-size: 16.3px;
+    font-family: 700;
+    line-height: 26.08px;
+    color: #3B3F5C;;
+    margin-bottom: 1px;
+  }
+
+  .titre-profession {
+    font-size: 11.85px;
+    font-family: 400;
+    line-height: 18.96px;
+    color: #3B3F5C;
+
+
+  }
+
+  .btn-accepter {
+    font-size: 15.86px;
+    font-weight: 600;
+    width: 101.27px;
+    border-radius: 3.84px;
+    background-color: #3DA172;
+    border-color: #3DA172;
+    margin-top: 5px;
+  }
+
+  .btn-modifier {
+    font-size: 15.86px;
+    font-weight: 600;
+    width: 87.27px;
+    border-radius: 3.84px;
+    background-color: #EFA411;
+    border-color: #EFA411;
+    margin-top: 5px;
+  }
+
+  .btn-refuser {
+    font-size: 15.86px;
+    font-weight: 600;
+    width: 87.27px;
+    border-radius: 3.84px;
+    background-color: #EB0000;
+    border-color: #EB0000;
+    margin-top: 5px;
+  }
+}

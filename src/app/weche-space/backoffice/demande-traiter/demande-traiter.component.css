@@ -1,0 +1,26 @@
+.search2{
+
+}
+
+.input-group-text {
+  background: none;
+  border: none;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.form-control {
+  padding-left: 2.5rem; /* Adjust to make room for the icon */
+  border-radius: 50px;width: 400px;
+  height: 47px;
+}
+@media (max-width:767.98px){
+
+  .form-control {
+    padding-left: 2.5rem; /* Adjust to make room for the icon */
+    border-radius: 50px;width: 200px;
+    height: 47px;
+  }}

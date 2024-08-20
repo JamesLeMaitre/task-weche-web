@@ -1,0 +1,207 @@
+<ng-template #rejeter let-modal>
+  <!--  <div class="modal-header">
+  <h4 class="modal-title">Modal title</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>-->
+  <div class="modal-body taille-notif-delete position-relative">
+    <div class="d-flex justify-content-center align-items-center">
+      <i (click)="modal.close('Close click')" class="bi bi-x-lg profile-imgd"></i>
+
+    </div>
+    <p class="text-center paraph-notifdelete">Vous avez refusé la demande d’attestation de présence au poste
+      de {{ details.civilName }}
+      <span
+        class="span-nom"> {{ details.firstName + ' ' + details.lastName }}</span></p>
+    <form (ngSubmit)="save()" [formGroup]="rejectRequestAdminForm">
+      <div class="form-floating">
+        <textarea class="form-control" id="floatingTextarea2" placeholder="Entrez le motif de ce rejet"
+                  style="height: 100px"></textarea>
+        <label class="custom-labe" for="floatingTextarea2">Entrez le motif de ce rejet</label>
+      </div>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-top">
+        <button (click)="modal.close('Close click')" class="btn btn-danger me-md-2 btn-annuler" type="button">Annuler
+        </button>
+        <button class="btn btn-primary btn-confirmer" type="button">Confirmer</button>
+      </div>
+    </form>
+  </div>
+  <!-- <div class="modal-footer">
+     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Close</button>
+   </div>-->
+</ng-template>
+
+<ng-template #modifier let-modal>
+  <!--  <div class="modal-header">
+  <h4 class="modal-title">Modal title</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>-->
+  <div class="modal-body taille-notif-delete position-relative">
+    <div class="d-flex justify-content-center align-items-center">
+      <img alt="" class="  profile-imgd2" src="../../../../assets/img/edit.svg">
+
+    </div>
+    <p class="text-center paraph-notifdelete">Choisissez les documents à modifier ou à renvoyer. </p>
+    <form action="" class=" ">
+      <div class="form-check v">
+        <input class="form-check-input" id="flexCheckDefault" type="checkbox" value="">
+        <label class="form-check-label" for="flexCheckDefault">
+          Fichier décret de nomination
+        </label>
+      </div>
+      <div class="form-check v">
+        <input checked class="form-check-input" id="flexCheckChecked" type="checkbox" value="">
+        <label class="form-check-label" for="flexCheckChecked">
+          Fichier de passation de service
+        </label>
+      </div>
+      <div class="form-floating">
+        <textarea class="form-control" id="floatingTextarea2" placeholder="Entrez le motif de ce rejet"
+                  style="height: 100px ;margin-top: 15px;"></textarea>
+        <label class="custom-labe" for="floatingTextarea2">Entrez le motif de ce rejet</label>
+      </div>
+      <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-top">
+        <button (click)="modal.close('Close click')" class="btn btn-danger me-md-2 btn-annuler" type="button">Annuler
+        </button>
+        <button class="btn btn-primary btn-confirmer" type="button">Confirmer</button>
+      </div>
+    </form>
+  </div>
+  <!-- <div class="modal-footer">
+     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Close</button>
+   </div>-->
+</ng-template>
+
+<div class="row">
+  <div *ngIf="checkStatusData" class="col-lg-12 mb-10">
+    <h1 class="title-dash">Liste des demandes / Détails de la demande {{ details.requestNumber }}
+      <button
+        *ngIf="checkStatusData?.requestStatus === 'PENDING'" class="btn btn-primary info-attente">En attente
+
+      </button>
+      <button
+        *ngIf="checkStatusData!.requestStatus === 'REJECTED'" class="btn btn-primary info-rejeter">Rejetée
+      </button>
+      <button *ngIf="checkStatusData!.requestStatus === 'UPDATE'" class="btn btn-primary info-modifier">A
+        modifier
+      </button>
+      <button *ngIf="checkStatusData!.requestStatus === 'APPROVED'" class="btn btn-primary info-valider">Validée
+      </button>
+    </h1>
+  </div>
+</div>
+<div class="row">
+
+</div>
+<div *ngIf="checkStatusData?.requestStatus === 'REJECTED'" class="alert alert-danger alert-dismissible fade show"
+     role="alert">
+  <button aria-label="Close" class="btn-close custom-close" data-bs-dismiss="alert" type="button"></button>
+  {{ checkStatusData!.comment }}
+  <!-- En effet, votre taux de présence au poste durant cette période est inférieur à 70%, ce qui ne correspond pas aux
+   exigences requises pour l'obtention d'une attestation de présence positive.-->
+
+</div>
+<div *ngIf="checkStatusData?.requestStatus === 'UPDATE'" class="alert alert-warning alert-dismissible fade show"
+     role="alert">
+  <button aria-label="Close" class="btn-close custom-close1" data-bs-dismiss="alert" type="button"></button>
+  {{ checkStatusData.comment }}
+</div>
+
+<div class="row section-profile1">
+  <div class="col-lg-1 col-md-3 me-5">
+    <img alt="" class="profile-img" src="../../../../assets/img/ads.JPG"
+    >
+  </div>
+  <div class="col-lg-10  col-md-  ">
+    <h1 class="titre-detail">{{ details.lastName }} {{ details.firstName }}</h1>
+    <p class="titre-profession">Profession</p>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <h2 class="titre-detail2 text-decoration-underline">Détails sur le demandeur {{ details.requestStatus }}</h2>
+  </div>
+
+  <div class="col-6">
+    <p class="ligne1">Dénomination civile : <span class="xxx">{{ details.civilName }}</span></p>
+  </div>
+  <div class="col-6">
+    <p class="ligne1">Période de début : <span class="xxx">{{ details.startPeriod | date:"dd-MM-yyyy" }}</span></p>
+  </div>
+  <div class="col-6">
+    <p class="ligne1">Date de la 1ère prise de service : <span
+      class="xxx">{{ details.dateOfFirstEntryService | date:"dd-MM-yyyy" }}</span></p>
+  </div>
+  <div class="col-6">
+    <p class="ligne1">Période de fin : <span class="xxx">{{ details.endPeriod | date:"dd-MM-yyyy" }}</span></p>
+  </div>
+  <div (click)="openDocument(details!)" class="col-lg-6">
+    <a class="btn btn-primary btn-lg-a d-flex justify-content-between" type="button"> <span
+      class="text-truncate ">{{ details!.handingOver!!.name }}.pdf</span> <img alt=""
+                                                                               class="img-detail"
+                                                                               src="../../../../assets/img/eye-open2.png"></a>
+  </div>
+  <div (click)="openDocument2(details!)" class="col-lg-6   ">
+    <a class="btn btn-primary btn-lg-a d-flex justify-content-between" type="button"> <span
+      class="text-truncate  ">{{ details!.appointmentDecree!.name }}.pdf</span> <img
+      alt="" class="img-detail" src="../../../../assets/img/eye-open2.png"></a>
+  </div>
+</div>
+<div class="row " id="mt-detail">
+  <div class="col-lg-12">
+    <h2 class="titre-detail2 text-decoration-underline"> Détails sur le responsable remplacé</h2>
+  </div>
+
+  <div class="col-6">
+    <p class="ligne1">Nom du responsable: <span class="xxx">{{ details.lastNameOfPreviousOfficial }}</span></p>
+  </div>
+  <div class="col-6">
+    <p class="ligne1">Grade du responsable: <span class="xxx">{{ details.gradeOfPreviousOfficial }}</span></p>
+  </div>
+  <div class="col-6">
+    <p class="ligne1">Prénom du responsable : <span class="xxx">{{ details.firstNameOfPreviousOfficial }}</span></p>
+  </div>
+  <div class="col-6">
+    <p class="ligne1">Poste occupé : <span class="xxx">{{ details.positionHeldOfPreviousOfficial }}</span></p>
+  </div>
+  <div class="col-6">
+    <p class="ligne1">Matricule de responsable :
+      <span class="xxx">{{ details.serialNumberOfPreviousOfficial }}</span></p>
+  </div>
+  <div class="col-6">
+    <p class="ligne1">Corps ou structure : <span class="xxx">{{ details.bodyOfPreviousOfficial }}</span></p>
+  </div>
+  <div class="col-lg-12 mb-10">
+    <button (click)="approvedRequest(details.id!!)"
+            *ngIf="user && user.roles[0].roleName === 'ROLE_SUPER_ADMIN' && checkStatusData?.requestStatus === 'PENDING' "
+            class="btn btn-primary me-2 btn-accepter"
+            type="button"
+    >Accepter
+    </button>
+    <button (click)="approvedRequest(details.id!!)"
+            *ngIf="user && user.roles[0].roleName === 'ROLE_ADMIN' && details?.requestStatus === 'NEW' "
+            class="btn btn-primary me-2 btn-accepter"
+            type="button"
+    >Accepter
+    </button>
+
+
+    <button (click)="modifierBtn()"
+            *ngIf="user && user.roles[0].roleName === 'ROLE_SUPER_ADMIN' && checkStatusData?.requestStatus === 'PENDING'"
+            class="btn btn-primary me-2 btn-modifier"
+            type="button">Modifier
+    </button>
+
+    <button (click)="open ()"
+            *ngIf="user && user.roles[0].roleName === 'ROLE_SUPER_ADMIN' && checkStatusData?.requestStatus === 'PENDING'"
+            class="btn btn-secondary btn-refuser"
+            type="button"
+    >Refuser
+    </button>
+    <button (click)="open()" *ngIf="user && user.roles[0].roleName === 'ROLE_ADMIN' && details?.requestStatus === 'NEW'"
+            class="btn btn-secondary btn-refuser"
+            type="button"
+    >Refuser
+    </button>
+  </div>
+</div>

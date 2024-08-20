@@ -1,0 +1,151 @@
+<section class="container-fluid top-1">
+  <div class="row">
+    <div class="col-lg-6 justify-content-center   ps-5 pe-5  mb-10">
+
+      <div class="form-connect">
+        <h1 class="text-center"><a  routerLink="/connexion"> <span class="gray">Connexion</span></a> /<a routerLink="inscription"><strong
+         >Inscription</strong></a></h1>
+        <p class="form-paraph22    ">Entrez vos informations pour vous inscrire.</p>
+
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <div class="row g-2">
+            <div class="col-md">
+              <label for="exampleInputEmail1" class="form-label">Nom
+                <span class="red">*</span></label>
+              <input type="text" class="form-control" id="floatingInputGrid" placeholder="Votre Nom  de famille"
+                formControlName="firstname">
+                <div *ngIf="registerForm.get('firstname')?.touched && registerForm.get('firstname')?.invalid">
+                  <small class="text-danger" *ngIf="registerForm.get('firstname')?.errors?.['required']">Le nom est requis.</small>
+                </div>
+                <div *ngIf="validationErrors['firstname']">
+                  <small class="text-danger">{{ validationErrors['firstname'] }}</small>
+                </div>
+            </div>
+            <div class="col-md"> <label for="exampleInputEmail1" class="form-label">Numéro de téléphone
+                <span class="red">*</span></label>
+              <input type="text" class="form-control" id="floatingInputGrid" placeholder=" Numéro de téléphone
+              " formControlName="phoneNumber">
+              <div *ngIf="registerForm.get('phoneNumber')?.touched && registerForm.get('phoneNumber')?.invalid">
+                <small class="text-danger" *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">Le numéro de téléphone est requis.</small>
+                <small class="text-danger" *ngIf="registerForm.get('phoneNumber')?.errors?.['pattern']">Le numéro de téléphone n'est pas valide.</small>
+              </div>
+
+              <div *ngIf="validationErrors['phoneNumber']">
+                <small class="text-danger">{{ validationErrors['phoneNumber'] }}</small>
+              </div>
+            </div>
+          </div>
+          <div class="row g-2 py-3">
+            <div class="col-md">
+              <label for="exampleInputEmail1" class="form-label">Prénom(s)
+                <span class="red">*</span></label>
+              <input type="text" class="form-control" id="floatingInputGrid" placeholder="Prénom(s)"
+                formControlName="lastname">
+                <div *ngIf="registerForm.get('lastname')?.touched && registerForm.get('lastname')?.invalid">
+                  <small class="text-danger" *ngIf="registerForm.get('lastname')?.errors?.['required']">Le Prénom(s) est requis.</small>
+                </div>
+
+                <div *ngIf="validationErrors['lastname']">
+                  <small class="text-danger">{{ validationErrors['lastname'] }}</small>
+                </div>
+            </div>
+            <div class="col-md">
+              <label for="exampleInputEmail1" class="form-label">Email
+                <span class="red">*</span></label>
+              <input type="email" class="form-control" id="floatingInputGrid" placeholder="Votre adresse email"
+                formControlName="email">
+                <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
+                  <small class="text-danger" *ngIf="registerForm.get('email')?.errors?.['required']">L'email est requis.</small>
+                  <small class="text-danger" *ngIf="registerForm.get('email')?.errors?.['email']">L'email n'est pas valide.</small>
+                </div>
+
+                <div *ngIf="validationErrors['email']">
+                  <small class="text-danger">{{ validationErrors['email'] }}</small>
+                </div>
+            </div>
+          </div>
+          <div class="row g-2 py-3">
+            <div class="col-md">
+              <label for="exampleInputEmail1" class="form-label">Date de naissance
+                <span class="red">*</span></label>
+              <input type="date" class="form-control" id="floatingInputGrid" placeholder="Votre date de naissance"
+                formControlName="birthdate">
+
+                <div *ngIf="validationErrors['birthdate']">
+                  <small class="text-danger">{{ validationErrors['birthdate'] }}</small>
+                </div>
+
+            </div>
+            <div class="col-md">
+              <label for="exampleInputEmail1" class="form-label">Mot de passe
+                <span class="red">*</span></label>
+              <input type="text" class="form-control" id="floatingInputGrid" placeholder="Mot de passe"
+                formControlName="password">
+
+                <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
+                  <small class="text-danger" *ngIf="registerForm.get('password')?.errors?.['required']">Le mot de passe est requis.</small>
+                  <small class="text-danger" *ngIf="registerForm.get('password')?.errors?.['minlength']">Le mot de passe doit comporter au moins 6 caractères.</small>
+                </div>
+                <div *ngIf="validationErrors['password']">
+                  <small class="text-danger">{{ validationErrors['password'] }}</small>
+                </div>
+            </div>
+          </div>
+          <div class="row g-2 py-3">
+            <div class="col-md">
+              <label for="exampleInputEmail1" class="form-label">Numéro matricule
+                <span class="red">*</span></label>
+              <input type="text" class="form-control" id="floatingInputGrid" placeholder="Numéro matricule"
+                formControlName="serialNumber">
+
+
+                <div *ngIf="validationErrors['serialNumber']">
+                  <small class="text-danger">{{ validationErrors['serialNumber'] }}</small>
+                </div>
+            </div>
+            <div class="col-md">
+              <label for="exampleInputEmail1" class="form-label">Confirmation du mot de passe
+                <span class="red">*</span></label>
+              <input type="text" class="form-control" id="floatingInputGrid" placeholder="Confirmation du mot de passe "
+                formControlName="confirmPassword">
+
+              <div *ngIf="registerForm.errors?.['passwordMismatch'] && registerForm.get('confirmPassword')?.touched">
+                <span class="text-danger">Les mots de passe ne correspondent pas.</span>
+              </div>
+
+              <div *ngIf="validationErrors['confirmPassword']">
+                <small class="text-danger">{{ validationErrors['confirmPassword'] }}</small>
+              </div>
+            </div>
+          </div>
+
+          <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary" id="bt4"> <ng-container
+              *ngIf="isLoading$ | async"><span [style.display]="'block'" class="indicator-progress">Patientez...
+                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>  </ng-container>
+                 <ng-container
+                *ngIf="(isLoading$ | async) === false">
+                <span class="indicator-label">S'inscrire</span>
+              </ng-container>
+          </button>
+        </form>
+
+      </div>
+    </div>
+    <div class="col-lg-6  d-none d-lg-block"
+      style="background-image: url('../../../../assets/img/connexion.png'); background-repeat: no-repeat; background-size: cover;  ">
+
+    </div>
+  </div>
+</section>
+
+<ng-template #formError let-control="control" let-message="message" let-validation="validation">
+  <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block">
+        <span role="alert">
+          {{ message }}
+        </span>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

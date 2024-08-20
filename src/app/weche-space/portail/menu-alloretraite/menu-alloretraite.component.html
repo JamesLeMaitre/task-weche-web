@@ -1,0 +1,77 @@
+<section class=" allo-image top-1">
+  <div class="container">
+    <div class="row sec2">
+      <!-- Vous pouvez mettre ici d'autres contenus si nécessaire -->
+      <div class="col-lg-12">
+        <h1 class="allo-text1">Jouissez aussitôt de votre retraite<br>
+          au lendemain de votre cessation d'activité
+        </h1>
+        <p class="allo-text2">C'est bien possible grâce au partenariat MTFP-MEF pour le bonheur <br>des retraités.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="container section-allo">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="allo-text3">Allô retraite</h1>
+      <p class="allo-text4">Nous vous remercions pour la confiance et l'exploitation de cette plateforme. Vous avez une
+        préoccupation concernant votre retraite?
+        Ecrivez-nous et nous vous garantissons de traiter votre requête dans le meilleur des délais.</p>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12   d-flex justify-content-center">
+      <form [formGroup]="alloretariteForm" (ngSubmit)="submit()" class="row g-3 allo-width">
+        <div class="col-md-6 col-6">
+          <input class="form-control" id="inputEmail4" placeholder="Nom" type="text" formControlName="lastName">
+        </div>
+        <div class="col-md-6 col-6">
+          <input class="form-control" id="inputPassword4" placeholder="Prénom(s)" type="text" formControlName="firstName">
+        </div>
+        <div class="col-md-6 col-6">
+          <label class="form-label" for="inputAddress">N° Matricule</label>
+          <input class="form-control" id="inputAddress" placeholder="Matricule" type="text" formControlName="serialNumber">
+        </div>
+        <div class="col-md-6 col-6">
+          <label class="form-label" for="inputAddress2">Date de naissance</label>
+          <input class="form-control" id="inputAddress2" type="date" formControlName="birthDate">
+        </div>
+        <div class="col-md-6 col-6">
+          <label class="form-label" for="annee_depart">Année de départ</label>
+          <select class=" form-select" id="annee_depart" name="annee_depart" formControlName="yearOfDeparture" required>
+            <option *ngFor="let year of years" [value]="year">{{year}}</option>
+          </select>
+        </div>
+        <div class="col-md-6 col-6">
+          <label class="form-label" for="inputState">Téléphone</label>
+          <input class="form-control" id="inputState" placeholder="Ex: 97000098" type="number" formControlName="phoneNumber">
+        </div>
+        <div class="col-md-6 col-6">
+          <input class="form-control" id="inputAddress3" placeholder="Contact d'urgence (Téléphone)" type="number" formControlName="emergencyContact">
+        </div>
+        <div class="col-md-6 col-6">
+          <input class="form-control" id="inputAddress4" placeholder="Email" type="email" formControlName="email">
+        </div>
+        <div class="col-12">
+          <select class=" form-select " id="ministere" name="ministere_id" formControlName="structureId" required>
+            <option *ngFor="let struc of structure" [value]="struc.id">{{struc.name}}</option>
+          </select>
+        </div>
+        <div class="col-md-12">
+          <input class="form-control" id="inputAddress5" placeholder="Objet" type="text" formControlName="subject">
+        </div>
+        <div class="col-md-12">
+          <textarea class="form-control" cols="30" name="message" placeholder="Message" required rows="4" formControlName="message"></textarea>
+        </div>
+        <div class="col-12 d-flex justify-content-end">
+          <button [disabled]="alloretariteForm.invalid" class="btn btn-primary " id="bt6" type="submit">Envoyer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

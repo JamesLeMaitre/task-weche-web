@@ -1,0 +1,658 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h2 class="app-title1">Suivi de la demande d’APP en cours</h2>
+    <p class="app-paraph">Demande numéro {{ user.requestNumber }}</p>
+  </div>
+</div>
+<!--Attestation fournie Télécharger la demande-->
+
+
+<div *ngIf="infos?.requestStatus==='APPROVED'" class="row mb-10">
+
+
+  <div class="col-7-custom   text-white d-flex flex-column align-items-center justify-content-center text-center">
+    <svg fill="none" height="88" viewBox="0 0 89 88" width="89" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="44.5" cy="44" fill="#47A673" r="44"/>
+      <circle cx="42.5" cy="43.5" fill="white" r="25.5"/>
+      <path
+        d="M47.1893 41.3107L41.5 47L39.5607 45.0607M43 32C36.3726 32 31 37.3726 31 44C31 50.6274 36.3726 56 43 56C49.6274 56 55 50.6274 55 44C55 37.3726 49.6274 32 43 32Z"
+        stroke="#008000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </svg>
+    <h2>Approbation du supérieur</h2>
+    <p>{{ infos?.createdAt | customDate }}</p>
+  </div>
+
+  <div class="col-7-custom align-items-center  text-white d-flex  justify-content-center text-center  trait    ">
+
+
+    <svg class="d-md-none " fill="none" height="25" viewBox="0 0 2 25" width="2" xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0E913B" stroke-dasharray="2 2" stroke-width="2" x1="1" x2="1" y1="-1.19249e-08" y2="25"/>
+    </svg>
+
+    <svg class="d-none d-md-inline" fill="none" height="2" viewBox="0 0 120 2" width="120"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0E913B" stroke-dasharray="2 2" stroke-width="2" x1="120" x2="-8.74228e-08" y1="1" y2="0.99999"/>
+    </svg>
+
+  </div>
+  <div class="col-7-custom   text-white d-flex flex-column align-items-center justify-content-center text-center">
+    <svg fill="none" height="88" viewBox="0 0 89 88" width="89" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="44.5" cy="44" fill="#47A673" r="44"/>
+      <circle cx="42.5" cy="43.5" fill="white" r="25.5"/>
+      <path
+        d="M47.1893 41.3107L41.5 47L39.5607 45.0607M43 32C36.3726 32 31 37.3726 31 44C31 50.6274 36.3726 56 43 56C49.6274 56 55 50.6274 55 44C55 37.3726 49.6274 32 43 32Z"
+        stroke="#008000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </svg>
+    <h2>Approbation du supérieur</h2>
+    <p>{{ infos?.createdBySupAt | customDate }}</p>
+  </div>
+  <div class="col-7-custom  align-items-center  text-white d-flex  justify-content-center text-center  trait   ">
+
+
+    <svg class="d-md-none" fill="none" height="25" viewBox="0 0 2 25" width="2" xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0E913B" stroke-dasharray="2 2" stroke-width="2" x1="1" x2="1" y1="-1.19249e-08" y2="25"/>
+    </svg>
+
+    <svg class="d-none d-md-inline" fill="none" height="2" viewBox="0 0 120 2" width="120"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0E913B" stroke-dasharray="2 2" stroke-width="2" x1="120" x2="-8.74228e-08" y1="1" y2="0.99999"/>
+    </svg>
+  </div>
+  <div class="col-7-custom   text-white d-flex flex-column align-items-center justify-content-center text-center">
+    <svg fill="none" height="88" viewBox="0 0 89 88" width="89" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="44.5" cy="44" fill="#47A673" r="44"/>
+      <circle cx="42.5" cy="43.5" fill="white" r="25.5"/>
+      <path
+        d="M47.1893 41.3107L41.5 47L39.5607 45.0607M43 32C36.3726 32 31 37.3726 31 44C31 50.6274 36.3726 56 43 56C49.6274 56 55 50.6274 55 44C55 37.3726 49.6274 32 43 32Z"
+        stroke="#008000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </svg>
+    <h2>Validation</h2>
+    <p>{{ infos?.createByDpafAt| customDate }}</p>
+  </div>
+  <div class="col-7-custom  align-items-center  text-white d-flex  justify-content-center text-center  trait ng    ">
+    <svg class="d-md-none" fill="none" height="25" viewBox="0 0 2 25" width="2" xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0E913B" stroke-dasharray="2 2" stroke-width="2" x1="1" x2="1" y1="-1.19249e-08" y2="25"/>
+    </svg>
+
+    <svg class="d-none d-md-inline" fill="none" height="2" viewBox="0 0 120 2" width="120"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0E913B" stroke-dasharray="2 2" stroke-width="2" x1="120" x2="-8.74228e-08" y1="1" y2="0.99999"/>
+    </svg>
+  </div>
+  <div class="col-7-custom   text-white d-flex flex-column align-items-center justify-content-center text-center">
+    <svg fill="none" height="88" viewBox="0 0 89 88" width="89" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="44.5" cy="44" fill="#47A673" r="44"/>
+      <circle cx="42.5" cy="43.5" fill="white" r="25.5"/>
+      <path
+        d="M39.8053 53.0179H34.2245C32.6834 53.0179 31.4341 51.7686 31.4341 50.2275L31.4342 33.4852C31.4342 31.9441 32.6835 30.6948 34.2246 30.6948H46.7816C48.3227 30.6948 49.572 31.9441 49.572 33.4852V41.1588M43.9913 49.0649L46.5491 51.6228L52.1299 46.0417M36.3177 36.2756H44.6889M36.3177 40.4612H44.6889M36.3177 44.6468H40.5033"
+        stroke="#47A673" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.79039"/>
+    </svg>
+    <h2>Attestation fournie </h2>
+    <p>Télécharger la demande
+      <svg fill="none" height="16" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M2.95312 9.67114L2.95313 11.9691C2.95313 12.3174 3.09032 12.6514 3.33453 12.8976C3.57873 13.1439 3.90995 13.2822 4.25531 13.2822H12.0684C12.4138 13.2822 12.745 13.1439 12.9892 12.8976C13.2334 12.6514 13.3706 12.3174 13.3706 11.9691V9.67114M8.16258 2.06689V9.50794M8.16258 9.50794L11.139 6.66475M8.16258 9.50794L5.18616 6.66475"
+          stroke="#667085" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.86026"/>
+      </svg>
+    </p>
+  </div>
+</div>
+<!--FIN Attestation fournie Télécharger la demande-->
+
+<!--Demande encours-->
+<div *ngIf="infos?.requestStatus==='NEW'" class="row mb-10">
+
+
+  <div class="col-7-custom   text-white d-flex flex-column align-items-center justify-content-center text-center">
+    <svg fill="none" height="88" viewBox="0 0 89 88" width="89" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="44.5" cy="44" fill="#47A673" r="44"/>
+      <circle cx="42.5" cy="43.5" fill="white" r="25.5"/>
+      <path
+        d="M47.1893 41.3107L41.5 47L39.5607 45.0607M43 32C36.3726 32 31 37.3726 31 44C31 50.6274 36.3726 56 43 56C49.6274 56 55 50.6274 55 44C55 37.3726 49.6274 32 43 32Z"
+        stroke="#008000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </svg>
+
+    <h2>Demande envoyée</h2>
+    <p>{{ infos?.createdAt | customDate }}</p>
+  </div>
+
+  <div class="col-7-custom  align-items-center  text-white d-flex  justify-content-center text-center  trait   ">
+
+
+    <svg class="d-md-none" fill="none" height="25" viewBox="0 0 2 25" width="2" xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0E913B" stroke-dasharray="2 2" stroke-width="2" x1="1" x2="1" y1="-1.19249e-08" y2="25"/>
+    </svg>
+
+    <svg class="d-none d-md-inline" fill="none" height="2" viewBox="0 0 120 2" width="120"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0E913B" stroke-dasharray="2 2" stroke-width="2" x1="120" x2="-8.74228e-08" y1="1" y2="0.99999"/>
+    </svg>
+
+  </div>
+  <div class="col-7-custom   text-white d-flex flex-column align-items-center justify-content-center text-center">
+    <svg class="h-notif" fill="none" height="88" viewBox="0 0 99 99" width="89" xmlns="http://www.w3.org/2000/svg">
+      <rect fill="#ECB159" height="98.546" rx="49.273" width="98.5491" x="0.286133"/>
+      <circle cx="49.5607" cy="49.2731" fill="white" r="28.7555"/>
+      <path d="M42.1768 60.8322V38.2788M56.2726 60.8322V38.2788" stroke="#EF8811" stroke-linecap="round"
+            stroke-linejoin="round" stroke-width="3.38301"/>
+    </svg>
+    <h3>Approbation du supérieur</h3>
+
+  </div>
+  <div class="col-7-custom  align-items-center  text-white d-flex  justify-content-center text-center  trait   ">
+
+
+    <svg class="d-md-none" fill="none" height="25" viewBox="0 0 2 25" width="2" xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0F0F0F" stroke-dasharray="2 2" stroke-width="2" x1="1" x2="1" y1="-1.19249e-08" y2="25"/>
+    </svg>
+
+    <svg class="d-none d-md-inline" fill="none" height="1" viewBox="0 0 120 1" width="120"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="black" stroke-dasharray="2 2" x1="120" x2="-4.37114e-08" y1="0.5" y2="0.49999"/>
+    </svg>
+  </div>
+  <div class="col-7-custom   text-white d-flex flex-column align-items-center justify-content-center text-center">
+
+    <svg class="h-notif" fill="none" height="88" viewBox="0 0 96 96" width="89" xmlns="http://www.w3.org/2000/svg">
+      <rect fill="#C4C9D4" height="95.1704" rx="47.5852" width="95.1704" x="0.415039"/>
+      <circle cx="48.0001" cy="47.5851" fill="white" r="27.5778"/>
+      <path
+        d="M54.2822 41.2231C54.2822 44.8766 51.9619 47.5444 49.0997 47.5444C46.2375 47.5444 43.9173 44.8766 43.9173 41.2231C43.9173 37.5695 46.2375 34.6077 49.0997 34.6077C51.9619 34.6077 54.2822 37.5695 54.2822 41.2231Z"
+        stroke="#9B9F9B" stroke-linejoin="round" stroke-width="3.24444"/>
+      <path
+        d="M38.5394 52.8367C38.9109 52.1593 39.5927 51.7427 40.33 51.7427H57.2964C58.0337 51.7427 58.7155 52.1593 59.087 52.8367L61.5055 57.247C62.3116 58.7171 61.3148 60.5632 59.7149 60.5632H37.9115C36.3116 60.5632 35.3148 58.7171 36.121 57.247L38.5394 52.8367Z"
+        stroke="#9B9F9B" stroke-linejoin="round" stroke-width="3.24444"/>
+    </svg>
+    <h4>Validation</h4>
+
+  </div>
+  <div class="col-7-custom   align-items-center  text-white d-flex  justify-content-center text-center  trait   ">
+    <svg class="d-md-none" fill="none" height="25" viewBox="0 0 2 25" width="2" xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0F0F0F" stroke-dasharray="2 2" stroke-width="2" x1="1" x2="1" y1="-1.19249e-08" y2="25"/>
+    </svg>
+    <svg class="d-none d-md-inline" fill="none" height="1" viewBox="0 0 120 1" width="120"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="black" stroke-dasharray="2 2" x1="120" x2="-4.37114e-08" y1="0.5" y2="0.49999"/>
+    </svg>
+
+
+  </div>
+  <div class="col-7-custom   text-white d-flex flex-column align-items-center justify-content-center text-center">
+    <svg fill="none" height="88" viewBox="0 0 96 96" width="89" xmlns="http://www.w3.org/2000/svg">
+      <rect fill="#C4C9D4" height="95.1704" rx="47.5852" width="95.1704" x="0.415039"/>
+      <circle cx="48.0001" cy="47.5851" fill="white" r="27.5778"/>
+      <path
+        d="M54.2822 41.2231C54.2822 44.8766 51.9619 47.5444 49.0997 47.5444C46.2375 47.5444 43.9173 44.8766 43.9173 41.2231C43.9173 37.5695 46.2375 34.6077 49.0997 34.6077C51.9619 34.6077 54.2822 37.5695 54.2822 41.2231Z"
+        stroke="#9B9F9B" stroke-linejoin="round" stroke-width="3.24444"/>
+      <path
+        d="M38.5394 52.8367C38.9109 52.1593 39.5927 51.7427 40.33 51.7427H57.2964C58.0337 51.7427 58.7155 52.1593 59.087 52.8367L61.5055 57.247C62.3116 58.7171 61.3148 60.5632 59.7149 60.5632H37.9115C36.3116 60.5632 35.3148 58.7171 36.121 57.247L38.5394 52.8367Z"
+        stroke="#9B9F9B" stroke-linejoin="round" stroke-width="3.24444"/>
+    </svg>
+
+    <h4>Attestation fournie</h4>
+    <p><u>Télécharger la demande</u>
+      <svg fill="none" height="16" viewBox="0 0 14 16" width="14" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M1.3999 10.1467L1.3999 12.6172C1.3999 12.9917 1.5474 13.3508 1.80995 13.6155C2.0725 13.8803 2.4286 14.029 2.7999 14.029H11.1999C11.5712 14.029 11.9273 13.8803 12.1898 13.6155C12.4524 13.3508 12.5999 12.9917 12.5999 12.6172V10.1467M7.00068 1.97119V9.97119M7.00068 9.97119L10.2007 6.91442M7.00068 9.97119L3.80068 6.91442"
+          stroke="#C4C9D4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </svg>
+
+    </p>
+  </div>
+</div>
+
+<!--FIN Demande encours-->
+<!--Demande encours-->
+<div *ngIf="infos?.requestStatus==='PENDING'" class="row mb-10">
+
+
+  <div class="col-7-custom   text-white d-flex flex-column align-items-center justify-content-center text-center">
+    <svg fill="none" height="88" viewBox="0 0 89 88" width="89" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="44.5" cy="44" fill="#47A673" r="44"/>
+      <circle cx="42.5" cy="43.5" fill="white" r="25.5"/>
+      <path
+        d="M47.1893 41.3107L41.5 47L39.5607 45.0607M43 32C36.3726 32 31 37.3726 31 44C31 50.6274 36.3726 56 43 56C49.6274 56 55 50.6274 55 44C55 37.3726 49.6274 32 43 32Z"
+        stroke="#008000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </svg>
+
+    <h2>Demande envoyée</h2>
+    <p>{{ infos?.createdAt | customDate }}</p>
+  </div>
+
+  <div class="col-7-custom  align-items-center  text-white d-flex  justify-content-center text-center  trait   ">
+
+
+    <svg class="d-md-none" fill="none" height="25" viewBox="0 0 2 25" width="2" xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0E913B" stroke-dasharray="2 2" stroke-width="2" x1="1" x2="1" y1="-1.19249e-08" y2="25"/>
+    </svg>
+
+    <svg class="d-none d-md-inline" fill="none" height="2" viewBox="0 0 120 2" width="120"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0E913B" stroke-dasharray="2 2" stroke-width="2" x1="120" x2="-8.74228e-08" y1="1" y2="0.99999"/>
+    </svg>
+
+  </div>
+
+
+  <div class="col-7-custom   text-white d-flex flex-column align-items-center justify-content-center text-center">
+    <svg fill="none" height="88" viewBox="0 0 89 88" width="89" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="44.5" cy="44" fill="#47A673" r="44"/>
+      <circle cx="42.5" cy="43.5" fill="white" r="25.5"/>
+      <path
+        d="M47.1893 41.3107L41.5 47L39.5607 45.0607M43 32C36.3726 32 31 37.3726 31 44C31 50.6274 36.3726 56 43 56C49.6274 56 55 50.6274 55 44C55 37.3726 49.6274 32 43 32Z"
+        stroke="#008000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </svg>
+
+    <h2>Approbation du supérieur</h2>
+    <p>{{ infos?.createdBySupAt | customDate }}</p>
+  </div>
+
+  <div class="col-7-custom  align-items-center  text-white d-flex  justify-content-center text-center  trait   ">
+
+
+    <svg class="d-md-none" fill="none" height="25" viewBox="0 0 2 25" width="2" xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0F0F0F" stroke-dasharray="2 2" stroke-width="2" x1="1" x2="1" y1="-1.19249e-08" y2="25"/>
+    </svg>
+
+    <svg class="d-none d-md-inline" fill="none" height="1" viewBox="0 0 120 1" width="120"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="black" stroke-dasharray="2 2" x1="120" x2="-4.37114e-08" y1="0.5" y2="0.49999"/>
+    </svg>
+  </div>
+  <div class="col-7-custom   text-white d-flex flex-column align-items-center justify-content-center text-center">
+    <svg class="h-notif" fill="none" height="88" viewBox="0 0 99 99" width="89" xmlns="http://www.w3.org/2000/svg">
+      <rect fill="#ECB159" height="98.546" rx="49.273" width="98.5491" x="0.286133"/>
+      <circle cx="49.5607" cy="49.2731" fill="white" r="28.7555"/>
+      <path d="M42.1768 60.8322V38.2788M56.2726 60.8322V38.2788" stroke="#EF8811" stroke-linecap="round"
+            stroke-linejoin="round" stroke-width="3.38301"/>
+    </svg>
+    <h3>En attente de validation</h3>
+
+  </div>
+  <div class="col-7-custom   align-items-center  text-white d-flex  justify-content-center text-center  trait   ">
+    <svg class="d-md-none" fill="none" height="25" viewBox="0 0 2 25" width="2" xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0F0F0F" stroke-dasharray="2 2" stroke-width="2" x1="1" x2="1" y1="-1.19249e-08" y2="25"/>
+    </svg>
+    <svg class="d-none d-md-inline" fill="none" height="1" viewBox="0 0 120 1" width="120"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="black" stroke-dasharray="2 2" x1="120" x2="-4.37114e-08" y1="0.5" y2="0.49999"/>
+    </svg>
+
+
+  </div>
+  <div class="col-7-custom   text-white d-flex flex-column align-items-center justify-content-center text-center">
+    <svg fill="none" height="88" viewBox="0 0 96 96" width="89" xmlns="http://www.w3.org/2000/svg">
+      <rect fill="#C4C9D4" height="95.1704" rx="47.5852" width="95.1704" x="0.415039"/>
+      <circle cx="48.0001" cy="47.5851" fill="white" r="27.5778"/>
+      <path
+        d="M54.2822 41.2231C54.2822 44.8766 51.9619 47.5444 49.0997 47.5444C46.2375 47.5444 43.9173 44.8766 43.9173 41.2231C43.9173 37.5695 46.2375 34.6077 49.0997 34.6077C51.9619 34.6077 54.2822 37.5695 54.2822 41.2231Z"
+        stroke="#9B9F9B" stroke-linejoin="round" stroke-width="3.24444"/>
+      <path
+        d="M38.5394 52.8367C38.9109 52.1593 39.5927 51.7427 40.33 51.7427H57.2964C58.0337 51.7427 58.7155 52.1593 59.087 52.8367L61.5055 57.247C62.3116 58.7171 61.3148 60.5632 59.7149 60.5632H37.9115C36.3116 60.5632 35.3148 58.7171 36.121 57.247L38.5394 52.8367Z"
+        stroke="#9B9F9B" stroke-linejoin="round" stroke-width="3.24444"/>
+    </svg>
+
+    <h4>Attestation fournie</h4>
+    <p><u>Télécharger la demande</u>
+      <svg fill="none" height="16" viewBox="0 0 14 16" width="14" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M1.3999 10.1467L1.3999 12.6172C1.3999 12.9917 1.5474 13.3508 1.80995 13.6155C2.0725 13.8803 2.4286 14.029 2.7999 14.029H11.1999C11.5712 14.029 11.9273 13.8803 12.1898 13.6155C12.4524 13.3508 12.5999 12.9917 12.5999 12.6172V10.1467M7.00068 1.97119V9.97119M7.00068 9.97119L10.2007 6.91442M7.00068 9.97119L3.80068 6.91442"
+          stroke="#C4C9D4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </svg>
+
+    </p>
+  </div>
+</div>
+
+<!--FIN Demande encours-->
+<!--Demande rejete-->
+<div *ngIf="infos?.requestStatus==='REJECTED' && infos?.createdBySupAt && !infos?.createByDpafAt" class="row mb-10">
+
+
+  <div class="col-7-custom   text-white d-flex flex-column align-items-center justify-content-center text-center">
+    <svg fill="none" height="88" viewBox="0 0 89 88" width="89" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="44.5" cy="44" fill="#47A673" r="44"/>
+      <circle cx="42.5" cy="43.5" fill="white" r="25.5"/>
+      <path
+        d="M47.1893 41.3107L41.5 47L39.5607 45.0607M43 32C36.3726 32 31 37.3726 31 44C31 50.6274 36.3726 56 43 56C49.6274 56 55 50.6274 55 44C55 37.3726 49.6274 32 43 32Z"
+        stroke="#008000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </svg>
+
+    <h2>Demande envoyée</h2>
+    <p>{{ infos?.createdAt | customDate }}</p>
+  </div>
+
+  <div class="col-7-custom  align-items-center  text-white d-flex  justify-content-center text-center  trait  ">
+
+
+    <svg class="d-md-none" fill="none" height="25" viewBox="0 0 2 25" width="2" xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0E913B" stroke-dasharray="2 2" stroke-width="2" x1="1" x2="1" y1="-1.19249e-08" y2="25"/>
+    </svg>
+
+    <svg class="d-none d-md-inline" fill="none" height="2" viewBox="0 0 120 2" width="120"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0E913B" stroke-dasharray="2 2" stroke-width="2" x1="120" x2="-8.74228e-08" y1="1" y2="0.99999"/>
+    </svg>
+
+  </div>
+  <div class="col-7-custom   text-white d-flex flex-column align-items-center justify-content-center text-center">
+    <svg fill="none" height="88" viewBox="0 0 89 88" width="89" xmlns="http://www.w3.org/2000/svg">
+      <rect fill="#EB0000" height="87.4449" rx="43.7224" width="87.4476" x="0.776123"/>
+      <circle cx="44.4999" cy="43.7225" fill="white" r="25.5162"/>
+      <path d="M51.7046 36.4678L36.6951 51.4773M51.7046 51.4773L36.6951 36.4678" stroke="#EB0000" stroke-linecap="round"
+            stroke-width="3.00191"/>
+    </svg>
+
+    <h3>Approbation du supérieur</h3>
+    <p>{{ infos?.createdBySupAt | customDate }}</p>
+
+  </div>
+  <div class="col-7-custom  align-items-center  text-white d-flex  justify-content-center text-center  trait  ">
+
+
+    <svg class="d-md-none" fill="none" height="25" viewBox="0 0 2 25" width="2" xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0F0F0F" stroke-dasharray="2 2" stroke-width="2" x1="1" x2="1" y1="-1.19249e-08" y2="25"/>
+    </svg>
+
+
+    <svg class="d-none d-md-inline" fill="none" height="1" viewBox="0 0 120 1" width="120"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#EB0000" stroke-dasharray="2 2" x1="120" x2="-4.37114e-08" y1="0.5" y2="0.49999"/>
+    </svg>
+
+  </div>
+
+
+  <div class="col-8-custom  ">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <button aria-label="Close" class="btn-close custom-close" data-bs-dismiss="alert" type="button"></button>
+      <p>{{ infos?.comment  }}</p>
+
+    </div>
+  </div>
+</div>
+<!--Fin Demande rejete-->
+
+<!--Demande Modification-->
+
+<div *ngIf="infos?.requestStatus==='UPDATE'  " class="row">
+  <div class="col-lg-2 custom1 text-white d-flex flex-column align-items-center justify-content-center text-center">
+
+    <svg fill="none" height="88" viewBox="0 0 89 88" width="89" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="44.5" cy="44" fill="#47A673" r="44"/>
+      <circle cx="42.5" cy="43.5" fill="white" r="25.5"/>
+      <path
+        d="M47.1893 41.3107L41.5 47L39.5607 45.0607M43 32C36.3726 32 31 37.3726 31 44C31 50.6274 36.3726 56 43 56C49.6274 56 55 50.6274 55 44C55 37.3726 49.6274 32 43 32Z"
+        stroke="#008000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </svg>
+    <h2>Demande envoyée</h2>
+    <p>{{ infos?.createdAt | customDate }}</p>
+
+  </div>
+  <div class="col-lg-1 custom1 text-white d-flex flex-column align-items-center justify-content-center  trait">
+
+    <svg class="d-block d-lg-none" fill="none" height="25" viewBox="0 0 2 25" width="2"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0F0F0F" stroke-dasharray="2 2" stroke-width="2" x1="1" x2="1" y1="-1.19249e-08" y2="25"/>
+    </svg>
+
+    >
+    <svg class="d-none d-lg-block" fill="none" height="1" viewBox="0 0 120 1" width="120"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="black" stroke-dasharray="2 2" x1="120" x2="-4.37114e-08" y1="0.5" y2="0.49999"/>
+    </svg>
+
+  </div>
+  <div class="col-lg-2 custom1 text-white d-flex flex-column align-items-center justify-content-center text-center">
+
+
+    <svg fill="none" height="88" viewBox="0 0 89 88" width="89" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="44.5" cy="44" fill="#47A673" r="44"/>
+      <circle cx="42.5" cy="43.5" fill="white" r="25.5"/>
+      <path
+        d="M47.1893 41.3107L41.5 47L39.5607 45.0607M43 32C36.3726 32 31 37.3726 31 44C31 50.6274 36.3726 56 43 56C49.6274 56 55 50.6274 55 44C55 37.3726 49.6274 32 43 32Z"
+        stroke="#008000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </svg>
+    <h2>Approbation du supérieur</h2>
+    <p>{{ infos?.createdBySupAt | customDate }}</p>
+
+  </div>
+  <div class="col-lg-1 custom1 text-white d-flex flex-column align-items-center justify-content-center trait">
+
+
+    <svg class="d-block d-lg-none" fill="none" height="25" viewBox="0 0 2 25" width="2"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0F0F0F" stroke-dasharray="2 2" stroke-width="2" x1="1" x2="1" y1="-1.19249e-08" y2="25"/>
+    </svg>
+
+    <svg class="d-none d-lg-block" fill="none" height="1" viewBox="0 0 120 1" width="120"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="black" stroke-dasharray="2 2" x1="120" x2="-4.37114e-08" y1="0.5" y2="0.49999"/>
+    </svg>
+
+  </div>
+  <div class="col-lg-2 custom1 text-white d-flex flex-column align-items-center justify-content-center text-center">
+
+    <svg fill="none" height="88" viewBox="0 0 89 88" width="89" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="44.5" cy="44" fill="#EC9733" r="44"/>
+      <circle cx="44.5" cy="44.5" fill="white" r="25.5"/>
+      <path
+        d="M43.9987 50V50.0527M41 40.3067C41 38.6185 42.3431 37.25 44 37.25C45.6569 37.25 47 38.6185 47 40.3067C47 41.9948 45.6569 43.3633 44 43.3633C44 43.3633 43.9987 44.2757 43.9987 45.4011M56 44C56 50.6274 50.6274 56 44 56C37.3726 56 32 50.6274 32 44C32 37.3726 37.3726 32 44 32C50.6274 32 56 37.3726 56 44Z"
+        stroke="#EC9733" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </svg>
+    <h3>En attente de modification</h3>
+    <p>{{ infos?.createByDpafAt | customDate }}</p>
+
+  </div>
+  <div class="col-lg-1 custom1 text-white d-flex flex-column align-items-center justify-content-center trait">
+
+
+    <svg class="d-block d-lg-none" fill="none" height="25" viewBox="0 0 2 25" width="2"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0F0F0F" stroke-dasharray="2 2" stroke-width="2" x1="1" x2="1" y1="-1.19249e-08" y2="25"/>
+    </svg>
+
+    <svg class="d-none d-lg-block" fill="none" height="1" viewBox="0 0 120 1" width="120"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="black" stroke-dasharray="2 2" x1="120" x2="-4.37114e-08" y1="0.5" y2="0.49999"/>
+    </svg>
+
+  </div>
+  <div class="col-lg-3 custom1">
+
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <button aria-label="Close" class="btn-close custom-close1" data-bs-dismiss="alert" type="button"></button>
+      {{ infos?.comment }}
+    </div>
+  </div>
+</div>
+<!--FIN Demande encours-->
+
+
+<!--Fin Demande rejete-->
+
+<!--Demande rejetee par DPAF-->
+
+<div *ngIf="infos?.requestStatus==='REJECTED' && infos?.createByDpafAt" class="row">
+  <div class="col-lg-2 custom1 text-white d-flex flex-column align-items-center justify-content-center text-center">
+
+    <svg fill="none" height="88" viewBox="0 0 89 88" width="89" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="44.5" cy="44" fill="#47A673" r="44"/>
+      <circle cx="42.5" cy="43.5" fill="white" r="25.5"/>
+      <path
+        d="M47.1893 41.3107L41.5 47L39.5607 45.0607M43 32C36.3726 32 31 37.3726 31 44C31 50.6274 36.3726 56 43 56C49.6274 56 55 50.6274 55 44C55 37.3726 49.6274 32 43 32Z"
+        stroke="#008000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </svg>
+    <h2>Demande envoyée</h2>
+    <p>{{ infos?.createdAt | customDate }}</p>
+
+  </div>
+  <div class="col-lg-1 custom1 text-white d-flex flex-column align-items-center justify-content-center  trait">
+
+    <svg class="d-block d-lg-none" fill="none" height="25" viewBox="0 0 2 25" width="2"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0F0F0F" stroke-dasharray="2 2" stroke-width="2" x1="1" x2="1" y1="-1.19249e-08" y2="25"/>
+    </svg>
+
+    >
+    <svg class="d-none d-lg-block" fill="none" height="1" viewBox="0 0 120 1" width="120"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="black" stroke-dasharray="2 2" x1="120" x2="-4.37114e-08" y1="0.5" y2="0.49999"/>
+    </svg>
+
+  </div>
+  <div class="col-lg-2 custom1 text-white d-flex flex-column align-items-center justify-content-center text-center">
+
+
+    <svg fill="none" height="88" viewBox="0 0 89 88" width="89" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="44.5" cy="44" fill="#47A673" r="44"/>
+      <circle cx="42.5" cy="43.5" fill="white" r="25.5"/>
+      <path
+        d="M47.1893 41.3107L41.5 47L39.5607 45.0607M43 32C36.3726 32 31 37.3726 31 44C31 50.6274 36.3726 56 43 56C49.6274 56 55 50.6274 55 44C55 37.3726 49.6274 32 43 32Z"
+        stroke="#008000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </svg>
+    <h2>Approbation du supérieur</h2>
+    <p>{{ infos?.createdBySupAt | customDate }}</p>
+
+  </div>
+  <div class="col-lg-1 custom1 text-white d-flex flex-column align-items-center justify-content-center trait">
+
+
+    <svg class="d-block d-lg-none" fill="none" height="25" viewBox="0 0 2 25" width="2"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#47A673" stroke-dasharray="2 2" stroke-width="2" x1="1" x2="1" y1="-1.19249e-08" y2="25"/>
+    </svg>
+
+
+    <svg class="d-none d-lg-block" fill="none" height="1" viewBox="0 0 120 1" width="120"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#47A673" stroke-dasharray="2 2" x1="120" x2="-4.37114e-08" y1="0.5" y2="0.49999"/>
+    </svg>
+
+  </div>
+  <div class="col-lg-2 custom1 text-white d-flex flex-column align-items-center justify-content-center text-center">
+
+    <svg fill="none" height="88" viewBox="0 0 89 88" width="89" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="44.5" cy="44" fill="#EB0000" r="44"/>
+      <circle cx="44.5" cy="43.5" fill="white" r="25.5"/>
+      <path d="M53.3725 35.4575L36.4575 52.3725M53.3725 52.3725L36.4575 35.4575" stroke="#EB0000" stroke-linecap="round"
+            stroke-width="3.38301"/>
+    </svg>
+
+    <h3>Demande rejetée</h3>
+    <p>{{ infos?.createByDpafAt| customDate }}</p>
+
+  </div>
+  <div class="col-lg-1 custom1 text-white d-flex flex-column align-items-center justify-content-center trait">
+
+
+    <svg class="d-block d-lg-none" fill="none" height="25" viewBox="0 0 2 25" width="2"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#EB0000" stroke-dasharray="2 2" stroke-width="2" x1="1" x2="1" y1="-1.19249e-08" y2="25"/>
+    </svg>
+
+
+    <svg class="d-none d-lg-block" fill="none" height="1" viewBox="0 0 120 1" width="120"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#EB0000" stroke-dasharray="2 2" x1="120" x2="-4.37114e-08" y1="0.5" y2="0.49999"/>
+    </svg>
+
+  </div>
+  <div class="col-lg-3 custom1">
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <button aria-label="Close" class="btn-close custom-close" data-bs-dismiss="alert" type="button"></button>
+      <p>{{ infos?.comment   }}</p>
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="infos?.requestStatus==='UPDATE'" class="row">
+  <div class="col-lg-3">
+    <h1 class="form-title1">Documents à réenregistrer: </h1>
+  </div>
+  <div class="col-lg-9">
+    <form class="row g-3"  [formGroup]="attestationForm2" (ngSubmit)="submitFiles()" enctype="multipart/form-data">
+
+      <div class="col-auto" *ngIf="request?.handingOver">
+
+        <div class="input-group mb-3 custom-file-input">
+          <label class="input-wrapper" for="customFile1">
+            <svg fill="none" height="20px" viewBox="0 0 24 24" width="20px" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M12 14V8.5C12 7.67157 12.6716 7 13.5 7C14.3284 7 15 7.67157 15 8.5V14C15 15.6569 13.6569 17 12 17C10.3431 17 9 15.6569 9 14V10M8.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9265 19.673 20.362C20 19.7202 20 18.8802 20 17.2V6.8C20 5.11984 20 4.27976 19.673 3.63803C19.3854 3.07354 18.9265 2.6146 18.362 2.32698C17.7202 2 16.8802 2 15.2 2H8.8C7.11984 2 6.27976 2 5.63803 2.32698C5.07354 2.6146 4.6146 3.07354 4.32698 3.63803C4 4.27976 4 5.11984 4 6.8V17.2C4 18.8802 4 19.7202 4.32698 20.362C4.6146 20.9265 5.07354 21.3854 5.63803 21.673C6.27976 22 7.11984 22 8.8 22Z"
+                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+            </svg>
+            <span class="placeholder" *ngIf="!fileName">Ajouter le décret de nomination</span>
+            <span class="placeholder" *ngIf="fileName">{{ fileName }}</span>
+            <input type="file" class="form-control custom-input" id="customFile1"  aria-describedby="inputGroupFileAddon04" aria-label="Upload" (change)="onFileChange($event)" accept=".pdf" formControlName="handingOver">
+          </label>
+          <div *ngIf="fileError">
+            <small class="text-danger">{{ fileError }}</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-auto"  *ngIf="request?.appointmentDecree">
+
+        <div class="input-group mb-3 custom-file-input">
+          <label class="input-wrapper" for="customFile1">
+            <svg fill="none" height="20px" viewBox="0 0 24 24" width="20px" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M12 14V8.5C12 7.67157 12.6716 7 13.5 7C14.3284 7 15 7.67157 15 8.5V14C15 15.6569 13.6569 17 12 17C10.3431 17 9 15.6569 9 14V10M8.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9265 19.673 20.362C20 19.7202 20 18.8802 20 17.2V6.8C20 5.11984 20 4.27976 19.673 3.63803C19.3854 3.07354 18.9265 2.6146 18.362 2.32698C17.7202 2 16.8802 2 15.2 2H8.8C7.11984 2 6.27976 2 5.63803 2.32698C5.07354 2.6146 4.6146 3.07354 4.32698 3.63803C4 4.27976 4 5.11984 4 6.8V17.2C4 18.8802 4 19.7202 4.32698 20.362C4.6146 20.9265 5.07354 21.3854 5.63803 21.673C6.27976 22 7.11984 22 8.8 22Z"
+                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+            </svg>
+            <span class="placeholder" *ngIf="!fileName2">Ajouter la passation de service </span>
+            <span class="placeholder" *ngIf="fileName2">{{ fileName2 }}</span>
+            <input type="file" class="form-control custom-input" id="customFile2" aria-describedby="inputGroupFile" aria-label="Upload" (change)="onFileChange2($event)" accept=".pdf" formControlName="appointmentDecree">
+          </label>
+          <div *ngIf="fileError2">
+            <small class="text-danger">{{ fileError2 }}</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-auto">
+      <button type="submit" *ngIf="attestationForm2?.valid" class="btn btn-primary "  id="btn-send-again"> Envoyer</button>
+        <button *ngIf="!attestationForm2?.valid" class="btn btn-primary disabled" id="btn-send-again1" type="submit"> Envoyer</button>
+      </div>
+    </form>
+
+  </div>
+</div>
+<!--FIN Demande rejetee par Depaf-->
+<!--<div class="row">
+  <div class="col-lg-12">
+    <h5 class="title-dash2">Historique des demande de APP</h5>
+  </div>
+  <div class="col-lg-12  ">
+    <br>
+    <div class="table-responsive">
+      <table class="table">
+        <thead class="table-light">
+        <tr>
+          <th>Date de téléchargement</th>
+          <th>Type de document</th>
+          <th>Statut de la demande</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>19 Décembre 2020</td>
+          <td>Attestation de présence au poste</td>
+          <td><span class="status1">Attestation fournie</span></td>
+
+        </tr>
+        <tr>
+          <td>03 Mai 2024</td>
+          <td>Mark</td>
+          <td><span class="status2">Demande rejetée   <a class="btn-vue btn ms-2" routerLink="/backoffice/detail-nomme"><img
+            alt="" class="img-enga" src="../../../../assets/img/eye-open.png"></a></span></td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>-->
+<app-historique></app-historique>

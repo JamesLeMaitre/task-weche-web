@@ -1,0 +1,70 @@
+<div class="row">
+  <h1 class="title-dash">Statistiques globales</h1>
+  <div class="col-lg-3  col-6 d-flex justify-content-center">
+    <div class="background-card justify-content-center ">
+      <h6 class="count-dash">{{ newRequestCount }}</h6>
+      <p class="paraph-dash text-center ">Demandes totales</p>
+    </div>
+  </div>
+  <div class="col-lg-3  col-6 d-flex justify-content-center">
+    <div class="background-card">
+      <h1 class="count-dash">{{ approvedRequestCount }}</h1>
+      <p class="paraph-dash">Acceptée.s</p>
+    </div>
+  </div>
+  <div class="col-lg-3  col-6 d-flex justify-content-center">
+    <div class="background-card">
+      <h1 class="count-dash">{{ rejectRequestCount }}</h1>
+      <p class="paraph-dash">Rejetée.s</p>
+    </div>
+  </div>
+  <div class="col-lg-3 col-6 d-flex justify-content-center">
+    <div class="background-card"><h1 class="count-dash">{{ pendingRequestCount }}</h1>
+      <p class="paraph-dash ">En attente</p></div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <h5 class="title-dash2">Nouvelles demandes</h5>
+  </div>
+  <div class="col-lg-12 ">
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead class="table-light">
+        <tr>
+          <th scope="col">Date de reception</th>
+          <th scope="col">Nom du demandeur</th>
+          <th scope="col">Poste occupé</th>
+          <th scope="col">Documents</th>
+          <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr *ngFor="let item of demandes | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+          <td>{{ item.createdAt | customDate }}</td>
+          <td>{{ item.lastName }}</td>
+          <td>{{ item.positionHeldOfPreviousOfficial }}</td>
+          <td>Attestation de présence au poste</td>
+          <td><a class="btn-detail btn " routerLink="/backoffice/detail-nomme/{{item.requestNumber}}"><img
+            alt="" class="img-enga" src="../../../../assets/img/eye-open.png">Détails de la demande </a></td>
+        </tr>
+
+        </tbody>
+      </table>
+      <div class="pagination-container">
+        <div class="items-info">
+          Page {{ p }} / {{ totalPages }}
+        </div>
+        <div class="pagination-controls">
+          <pagination-controls (pageChange)="p = $event"
+                               [directionLinks]="true"
+                               nextLabel=""
+                               previousLabel=""></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

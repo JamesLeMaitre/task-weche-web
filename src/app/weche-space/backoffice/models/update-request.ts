@@ -1,13 +1,12 @@
-import { NewRequest } from "./new-request";
+import {NewRequest} from "./new-request";
 
 export class UpdateRequest {
-  id!:string;
+  id!: string;
   handingOver!: Boolean;
   appointmentDecree!: Boolean;
-  reason!:string;
- request!:NewRequest
-
-
+  reason!: string;
+  request!: NewRequest
+  newRequest!: NewRequest
 
 
 }

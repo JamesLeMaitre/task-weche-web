@@ -1,0 +1,70 @@
+
+<ng-template #rejeter let-modal>
+  <!--  <div class="modal-header">
+  <h4 class="modal-title">Modal title</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>-->
+  <div class="modal-body taille-notif-delete position-relative">
+    <div class="d-flex justify-content-center align-items-center">
+      <i (click)="modal.close('Close click')" class="bi bi-x-lg profile-imgd"></i>
+
+    </div>
+    <p class="text-center paraph-notifdelete">{{message}}
+
+      <span
+        class="span-nom"> </span></p> <div class="d-flex justify-content-center align-items-center">
+
+<a  class=" text-center notif-lien rt"  (click)="redirectTo()">Faire une demande d'APP</a></div>
+  </div>
+  <!-- <div class="modal-footer">
+     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Close</button>
+   </div>-->
+</ng-template>
+<!--Attestation fournie Télécharger la demande-->
+
+<ng-template #content let-modal>
+  <!--  <div class="modal-header">
+  <h4 class="modal-title">Modal title</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>-->
+  <div class="modal-body taille-notif">
+    <div class="d-flex justify-content-center align-items-center">
+
+      <img alt="" class="notif-img" src="../../../../assets/img/guiland.png">
+    </div>
+
+
+    <h2 class="notif-title text-center">Félicitations !</h2>
+    <p class="text-center paraph-notif">Votre attestation est prête. Veuillez cliquer sur le lien ci-dessous.</p>
+    <div class="d-flex justify-content-center align-items-center">
+
+      <a (click)="downloadPdf()"  class="text-center notif-lien rt">Télécharger le attestation de Validité de Service
+
+        </a>
+    </div>
+
+  </div>
+  <!-- <div class="modal-footer">
+     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Close</button>
+   </div>-->
+</ng-template>
+
+<h1 class="visually-hidden"></h1>
+
+<div class="px-4 py-5 my-5 text-center">
+
+  <svg xmlns="http://www.w3.org/2000/svg" width="72" height="57" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+    <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"/>
+    <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+  </svg>
+  <h1 class="display-5 fw-bold">ATTESTATION DE VALIDITE DE SERVICE</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">
+
+      Cette attestation est délivrée lorsque vous avez une demande d'attestation de présence en cours de validité dans le système</p>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+     <!-- <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Primary button</button>-->
+      <button (click)="checkIfUserHasValidAppAndDnr()" type="button" class="btn btn-success btn-lg px-4">Cliquez ici</button>
+    </div>
+  </div>
+</div>

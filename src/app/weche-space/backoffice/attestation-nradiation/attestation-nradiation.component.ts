@@ -1,0 +1,86 @@
+import { Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
+import { DashboardService } from '../services/dashboard.service';
+import { Router } from '@angular/router';
+import { first, Subscription } from 'rxjs';
+import { DashbordHttpService } from '../services/http/dashbord-http.service';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+  selector: 'app-attestation-nradiation',
+  templateUrl: './attestation-nradiation.component.html',
+  styleUrls: ['./attestation-nradiation.component.css']
+})
+export class AttestationNradiationComponent implements OnDestroy {
+  results: boolean = false; // Utilisez camelCase pour les variables
+  private unsubscribe: Subscription[] = []; // `private` est souvent préférable pour éviter un accès non voulu
+  @ViewChild('content') content: TemplateRef<any> | undefined;
+  @ViewChild('rejeter') rejeter: TemplateRef<any> | undefined;
+  @ViewChild('modifier') modifier: TemplateRef<any> | undefined;
+    message = "";
+  private modalRef!: NgbModalRef;
+  constructor(
+    private router: Router,private dashboardHttpService:DashbordHttpService,
+    private dashboardService: DashboardService,    private modalService: NgbModal,
+  ) {}
+
+  // Implémentez l'interface OnDestroy
+  ngOnDestroy(): void {
+    this.unsubscribe.forEach((sub) => sub.unsubscribe());
+  }
+  open() {
+    this.modalRef = this.modalService.open(this.content, {centered: true});
+
+  }
+
+  erreur() {
+    this.modalRef=    this.modalService.open(this.rejeter, {centered: true});
+  }
+ listApprovedRequest(): void {
+    const subscription = this.dashboardService.nonRadiation()
+      .pipe(first())
+      .subscribe((response) => {
+        // Vous pouvez traiter la réponse ici
+        this.results=response;
+        if (this.results==true) {
+          this.open()
+        }else{
+          this.erreur();
+          this.message="Désolé ! Vous n'avez pas d'attestation de présence au poste en cours de validité."
+        }
+        console.log("Response", response);
+      });
+
+    this.unsubscribe.push(subscription);
+  }
+    checkIfUserHasValidApp(): void {
+      const subscription = this.dashboardService.checkIfUserHasValidApp()
+        .pipe(first())
+        .subscribe((response) => {
+          // Vous pouvez traiter la réponse ici
+          this.results = response;
+          if (this.results) {
+            this.open()
+          } else {
+            this.erreur();
+            this.message = "Désolé ! Vous n'avez pas d'attestation de présence au poste en cours de validité."
+          }
+          console.log("Response", response);
+        });
+
+      this.unsubscribe.push(subscription);
+    }
+  downloadPdf() {
+    //this.dashboardHttpService.downloadPdf(request);
+   this.dashboardHttpService.downloadDnrPdf();
+ }
+ modifierBtn() {
+  this.modalService.open(this.modifier, { centered: true });
+}
+
+
+protected redirectTo() {
+  this.router.navigate([`/backoffice/demande-app`]);
+  this.modalRef.close();
+}
+
+}

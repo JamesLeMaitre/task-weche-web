@@ -4,6 +4,7 @@ import {AttestationHttpService} from "./http/attestation-http.service";
 import {HttpResponse} from "../../../shared/models/http-response";
 import {catchError, finalize, map} from "rxjs/operators";
 import {NewRequest} from "../models/new-request";
+import {getFormEncodedData} from "../../../shared/ts/main";
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,24 @@ export class AttestationService implements OnDestroy {
     })
     // console.log("valeur du formData++++++", formData);
     return this.service.save(formData).pipe(
+      map((response: HttpResponse<NewRequest>) => response.data),
+      catchError((err) => {
+        return of(undefined);
+      }),
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+  
+
+  createRequest(request: { [key: string]: string | Blob }): Observable<NewRequest | undefined> {
+    this.isLoadingSubject.next(true);
+    // const formEncoded: URLSearchParams = getFormEncodedData(request);
+    const formData = new FormData();
+    Object.keys(request).forEach((key: string) => {
+      formData.append(key, request[key]);
+    })
+
+    return this.service.create(formData).pipe(
       map((response: HttpResponse<NewRequest>) => response.data),
       catchError((err) => {
         return of(undefined);

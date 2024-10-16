@@ -1,11 +1,65 @@
 <div class="row">
-  <div class="col-lg-12">
-    <h2 class="app-title1">Suivi de la demande d’APP en cours</h2>
-    <p class="app-paraph">Demande numéro {{ user.requestNumber }}</p>
+  <div class="col-lg-6">
+
+    <h2  *ngIf="user.hasRequested" class="app-title1">Suivi de la demande d’APP en cours</h2>
+    <h2  *ngIf="!user.hasRequested" class="app-title1">Suivi de la dernière demande</h2>
+    <p class="app-paraph" *ngIf="user.hasRequested">Demande numéro {{ user.requestNumber }}</p>
+  </div>
+  <div class="col-lg-6 " *ngIf="!user.hasRequested"  >
+
+<div class="d-flex justify-content-end">
+  <a  class="btn btn-warning" routerLink="/backoffice/demande-app">Nouvelle demande d'APP</a>
+</div>
   </div>
 </div>
-<!--Attestation fournie Télécharger la demande-->
 
+<ng-template #rejeter let-modal>
+  <!--  <div class="modal-header">
+  <h4 class="modal-title">Modal title</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>-->
+  <div class="modal-body taille-notif-delete position-relative">
+    <div class="d-flex justify-content-center align-items-center">
+      <i (click)="modal.close('Close click')" class="bi bi-x-lg profile-imgd"></i>
+
+    </div>
+    <p class="text-center paraph-notifdelete">{{message}}
+
+      <span
+        class="span-nom"> </span></p>
+
+  </div>
+  <!-- <div class="modal-footer">
+     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Close</button>
+   </div>-->
+</ng-template>
+<!--Attestation fournie Télécharger la demande-->
+<ng-template #content let-modal>
+  <!--  <div class="modal-header">
+  <h4 class="modal-title">Modal title</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>-->
+  <div class="modal-body taille-notif">
+    <div class="d-flex justify-content-center align-items-center">
+
+      <img alt="" class="notif-img" src="../../../../assets/img/guiland.png">
+    </div>
+
+
+    <h2 class="notif-title text-center">Demande soumise avec succès</h2>
+    <p class="text-center paraph-notif">Votre demande a été envoyée avec succès ! Nous vous remercions pour votre
+      confiance et nous traiterons votre requête dans les plus brefs délais.</p>
+    <div class="d-flex justify-content-center align-items-center">
+
+      <a (click)="suivreMaDemande()" class="text-center notif-lien">Suivre ma demande <img
+        alt="" src="../../../../assets/img/ic_baseline-arrow-forward.png"></a>
+    </div>
+
+  </div>
+  <!-- <div class="modal-footer">
+     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Close</button>
+   </div>-->
+</ng-template>
 
 <div *ngIf="infos?.requestStatus==='APPROVED'" class="row mb-10">
 
@@ -18,7 +72,7 @@
         d="M47.1893 41.3107L41.5 47L39.5607 45.0607M43 32C36.3726 32 31 37.3726 31 44C31 50.6274 36.3726 56 43 56C49.6274 56 55 50.6274 55 44C55 37.3726 49.6274 32 43 32Z"
         stroke="#008000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
     </svg>
-    <h2>Approbation du supérieur</h2>
+    <h2>Demande envoyée </h2>
     <p>{{ infos?.createdAt | customDate }}</p>
   </div>
 
@@ -203,6 +257,7 @@
 
 <!--FIN Demande encours-->
 <!--Demande encours-->
+
 <div *ngIf="infos?.requestStatus==='PENDING'" class="row mb-10">
 
 
@@ -366,7 +421,7 @@
   <div class="col-8-custom  ">
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
       <button aria-label="Close" class="btn-close custom-close" data-bs-dismiss="alert" type="button"></button>
-      <p>{{ infos?.comment  }}</p>
+      <p> <b style="font-weight: 700;">Motif : </b> {{ infos?.comment  }}</p>
 
     </div>
   </div>
@@ -375,7 +430,7 @@
 
 <!--Demande Modification-->
 
-<div *ngIf="infos?.requestStatus==='UPDATE'  " class="row">
+<!--<div *ngIf="infos?.requestStatus==='UPDATE'  " class="row">
   <div class="col-lg-2 custom1 text-white d-flex flex-column align-items-center justify-content-center text-center">
 
     <svg fill="none" height="88" viewBox="0 0 89 88" width="89" xmlns="http://www.w3.org/2000/svg">
@@ -443,6 +498,99 @@
     <h3>En attente de modification</h3>
     <p>{{ infos?.createByDpafAt | customDate }}</p>
 
+  </div>
+  <div class="col-lg-1 custom1 text-white d-flex flex-column align-items-center justify-content-center trait">
+
+
+    <svg class="d-block d-lg-none" fill="none" height="25" viewBox="0 0 2 25" width="2"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0F0F0F" stroke-dasharray="2 2" stroke-width="2" x1="1" x2="1" y1="-1.19249e-08" y2="25"/>
+    </svg>
+
+    <svg class="d-none d-lg-block" fill="none" height="1" viewBox="0 0 120 1" width="120"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="black" stroke-dasharray="2 2" x1="120" x2="-4.37114e-08" y1="0.5" y2="0.49999"/>
+    </svg>
+
+  </div>
+  <div class="col-lg-3 custom1">
+
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <button aria-label="Close" class="btn-close custom-close1" data-bs-dismiss="alert" type="button"></button>
+      {{ infos?.comment }}
+    </div>
+  </div>
+</div>-->
+
+<div *ngIf="infos?.requestStatus==='UPDATE'  " class="row">
+  <div class="col-lg-2 custom1 text-white d-flex flex-column align-items-center justify-content-center text-center">
+
+    <svg fill="none" height="88" viewBox="0 0 89 88" width="89" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="44.5" cy="44" fill="#47A673" r="44"/>
+      <circle cx="42.5" cy="43.5" fill="white" r="25.5"/>
+      <path
+        d="M47.1893 41.3107L41.5 47L39.5607 45.0607M43 32C36.3726 32 31 37.3726 31 44C31 50.6274 36.3726 56 43 56C49.6274 56 55 50.6274 55 44C55 37.3726 49.6274 32 43 32Z"
+        stroke="#008000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </svg>
+    <h2>Demande envoyée</h2>
+    <p>{{ infos?.createdAt | customDate }}</p>
+
+  </div>
+  <div class="col-lg-1 custom1 text-white d-flex flex-column align-items-center justify-content-center  trait">
+
+    <svg class="d-block d-lg-none" fill="none" height="25" viewBox="0 0 2 25" width="2"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0F0F0F" stroke-dasharray="2 2" stroke-width="2" x1="1" x2="1" y1="-1.19249e-08" y2="25"/>
+    </svg>
+
+    >
+    <svg class="d-none d-lg-block" fill="none" height="1" viewBox="0 0 120 1" width="120"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="black" stroke-dasharray="2 2" x1="120" x2="-4.37114e-08" y1="0.5" y2="0.49999"/>
+    </svg>
+
+  </div>
+  <div class="col-lg-2 custom1 text-white d-flex flex-column align-items-center justify-content-center text-center">
+
+    <svg fill="none" height="88" viewBox="0 0 89 88" width="89" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="44.5" cy="44" fill="#EC9733" r="44"/>
+      <circle cx="44.5" cy="44.5" fill="white" r="25.5"/>
+      <path
+        d="M43.9987 50V50.0527M41 40.3067C41 38.6185 42.3431 37.25 44 37.25C45.6569 37.25 47 38.6185 47 40.3067C47 41.9948 45.6569 43.3633 44 43.3633C44 43.3633 43.9987 44.2757 43.9987 45.4011M56 44C56 50.6274 50.6274 56 44 56C37.3726 56 32 50.6274 32 44C32 37.3726 37.3726 32 44 32C50.6274 32 56 37.3726 56 44Z"
+        stroke="#EC9733" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    </svg>
+    <h3>En attente de modification</h3>
+    <p>{{ infos?.createByDpafAt | customDate }}</p>
+
+  </div>
+  <div class="col-lg-1 custom1 text-white d-flex flex-column align-items-center justify-content-center trait">
+
+
+    <svg class="d-block d-lg-none" fill="none" height="25" viewBox="0 0 2 25" width="2"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="#0F0F0F" stroke-dasharray="2 2" stroke-width="2" x1="1" x2="1" y1="-1.19249e-08" y2="25"/>
+    </svg>
+
+    <svg class="d-none d-lg-block" fill="none" height="1" viewBox="0 0 120 1" width="120"
+         xmlns="http://www.w3.org/2000/svg">
+      <line stroke="black" stroke-dasharray="2 2" x1="120" x2="-4.37114e-08" y1="0.5" y2="0.49999"/>
+    </svg>
+
+  </div>
+  <div class="col-lg-2 custom1 text-white d-flex flex-column align-items-center justify-content-center text-center">
+
+    <svg class="h-notif" fill="none" height="88" viewBox="0 0 96 96" width="89" xmlns="http://www.w3.org/2000/svg">
+      <rect fill="#C4C9D4" height="95.1704" rx="47.5852" width="95.1704" x="0.415039"/>
+      <circle cx="48.0001" cy="47.5851" fill="white" r="27.5778"/>
+      <path
+        d="M54.2822 41.2231C54.2822 44.8766 51.9619 47.5444 49.0997 47.5444C46.2375 47.5444 43.9173 44.8766 43.9173 41.2231C43.9173 37.5695 46.2375 34.6077 49.0997 34.6077C51.9619 34.6077 54.2822 37.5695 54.2822 41.2231Z"
+        stroke="#9B9F9B" stroke-linejoin="round" stroke-width="3.24444"/>
+      <path
+        d="M38.5394 52.8367C38.9109 52.1593 39.5927 51.7427 40.33 51.7427H57.2964C58.0337 51.7427 58.7155 52.1593 59.087 52.8367L61.5055 57.247C62.3116 58.7171 61.3148 60.5632 59.7149 60.5632H37.9115C36.3116 60.5632 35.3148 58.7171 36.121 57.247L38.5394 52.8367Z"
+        stroke="#9B9F9B" stroke-linejoin="round" stroke-width="3.24444"/>
+    </svg>
+    <h4>Validation</h4>
   </div>
   <div class="col-lg-1 custom1 text-white d-flex flex-column align-items-center justify-content-center trait">
 
@@ -575,7 +723,7 @@
   <div class="col-lg-9">
     <form class="row g-3"  [formGroup]="attestationForm2" (ngSubmit)="submitFiles()" enctype="multipart/form-data">
 
-      <div class="col-auto" *ngIf="request?.handingOver">
+      <div class="col-auto" *ngIf="request?.appointmentDecree">
 
         <div class="input-group mb-3 custom-file-input">
           <label class="input-wrapper" for="customFile1">
@@ -593,7 +741,7 @@
           </div>
         </div>
       </div>
-      <div class="col-auto"  *ngIf="request?.appointmentDecree">
+      <div class="col-auto"  *ngIf="request?.handingOver">
 
         <div class="input-group mb-3 custom-file-input">
           <label class="input-wrapper" for="customFile1">

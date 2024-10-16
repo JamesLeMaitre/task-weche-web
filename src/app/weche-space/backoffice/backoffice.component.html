@@ -4,7 +4,7 @@
 
   <!-- Sidebar -->
   <nav [ngClass]="{'active': isSidebarActive, 'show-nav': isShowNav}" id="sidebar">
-    <div class="sidebar-header">
+    <div class="sidebar-header rt" routerLink="/">
       <svg fill="none" height="64" viewBox="0 0 204 64" width="204" xmlns="http://www.w3.org/2000/svg"
            xmlns:xlink="http://www.w3.org/1999/xlink">
         <rect fill="url(#pattern0_531_14203)" height="63.6067" transform="translate(0.5)" width="203"/>
@@ -23,11 +23,11 @@
 
       <li class=" office-lien ">
         <a [routerLinkActiveOptions]="{ exact: true }" routerLink="/backoffice" routerLinkActive="active"> <img
-          alt="" class="office-icon" src="../../../../assets/img/hash-02.svg"><span>Dashboard</span></a>
+          alt="" class="office-icon " src="../../../../assets/img/hash-02.svg"><span>Dashboard</span></a>
       </li>
-      <li class=" office-lien ">
+      <!--<li class=" office-lien ">
         <a routerLinkActive="active"><img alt="" class="office-icon" src="../../../../assets/img/Icon(1).svg"> <span>Liste des demandes</span></a>
-      </li>
+      </li>-->
       <li class=" office-lien ">
         <a  [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" routerLink="/backoffice/demande-traiter"><img alt="" class="office-icon"
                                                                        src="../../../../assets/img/Icon(1).svg">
@@ -37,8 +37,12 @@
     <h6 *ngIf="user.roles[0].roleName === 'ROLE_USER'" class="text-white office-title">Suivi de carrière</h6>
     <ul *ngIf="user.roles[0].roleName === 'ROLE_USER'" class="list-unstyled components">
       <li class=" office-lien ">
+        <a routerLink="#" routerLinkActive="active ert"> <img
+          alt="" class="office-icon " src="../../../../assets/img/hash-02.svg"><span>Situation administrative</span></a>
+      </li>
+      <li class=" office-lien mt-1">
         <a routerLink="/backoffice/ligne-carriere" routerLinkActive="active"> <img
-          alt="" class="office-icon" src="../../../../assets/img/hash-02.svg"><span>Ligne de carrière</span></a>
+          alt="" class="office-icon" src="../../../../assets/img/hash-02.svg"><span>Ligne carrière</span></a>
       </li>
     </ul>
     <h6 *ngIf="user.roles[0].roleName === 'ROLE_USER'" class="text-white office-title">Demande de documents</h6>
@@ -53,9 +57,14 @@
        </li>-->
 
       <li class=" office-lien ">
-        <a class="dashboard   " href="#" routerLinkActive="active"> <img alt="" class="office-icon"
+        <a class="dashboard   " routerLink="non-radiation" routerLinkActive="active"> <img alt="" class="office-icon"
                                                                          src="../../../../assets/img/Icon(1).svg">
-          <span>Attestation DNR</span></a>
+          <span> Certificat CNR</span></a>
+      </li>
+      <li class=" office-lien ">
+        <a class="dashboard   " routerLink="attestation-validite" routerLinkActive="active"> <img alt="" class="office-icon"
+                                                                         src="../../../../assets/img/Icon(1).svg">
+          <span>Attestation AVS</span></a>
       </li>
       <li class=" office-lien ">
         <a class="dashboard   "[routerLinkActiveOptions]="{ exact: true }" routerLink="suivi"  routerLinkActive="active"> <img alt="" class="office-icon"
@@ -68,28 +77,24 @@
 
     <h6
       *ngIf="user.roles[0].roleName === 'ROLE_USER' || user.roles[0].roleName === 'ROLE_ADMIN' || user.roles[0].roleName === 'ROLE_SUPER_ADMIN' || user.roles[0].roleName === 'ROLE_S_SUPER_ADMIN'"
-      class="text-white office-title">Autre section et aide</h6>
+      class="text-white office-title">Exprimez vos préoccupations</h6>
     <ul *ngIf="user.roles[0].roleName === 'ROLE_USER'" class="list-unstyled components">
       <li class=" office-lien ">
-        <a class="dashboard    " routerLink="/engagement" routerLinkActive="active"> <img
-          alt="" class="office-icon" src="../../../../assets/img/shield-check.svg"><span>Engagement</span></a>
+        <a class="dashboard    " routerLink="demande-infos" routerLinkActive="active ert"> <img
+          alt="" class="office-icon" src="../../../../assets/img/shield-check.svg"><span>Besoin d'informations?</span></a>
       </li>
-      <li class=" office-lien ">
+    <!--  <li class=" office-lien ">
         <a class="dashboard    " routerLink="aide" routerLinkActive="active"> <img
           alt="" class="office-icon" src="../../../../assets/img/Icon(3).svg"><span>Besoin d’aide</span></a>
-      </li>
-      <li class=" office-lien ">
-        <a class="dashboard    " routerLink="/connectez-vous" routerLinkActive="active"> <img
-          alt="" class="office-icon" src="../../../../assets/img/Vector.svg"><span>Contactez-nous</span></a>
+      </li>-->
+      <li class=" office-lien mt-1">
+        <a class="dashboard    " routerLink="signaler" routerLinkActive="active"> <img
+          alt="" class="office-icon" src="../../../../assets/img/Vector.svg"><span>Signalez un problème </span></a>
       </li>
 
-      <li class=" office-lien ">
-        <a class="dashboard    " href="#" routerLinkActive="active"> <img alt=""
-                                                                          class="office-icon"
-                                                                          src="../../../../assets/img/settings.svg"><span>Mes préférences</span></a>
-      </li>
+
     </ul>
-    <ul
+  <!--  <ul
       *ngIf="user.roles[0].roleName === 'ROLE_ADMIN' || user.roles[0].roleName === 'ROLE_SUPER_ADMIN' || user.roles[0].roleName === 'ROLE_S_SUPER_ADMIN'"
       class="list-unstyled components">
 
@@ -98,7 +103,17 @@
                                                                           class="office-icon"
                                                                           src="../../../../assets/img/settings.svg"><span>Mes préférences</span></a>
       </li>
-    </ul>
+    </ul>-->
+    <ul
+
+    class="list-unstyled components">
+
+    <li class=" office-lien ">
+      <a class="dashboard   rt "   routerLinkActive="active" (click)="logout()"> <img alt=""
+                                                                        class="office-icon"
+                                                                        src="../../../../assets/img/settings.svg"><span>Se déconnecter</span></a>
+    </li>
+  </ul>
   </nav>
 
   <!-- Page Content -->
@@ -153,9 +168,9 @@
                       <span class="xp-user-live"></span>
                     </a>
                     <ul class="dropdown-menu small-menu">
-                      <li><a>Aller au Dashboard</a></li>
+                      <li><a routerLink="" class="lienz">Aller à l'accueil</a></li>
                       <!--                      <li><a routerLink="/backoffice/logout">Se déconnecter</a></li>-->
-                      <li><a (click)="logout()">Se déconnecter</a></li>
+                      <li><a class="lienz" (click)="logout()">Se déconnecter</a></li>
                     </ul>
                   </li>
                   <a class="d-none d-md-block"><span

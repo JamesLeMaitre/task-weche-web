@@ -76,6 +76,9 @@
           <a class="nav-link" routerLink="/engagement" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Engagement</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" routerLink="/faq" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Faq</a>
+    </li>
+      <li class="nav-item">
           <a class="nav-link" routerLink="/contacter" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Contactez-nous</a>
       </li>
   </ul>
@@ -94,9 +97,9 @@
                         </a>
 
                         <div class="dropdown-menu  p-2 text-muted mt-3 " style="max-width: 50px; ">
-                          <p (click)="redirectTo()">Aller au Dashboard</p>
+                          <p class="lienz" (click)="redirectTo()">Aller au Dashboard</p>
     <!--                      <li><a routerLink="/backoffice/logout">Se déconnecter</a></li>-->
-                          <p class="mb-0" (click)="logout()">Se déconnecter</p>
+                          <p class=" lienz mb-0" (click)="logout()">Se déconnecter</p>
 
                         </div>
                       </li></ul>
@@ -104,9 +107,9 @@
 
 
                           <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" routerLink="/backoffice/demande-app" >Dashboard </a></li>
+                            <li><a class="dropdown-item lienz" routerLink="/backoffice/demande-app" >Dashboard </a></li>
 
-                            <li><a class="dropdown-item"  (click)="logout()">Se déconnecter </a></li>
+                            <li><a class="dropdown-item lienz"  (click)="logout()">Se déconnecter </a></li>
 
 
                           </ul>

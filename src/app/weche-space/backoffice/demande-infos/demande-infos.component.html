@@ -1,0 +1,67 @@
+
+<section class="container section-allo">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="allo-text3">Besoin d'informations ?</h1>
+      <p class="allo-text4 mt-3">
+        Si vous avez des questions concernant nos services ou produits, veuillez remplir le formulaire ci-dessous.
+        Nous vous répondrons dans les plus brefs délais.
+
+      </p>
+
+    </div>
+  </div>
+
+  <div class="row  ">
+    <div class="col-lg-12   d-flex justify-content-center">
+      {{message}}
+      <form [formGroup]="informationRequestForm" (ngSubmit)="submitInformationRequest()" class="row g-3 mt-4">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="fullName"  class="form-label form-title">Nom complet <span class="text-danger">*</span></label>
+            <input type="text"   [placeholder]="user.lastname +' '+user.firstname" id="fullName" class="form-control  custom-input" formControlName="fullName"  required>
+            <small *ngIf="informationRequestForm.get('fullName')?.invalid && informationRequestForm.get('fullName')?.touched" class="text-danger">
+              Veuillez entrer votre nom complet.
+            </small>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="email"  class="form-label form-title">Adresse e-mail <span class="text-danger">*</span></label>
+            <input type="email" id="email"  [placeholder]="user.email" class="form-control  custom-input" formControlName="email"   required>
+            <small *ngIf="informationRequestForm.get('email')?.invalid && informationRequestForm.get('email')?.touched" class="text-danger">
+              Veuillez entrer une adresse e-mail valide.
+            </small>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="subject"  class="form-label form-title">Sujet <span class="text-danger">*</span></label>
+            <input type="text" id="subject" class="form-control  custom-input" formControlName="subject" placeholder="Sujet de votre demande" required>
+            <small *ngIf="informationRequestForm.get('subject')?.invalid && informationRequestForm.get('subject')?.touched" class="text-danger">
+              Veuillez entrer un sujet pour votre demande.
+            </small>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <label for="message"  class="form-label form-title">Message <span class="text-danger">*</span></label>
+            <textarea id="message" class="form-control" formControlName="message" rows="4" placeholder="Détaillez votre demande" required></textarea>
+            <small *ngIf="informationRequestForm.get('message')?.invalid && informationRequestForm.get('message')?.touched" class="text-danger">
+              Veuillez entrer votre message.
+            </small>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary  btn-lg" id="btn-app45">Envoyer la demande</button>
+        </div>
+      </form>
+
+
+    </div>
+  </div>
+</section>

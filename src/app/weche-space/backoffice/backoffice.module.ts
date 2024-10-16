@@ -12,7 +12,7 @@ import { AttestationAppComponent } from './attestation-app/attestation-app.compo
 import { EngagementComponent } from './engagement/engagement.component';
 import { AideComponent } from './aide/aide.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailNommeComponent } from './detail-nomme/detail-nomme.component';
 import { NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SuiviComponent } from './suivi/suivi.component';
@@ -23,6 +23,10 @@ import { DocumentModalComponent } from './document-modal/document-modal.componen
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { DocumentModal2Component } from './document-modal2/document-modal2.component';
 import { HistoriqueComponent } from './historique/historique.component';
+import { AttestationNradiationComponent } from './attestation-nradiation/attestation-nradiation.component';
+import { AttestationAvComponent } from './attestation-av/attestation-av.component';
+import { DemandeInfosComponent } from './demande-infos/demande-infos.component';
+import { SignalerComponent } from './signaler/signaler.component';
 
 
 
@@ -43,12 +47,16 @@ import { HistoriqueComponent } from './historique/historique.component';
     CustomDatePipePipe,
     DocumentModalComponent,
     DocumentModal2Component,
-    HistoriqueComponent
+    HistoriqueComponent,
+    AttestationNradiationComponent,
+    AttestationAvComponent,
+    DemandeInfosComponent,
+    SignalerComponent
 
   ],
   imports: [
     CommonModule,
-    BackofficeRoutingModule,NgxDocViewerModule,
+    BackofficeRoutingModule,NgxDocViewerModule,   FormsModule,
     ReactiveFormsModule,  NgbModule,NgbAlertModule,NgxPaginationModule,
 
   ]

@@ -10,6 +10,10 @@ import { SuiviComponent } from './suivi/suivi.component';
 import { authGuard } from '../auth.guard';
 import { LigneCarriereComponent } from './ligne-carriere/ligne-carriere.component';
 import { DemandeTraiterComponent } from './demande-traiter/demande-traiter.component';
+import { AttestationNradiationComponent } from './attestation-nradiation/attestation-nradiation.component';
+import { AttestationAvComponent } from './attestation-av/attestation-av.component';
+import { DemandeInfosComponent } from './demande-infos/demande-infos.component';
+import { SignalerComponent } from './signaler/signaler.component';
 
 
 const routes: Routes = [
@@ -28,6 +32,21 @@ const routes: Routes = [
       {
         path: 'suivi',
         component: SuiviComponent,
+      },
+      {
+        path: 'signaler',
+        component: SignalerComponent,
+      },
+      {
+        path: 'demande-infos',
+        component: DemandeInfosComponent,
+      },  {
+        path: 'non-radiation',
+        component: AttestationNradiationComponent,
+      },
+      {
+        path: 'attestation-validite',
+        component: AttestationAvComponent,
       },
       {
         path: 'demande-app',

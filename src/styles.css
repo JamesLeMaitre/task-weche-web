@@ -5,7 +5,9 @@ body {
 .text-danger {
   color: rgba(235, 0, 0, 1);
 }
-
+.lienz{
+  cursor: pointer;
+}
 h1 strong {
   color: #434343
 }
@@ -1117,21 +1119,21 @@ h1 strong {
 
 /*troisieme section */
 .design-col {
-  max-width: 187px;
+  max-width: 127px;
 }
 
 .design-col img {
-  width: 187px;
+  width: 127px;
 }
 
 .card-title {
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 600;
-  line-height: 30px;
+  line-height: 20px;
   color: #111928;
   margin-left: 40px;
   margin-right: 70px;
-  padding-top: 20px
+  padding-top: 10px
 }
 
 .lien {
@@ -1143,6 +1145,7 @@ h1 strong {
   margin-left: 40px;
   text-decoration: none;
   font-weight: 600;
+
 }
 
 .parph {
@@ -1914,7 +1917,7 @@ a {
 
   .image-sect2 {
     height: 392px;
-    Width: 434px;
+    width: 434px;
   }
 
   #bt2 {
@@ -2215,7 +2218,7 @@ a {
 }
 
 .custom-close::before {
-  content: url('../../../../assets/img/notif1.png'); /* Remplacez par le chemin de votre image SVG */
+ /* content: url('../../../../assets/img/notif1.png'); /* Remplacez par le chemin de votre image SVG */
   display: block;
   width: 1.5rem; /* Ajustez la taille de l'icône si nécessaire */
   height: 1.5rem; /* Ajustez la taille de l'icône si nécessaire */
@@ -2227,7 +2230,7 @@ a {
 }
 
 .custom-close1::before {
-  content: url('../../../../assets/img/notif2.png'); /* Remplacez par le chemin de votre image SVG */
+ /* content: url('../../../../assets/img/notif2.png'); /* Remplacez par le chemin de votre image SVG */
   display: block;
   width: 1.5rem; /* Ajustez la taille de l'icône si nécessaire */
   height: 1.5rem; /* Ajustez la taille de l'icône si nécessaire */
@@ -2717,7 +2720,12 @@ div.progress-bar {
   width: 213px;
   height: 52px;
 }
-
+#btn-app6 {
+  background-color: rgb(55, 184, 201)!important;
+  border-color: rgb(55, 184, 201);
+  width: 213px;
+  height: 52px;
+}
 #btn-send-again {
   background-color: rgba(239, 136, 17, 1) !important;
   border-color: rgba(239, 136, 17, 1);
@@ -2858,6 +2866,13 @@ input[type="date"]::placeholder {
   #btn-app {
     background-color: rgba(239, 136, 17, 1) !important;
     border-color: rgba(239, 136, 17, 1);
+    width: 135.95px;
+    height: 33.39px;
+    font-size: 11.56px;
+  }
+  #btn-app6 {
+    background-color: rgb(55, 184, 201) !important;
+    border-color: rgb(55, 184, 201);
     width: 135.95px;
     height: 33.39px;
     font-size: 11.56px;

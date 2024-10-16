@@ -6,6 +6,7 @@ import {Structure} from "../../../../shared/models/structure";
 export class User {
   id!: string;
   username!: string;
+  birthdate!:number;
   firstname!: string;
   lastname!: string;
   phoneNumber!: number;
@@ -17,4 +18,13 @@ export class User {
   requestNumber!:string;
   hasRequested!:boolean;
   serialNumber!:string;
+  body!:string;
+  grade!:string;
+  ppsDate!:Date;
+  gradeDate!:Date;
+  oldUserFirstname!:string;
+  oldUserLastname!:string;
+  oldUserSerialNumber!:string;
+  ua!:string;
+  dateRetreat!:Date
 }

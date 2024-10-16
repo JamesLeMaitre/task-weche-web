@@ -14,14 +14,21 @@
         class="span-nom"> {{ details.firstName + ' ' + details.lastName }}</span></p>
     <form (ngSubmit)="save()" [formGroup]="rejectRequestAdminForm">
       <div class="form-floating">
-        <textarea class="form-control" id="floatingTextarea2" placeholder="Entrez le motif de ce rejet"
-                  style="height: 100px"></textarea>
+        <textarea class="form-control" formControlName="reason" id="floatingTextarea2"
+                  placeholder="Entrez le motif de ce rejet" style="height: 100px"></textarea>
         <label class="custom-labe" for="floatingTextarea2">Entrez le motif de ce rejet</label>
       </div>
       <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-top">
         <button (click)="modal.close('Close click')" class="btn btn-danger me-md-2 btn-annuler" type="button">Annuler
         </button>
-        <button class="btn btn-primary btn-confirmer" type="button">Confirmer</button>
+        <button (click)="save()" class="btn btn-primary btn-confirmer" type="button">
+          <ng-container *ngIf="isLoading$ | async"><span [style.display]="'block'" class="indicator-progress">Patientez...
+                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+          </ng-container>
+          <ng-container *ngIf="(isLoading$ | async) === false">
+            <span class="indicator-label">Confirmer</span>
+          </ng-container>
+        </button>
       </div>
     </form>
   </div>
@@ -29,7 +36,26 @@
      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Close</button>
    </div>-->
 </ng-template>
+<ng-template #err let-modal>
+  <!--  <div class="modal-header">
+  <h4 class="modal-title">Modal title</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>-->
+  <div class="modal-body taille-notif-delete position-relative">
+    <div class="d-flex justify-content-center align-items-center">
+      <i (click)="modal.close('Close click')" class="bi bi-x-lg profile-imgd"></i>
 
+    </div>
+    <p class="text-center paraph-notifdelete">{{ mess }}
+
+      <span
+        class="span-nom"> </span></p>
+
+  </div>
+  <!-- <div class="modal-footer">
+     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Close</button>
+   </div>-->
+</ng-template>
 <ng-template #modifier let-modal>
   <!--  <div class="modal-header">
   <h4 class="modal-title">Modal title</h4>
@@ -41,28 +67,34 @@
 
     </div>
     <p class="text-center paraph-notifdelete">Choisissez les documents à modifier ou à renvoyer. </p>
-    <form action="" class=" ">
+    <form (ngSubmit)="saveUpdate()" [formGroup]="updateRequestAdminForm">
       <div class="form-check v">
-        <input class="form-check-input" id="flexCheckDefault" type="checkbox" value="">
+        <input class="form-check-input" formControlName="appointmentDecree" id="flexCheckDefault" type="checkbox"
+               value="">
         <label class="form-check-label" for="flexCheckDefault">
           Fichier décret de nomination
         </label>
       </div>
       <div class="form-check v">
-        <input checked class="form-check-input" id="flexCheckChecked" type="checkbox" value="">
-        <label class="form-check-label" for="flexCheckChecked">
+        <input checked class="form-check-input" formControlName="handingOver" id="flexCheckChecked" type="checkbox"
+               value="">
+        <label class="form-check-label " for="flexCheckChecked">
           Fichier de passation de service
         </label>
       </div>
+      <div *ngIf="updateRequestAdminForm.hasError('atLeastOneCheckboxChecked') && updateRequestAdminForm.touched"
+           class="text-center text-danger">
+        Vous devez sélectionner au moins une option.
+      </div>
       <div class="form-floating">
-        <textarea class="form-control" id="floatingTextarea2" placeholder="Entrez le motif de ce rejet"
-                  style="height: 100px ;margin-top: 15px;"></textarea>
+        <textarea class="form-control" formControlName="reason" id="floatingTextarea2"
+                  placeholder="Entrez le motif de ce rejet" style="height: 100px ;margin-top: 15px;"></textarea>
         <label class="custom-labe" for="floatingTextarea2">Entrez le motif de ce rejet</label>
       </div>
       <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-top">
         <button (click)="modal.close('Close click')" class="btn btn-danger me-md-2 btn-annuler" type="button">Annuler
         </button>
-        <button class="btn btn-primary btn-confirmer" type="button">Confirmer</button>
+        <button (click)="saveUpdate()" class="btn btn-primary btn-confirmer" type="button">Confirmer</button>
       </div>
     </form>
   </div>
@@ -103,105 +135,319 @@
 <div *ngIf="checkStatusData?.requestStatus === 'UPDATE'" class="alert alert-warning alert-dismissible fade show"
      role="alert">
   <button aria-label="Close" class="btn-close custom-close1" data-bs-dismiss="alert" type="button"></button>
-  {{ checkStatusData.comment }}
+  {{ checkStatusData?.comment }}
 </div>
 
-<div class="row section-profile1">
+<!--<div class="row section-profile1">
   <div class="col-lg-1 col-md-3 me-5">
     <img alt="" class="profile-img" src="../../../../assets/img/ads.JPG"
     >
   </div>
   <div class="col-lg-10  col-md-  ">
     <h1 class="titre-detail">{{ details.lastName }} {{ details.firstName }}</h1>
-    <p class="titre-profession">Profession</p>
+
   </div>
 
-</div>
+</div>-->
 <div class="row">
   <div class="col-lg-12">
-    <h2 class="titre-detail2 text-decoration-underline">Détails sur le demandeur {{ details.requestStatus }}</h2>
+    <h2 class="titre-detail2 text-decoration-underline">Détails sur le demandeur </h2>
   </div>
 
-  <div class="col-6">
-    <p class="ligne1">Dénomination civile : <span class="xxx">{{ details.civilName }}</span></p>
-  </div>
-  <div class="col-6">
-    <p class="ligne1">Période de début : <span class="xxx">{{ details.startPeriod | date:"dd-MM-yyyy" }}</span></p>
-  </div>
-  <div class="col-6">
-    <p class="ligne1">Date de la 1ère prise de service : <span
-      class="xxx">{{ details.dateOfFirstEntryService | date:"dd-MM-yyyy" }}</span></p>
-  </div>
-  <div class="col-6">
-    <p class="ligne1">Période de fin : <span class="xxx">{{ details.endPeriod | date:"dd-MM-yyyy" }}</span></p>
-  </div>
-  <div (click)="openDocument(details!)" class="col-lg-6">
-    <a class="btn btn-primary btn-lg-a d-flex justify-content-between" type="button"> <span
-      class="text-truncate ">{{ details!.handingOver!!.name }}.pdf</span> <img alt=""
-                                                                               class="img-detail"
-                                                                               src="../../../../assets/img/eye-open2.png"></a>
-  </div>
-  <div (click)="openDocument2(details!)" class="col-lg-6   ">
-    <a class="btn btn-primary btn-lg-a d-flex justify-content-between" type="button"> <span
-      class="text-truncate  ">{{ details!.appointmentDecree!.name }}.pdf</span> <img
-      alt="" class="img-detail" src="../../../../assets/img/eye-open2.png"></a>
-  </div>
-</div>
-<div class="row " id="mt-detail">
-  <div class="col-lg-12">
-    <h2 class="titre-detail2 text-decoration-underline"> Détails sur le responsable remplacé</h2>
+  <!--   Implementez la loique des type de benéficiaire-->
+  <div *ngIf="details.beneficiary.attribute === 'sans-fonction'" class="row">
+    <div class="col-6">
+      <p class="ligne1">Bénéficiaire : <span class="xxx">{{ details.beneficiary.name }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Matricule NPI : <span class="xxx">{{ details.user.username }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Nom : <span class="xxx">{{ details.user.firstname }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Prénom.s : <span class="xxx">{{ details.user.lastname }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Corps : <span class="xxx">{{ details.body }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Grade : <span class="xxx">{{ details.grade }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Date effet grade : <span class="xxx">{{ details.gradeDate | date:"dd/MM/yyyy" }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Désignation Ministère / Institution : <span class="xxx">{{ details.user.structure.name }}</span>
+      </p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Désignation UA : <span class="xxx">{{ details.ua }}</span></p>
+    </div>
   </div>
 
-  <div class="col-6">
-    <p class="ligne1">Nom du responsable: <span class="xxx">{{ details.lastNameOfPreviousOfficial }}</span></p>
+  <div *ngIf="details.beneficiary.attribute === 'nomme'" class="row">
+    <div class="col-12">
+      <p class="ligne1">Bénéficiaire : <span class="xxx">{{ details.beneficiary.name }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Matricule NPI : <span class="xxx">{{ details.user.username }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Nom : <span class="xxx">{{ details.user.firstname }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Prénom.s : <span class="xxx">{{ details.user.lastname }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Corps : <span class="xxx">{{ details.body }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Grade : <span class="xxx">{{ details.grade }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Date effet grade : <span class="xxx">{{ details.gradeDate | date:"dd/MM/yyyy" }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Désignation Ministère / Institution : <span class="xxx">{{ details.user.structure.name }}</span>
+      </p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Désignation UA : <span class="xxx">{{ details.ua }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Nom de l'ancien occupant : <span class="xxx">{{ details.firstNameOfPreviousOfficial }}</span>
+      </p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Prénom.s de l'ancien occupant : <span
+        class="xxx">{{ details.lastNameOfPreviousOfficial }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Intitulé de la fonction : <span class="xxx">{{ details.fonction }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Date prise de fonction : <span class="xxx">{{ details.dateFonction | date:"dd/MM/yyyy" }}</span>
+      </p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Matricule ancien occupant (NPI) : <span
+        class="xxx">{{ details.serialNumberOfPreviousOfficial }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Date PPS : <span class="xxx">{{ details.ppsDate | date:"dd/MM/yyyy" }}</span></p>
+    </div>
+    <div (click)="openDocument(details!)" class="col-lg-6">
+      <p class="ligne1">Décret ou l'arrêté de nomination :<a
+        class="btn btn-primary btn-lg-a d-flex justify-content-between" type="button"> <span
+        class="text-truncate ">{{ details!.appointmentDecree!.name }}</span> <img alt=""
+                                                                                  class="img-detail"
+                                                                                  src="../../../../assets/img/eye-open2.png"></a>
+      </p>
+
+    </div>
+    <div (click)="openDocument(details!)" class="col-lg-6">
+      <p class="ligne1">Fichier de passation de service :<a
+        class="btn btn-primary btn-lg-a d-flex justify-content-between" type="button"> <span
+        class="text-truncate ">{{ details!.handingOver!.name }}</span> <img alt=""
+                                                                            class="img-detail"
+                                                                            src="../../../../assets/img/eye-open2.png"></a>
+      </p>
+
+    </div>
   </div>
-  <div class="col-6">
-    <p class="ligne1">Grade du responsable: <span class="xxx">{{ details.gradeOfPreviousOfficial }}</span></p>
+
+  <div *ngIf="details.beneficiary.attribute === 'sans-fonction-departemental'" class="row">
+    <div class="col-6">
+      <p class="ligne1">Bénéficiaire : <span class="xxx">{{ details.beneficiary.name }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Matricule NPI : <span class="xxx">{{ details.user.username }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Nom : <span class="xxx">{{ details.user.firstname }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Prénom.s : <span class="xxx">{{ details.user.lastname }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Corps : <span class="xxx">{{ details.body }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Grade : <span class="xxx">{{ details.grade }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Date effet grade : <span class="xxx">{{ details.gradeDate | date:"dd/MM/yyyy" }}</span></p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Désignation Ministère / Institution : <span class="xxx">{{ details.user.structure.name }}</span>
+      </p>
+    </div>
+    <div class="col-6">
+      <p class="ligne1">Désignation UA : <span class="xxx">{{ details.ua }}</span></p>
+    </div>
   </div>
-  <div class="col-6">
-    <p class="ligne1">Prénom du responsable : <span class="xxx">{{ details.firstNameOfPreviousOfficial }}</span></p>
-  </div>
-  <div class="col-6">
-    <p class="ligne1">Poste occupé : <span class="xxx">{{ details.positionHeldOfPreviousOfficial }}</span></p>
-  </div>
-  <div class="col-6">
-    <p class="ligne1">Matricule de responsable :
-      <span class="xxx">{{ details.serialNumberOfPreviousOfficial }}</span></p>
-  </div>
-  <div class="col-6">
-    <p class="ligne1">Corps ou structure : <span class="xxx">{{ details.bodyOfPreviousOfficial }}</span></p>
-  </div>
+
+  <!-- <div *ngIf="details.beneficiary.attribute === 'nomme'">
+     <div class="col-6">
+       <p class="ligne1">Matricule NPI <span class="xxx">{{ details.serialNumber }}</span></p>
+     </div>
+   </div>
+
+
+   <div *ngIf="details.beneficiary.attribute === 'sans-fonction-departemental'" class="col-6">
+     <p class="ligne1">Matricule NPI : <span class="xxx">{{ details.serialNumberOfPreviousOfficial }}</span></p>
+   </div>
+
+   <div class="col-6">
+     <p class="ligne1">Dénomination civile : <span class="xxx">{{ details.civilName }}</span></p>
+   </div>
+   <div class="col-6">
+     <p class="ligne1">Période de début : <span class="xxx">{{ details.startPeriod | date:"dd-MM-yyyy" }}</span></p>
+   </div>
+   <div class="col-6">
+     <p class="ligne1">Date de la prise de service : <span
+       class="xxx">{{ details.dateOfFirstEntryService | date:"dd-MM-yyyy" }}</span></p>
+   </div>
+   <div class="col-6">
+     <p class="ligne1">Période de fin : <span class="xxx">{{ details.endPeriod | date:"dd-MM-yyyy" }}</span></p>
+   </div>
+   <div (click)="openDocument(details!)" class="col-lg-6">
+     <a class="btn btn-primary btn-lg-a d-flex justify-content-between" type="button"> <span
+       class="text-truncate ">{{ details!.handingOver!.name }}</span> <img alt=""
+                                                                                class="img-detail"
+                                                                                src="../../../../assets/img/eye-open2.png"></a>
+   </div>
+   <div (click)="openDocument2(details!)" class="col-lg-6   ">
+     <a class="btn btn-primary btn-lg-a d-flex justify-content-between" type="button"> <span
+       class="text-truncate  ">{{ details!.appointmentDecree!.name }}</span> <img
+       alt="" class="img-detail" src="../../../../assets/img/eye-open2.png"></a>
+   </div>
+ </div>
+ <div class="row " id="mt-detail">
+   <div class="col-lg-12">
+     <h2 class="titre-detail2 text-decoration-underline"> Détails sur le responsable remplacé</h2>
+   </div>
+
+   <div class="col-6">
+     <p class="ligne1">Nom du responsable: <span class="xxx">{{ details.firstNameOfPreviousOfficial }}</span></p>
+   </div>
+   <div class="col-6">
+     <p class="ligne1">Grade du responsable: <span class="xxx">{{ details.gradeOfPreviousOfficial }}</span></p>
+   </div>
+   <div class="col-6">
+     <p class="ligne1">Prénom du responsable : <span class="xxx">{{ details.lastNameOfPreviousOfficial }}</span></p>
+   </div>
+   <div class="col-6">
+     <p class="ligne1">Poste occupé : <span class="xxx">{{ details.positionHeldOfPreviousOfficial }}</span></p>
+   </div>
+   <div class="col-6">
+     <p class="ligne1">Matricule de responsable :
+       <span class="xxx">{{ details.serialNumberOfPreviousOfficial }}</span></p>
+   </div>
+   <div class="col-6">
+     <p class="ligne1">Corps ou structure : <span class="xxx">{{ details.bodyOfPreviousOfficial }}</span></p>
+   </div>-->
+
+
   <div class="col-lg-12 mb-10">
     <button (click)="approvedRequest(details.id!!)"
             *ngIf="user && user.roles[0].roleName === 'ROLE_SUPER_ADMIN' && checkStatusData?.requestStatus === 'PENDING' "
             class="btn btn-primary me-2 btn-accepter"
             type="button"
-    >Accepter
+    >
+      <ng-container *ngIf="isLoading$ | async"><span [style.display]="'block'" class="indicator-progress">Patientez...
+                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+      </ng-container>
+      <ng-container *ngIf="(isLoading$ | async) === false">
+        <span class="indicator-label">Accepter</span>
+      </ng-container>
     </button>
+    <!--    <button (click)="approvedRequest(details.id!!)"
+                *ngIf="user && user.roles[0].roleName === 'ROLE_ADMIN' && details?.requestStatus === 'NEW' "
+                class="btn btn-primary me-2 btn-accepter"
+                type="button"
+        >Accepter
+        </button>-->
+
     <button (click)="approvedRequest(details.id!!)"
-            *ngIf="user && user.roles[0].roleName === 'ROLE_ADMIN' && details?.requestStatus === 'NEW' "
+            *ngIf="user && user.roles[0].roleName === 'ROLE_ADMIN' && checkStatusData?.requestStatus === 'NEW' && details?.beneficiary?.attribute !== 'sans-fonction-departemental' "
             class="btn btn-primary me-2 btn-accepter"
             type="button"
-    >Accepter
+    >
+      <ng-container *ngIf="isLoading$ | async"><span [style.display]="'block'" class="indicator-progress">Patientez...
+                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+      </ng-container>
+      <ng-container *ngIf="(isLoading$ | async) === false">
+        <span class="indicator-label">Accepter</span>
+      </ng-container>
     </button>
 
-
     <button (click)="modifierBtn()"
-            *ngIf="user && user.roles[0].roleName === 'ROLE_SUPER_ADMIN' && checkStatusData?.requestStatus === 'PENDING'"
+            *ngIf="user && user.roles[0].roleName === 'ROLE_ADMIN' && checkStatusData?.requestStatus === 'NEW' && details?.handingOver?.name && details?.appointmentDecree?.name"
             class="btn btn-primary me-2 btn-modifier"
             type="button">Modifier
     </button>
+    <!--    Modify request by sup admin-->
+    <!-- <button (click)="modifierBtn()"
+             *ngIf="user && user.roles[0].roleName === 'ROLE_ADMIN' && checkStatusData?.requestStatus === 'PENDING'"
+             class="btn btn-primary me-2 btn-modifier"
+             type="button">Modifier
+     </button>-->
 
-    <button (click)="open ()"
+    <button (click)="open()"
             *ngIf="user && user.roles[0].roleName === 'ROLE_SUPER_ADMIN' && checkStatusData?.requestStatus === 'PENDING'"
             class="btn btn-secondary btn-refuser"
             type="button"
-    >Refuser
+    >
+      <ng-container *ngIf="isLoading$ | async"><span [style.display]="'block'" class="indicator-progress">Patientez...
+                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+      </ng-container>
+      <ng-container *ngIf="(isLoading$ | async) === false">
+        <span class="indicator-label">Refuser</span>
+      </ng-container>
     </button>
-    <button (click)="open()" *ngIf="user && user.roles[0].roleName === 'ROLE_ADMIN' && details?.requestStatus === 'NEW'"
+
+    <button (click)="open()"
+            *ngIf="user && user.roles[0].roleName === 'ROLE_ADMIN' && checkStatusData?.requestStatus === 'NEW' && details?.beneficiary?.attribute !== 'sans-fonction-departemental'"
             class="btn btn-secondary btn-refuser"
             type="button"
-    >Refuser
+    >
+      <ng-container *ngIf="isLoading$ | async"><span [style.display]="'block'" class="indicator-progress">Patientez...
+                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+      </ng-container>
+      <ng-container *ngIf="(isLoading$ | async) === false">
+        <span class="indicator-label">Refuser</span>
+      </ng-container>
+    </button>
+
+
+    <!--    For the thirs part-->
+    <button (click)="approvedThirdRequest(details.id!!)"
+            *ngIf="user && user.roles[0].roleName === 'ROLE_ADMIN' && details?.requestStatus === 'NEW' && details?.beneficiary?.attribute === 'sans-fonction-departemental' "
+            class="btn btn-primary me-2 btn-accepter"
+            type="button"
+    >
+      <ng-container *ngIf="isLoading$ | async"><span [style.display]="'block'" class="indicator-progress">Patientez...
+                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+      </ng-container>
+      <ng-container *ngIf="(isLoading$ | async) === false">
+        <span class="indicator-label">Accepter</span>
+      </ng-container>
+    </button>
+
+    <button (click)="open()"
+            *ngIf="user && user.roles[0].roleName === 'ROLE_ADMIN' && details?.requestStatus === 'NEW' && details?.beneficiary?.attribute === 'sans-fonction-departemental'"
+            class="btn btn-secondary btn-refuser"
+            type="button"
+    >
+      <ng-container *ngIf="isLoading$ | async"><span [style.display]="'block'" class="indicator-progress">Patientez...
+                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+      </ng-container>
+      <ng-container *ngIf="(isLoading$ | async) === false">
+        <span class="indicator-label">Refuser</span>
+      </ng-container>
+
     </button>
   </div>
 </div>

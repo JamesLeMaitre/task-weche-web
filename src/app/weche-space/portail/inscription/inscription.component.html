@@ -3,7 +3,7 @@
     <div class="col-lg-6 justify-content-center   ps-5 pe-5  mb-10">
 
       <div class="form-connect">
-        <h1 class="text-center"><a  routerLink="/connexion"> <span class="gray">Connexion</span></a> /<a routerLink="inscription"><strong
+        <h1 class="text-center"><a  routerLink="/connexion"> <span class="gray">Connexion / </span></a><a routerLink="inscription"><strong
          >Inscription</strong></a></h1>
         <p class="form-paraph22    ">Entrez vos informations pour vous inscrire.</p>
 
@@ -12,7 +12,7 @@
             <div class="col-md">
               <label for="exampleInputEmail1" class="form-label">Nom
                 <span class="red">*</span></label>
-              <input type="text" class="form-control" id="floatingInputGrid" placeholder="Votre Nom  de famille"
+              <input type="text" class="form-control" id="floatingInputGrid" placeholder="Nom  de famille"
                 formControlName="firstname">
                 <div *ngIf="registerForm.get('firstname')?.touched && registerForm.get('firstname')?.invalid">
                   <small class="text-danger" *ngIf="registerForm.get('firstname')?.errors?.['required']">Le nom est requis.</small>
@@ -23,7 +23,7 @@
             </div>
             <div class="col-md"> <label for="exampleInputEmail1" class="form-label">Numéro de téléphone
                 <span class="red">*</span></label>
-              <input type="text" class="form-control" id="floatingInputGrid" placeholder=" Numéro de téléphone
+              <input type="text" class="form-control" id="floatingInputGrid" placeholder="Numéro de téléphone
               " formControlName="phoneNumber">
               <div *ngIf="registerForm.get('phoneNumber')?.touched && registerForm.get('phoneNumber')?.invalid">
                 <small class="text-danger" *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">Le numéro de téléphone est requis.</small>
@@ -52,7 +52,7 @@
             <div class="col-md">
               <label for="exampleInputEmail1" class="form-label">Email
                 <span class="red">*</span></label>
-              <input type="email" class="form-control" id="floatingInputGrid" placeholder="Votre adresse email"
+              <input type="email" class="form-control" id="floatingInputGrid" placeholder="Adresse email"
                 formControlName="email">
                 <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid">
                   <small class="text-danger" *ngIf="registerForm.get('email')?.errors?.['required']">L'email est requis.</small>
@@ -77,6 +77,20 @@
 
             </div>
             <div class="col-md">
+              <label for="exampleInputEmail1" class="form-label">Numéro matricule
+                <span class="red">*</span></label>
+              <input type="text" class="form-control" id="floatingInputGrid" placeholder="Numéro matricule"
+                formControlName="serialNumber">
+
+
+                <div *ngIf="validationErrors['serialNumber']">
+                  <small class="text-danger">{{ validationErrors['serialNumber'] }}</small>
+                </div>
+
+            </div>
+          </div>
+          <div class="row g-2 py-3">
+            <div class="col-md">
               <label for="exampleInputEmail1" class="form-label">Mot de passe
                 <span class="red">*</span></label>
               <input type="text" class="form-control" id="floatingInputGrid" placeholder="Mot de passe"
@@ -89,22 +103,10 @@
                 <div *ngIf="validationErrors['password']">
                   <small class="text-danger">{{ validationErrors['password'] }}</small>
                 </div>
-            </div>
-          </div>
-          <div class="row g-2 py-3">
-            <div class="col-md">
-              <label for="exampleInputEmail1" class="form-label">Numéro matricule
-                <span class="red">*</span></label>
-              <input type="text" class="form-control" id="floatingInputGrid" placeholder="Numéro matricule"
-                formControlName="serialNumber">
 
-
-                <div *ngIf="validationErrors['serialNumber']">
-                  <small class="text-danger">{{ validationErrors['serialNumber'] }}</small>
-                </div>
             </div>
             <div class="col-md">
-              <label for="exampleInputEmail1" class="form-label">Confirmation du mot de passe
+              <label for="exampleInputEmail1" class="form-label">Confirmer mot de passe
                 <span class="red">*</span></label>
               <input type="text" class="form-control" id="floatingInputGrid" placeholder="Confirmation du mot de passe "
                 formControlName="confirmPassword">

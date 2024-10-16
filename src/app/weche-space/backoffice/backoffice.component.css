@@ -230,7 +230,9 @@ overflow:auto;
      #sidebar ul.component{
 		 padding:20px 0px;
 	 }
-
+.rt{
+  cursor: pointer;
+}
    #sidebar ul li a{
 	   padding:5px 10px 5px 20px;
 	   line-height:30px;
@@ -239,9 +241,20 @@ overflow:auto;
 	   font-weight:400;
 	   display:block;
 	   color:#fff;
-	   text-transform:capitalize;
+	   /*text-transform:capitalize;*/
    }
+   #sidebar ul li  .ert {
 
+padding: 5px 10px 10px 20px !important;
+    line-height:25px;
+    font-size:15px;
+    position:relative;
+    font-weight:400;
+    display:block;
+    color:#fff;
+
+    /*text-transform:capitalize;*/
+  }
       #sidebar ul li a i{
 		  position:relative;
 		  margin-right:10px;
@@ -261,7 +274,7 @@ overflow:auto;
 	  }
 .main-content{
   background-color: rgba(251, 251, 251, 1);
-height: auto;
+min-height: 900px;
 }
 
 

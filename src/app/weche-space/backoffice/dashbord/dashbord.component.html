@@ -34,7 +34,7 @@
       <table class="table">
         <thead class="table-light">
         <tr>
-          <th scope="col">Date de reception</th>
+          <th scope="col">Date de réception</th>
           <th scope="col">Nom du demandeur</th>
           <th scope="col">Poste occupé</th>
           <th scope="col">Documents</th>
@@ -46,8 +46,9 @@
         <tr *ngFor="let item of demandes | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
           <td>{{ item.createdAt | customDate }}</td>
           <td>{{ item.lastName }}</td>
-          <td>{{ item.positionHeldOfPreviousOfficial }}</td>
-          <td>Attestation de présence au poste</td>
+          <td>{{ item.user.profession }}</td>
+          <td>{{ newRequest?.beneficiary?.name }}</td>
+<!--          <td>moip</td>-->
           <td><a class="btn-detail btn " routerLink="/backoffice/detail-nomme/{{item.requestNumber}}"><img
             alt="" class="img-enga" src="../../../../assets/img/eye-open.png">Détails de la demande </a></td>
         </tr>

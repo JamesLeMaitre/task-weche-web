@@ -19,7 +19,14 @@ import { NewRequest } from "../../models/new-request";
       headers: this.httpHeaders
     });
   }
+  update1(id: string, request: FormData): Observable<HttpResponse<NewRequest>> {
+    return this.http.post<HttpResponse<any>>(`${this.API_URL}/pending-request/update-file-appointment-decree/${id}`, request, {})
+  }
+
   update(id: string, request: FormData): Observable<HttpResponse<NewRequest>> {
     return this.http.post<HttpResponse<any>>(`${this.API_URL}/pending-request/update-file/${id}`, request, {})
+
+  }update2(id: string, request: FormData): Observable<HttpResponse<NewRequest>> {
+    return this.http.post<HttpResponse<any>>(`${this.API_URL}/pending-request/update-file-handing-over/${id}`, request, {})
   }
 }

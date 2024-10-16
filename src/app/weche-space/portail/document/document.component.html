@@ -1,0 +1,22 @@
+<!-- search-document.component.html -->
+<div style="margin-top: 500px;">
+  <div>
+    <form (ngSubmit)="onSubmit()">
+      <label for="reference">Référence du document :</label>
+      <input type="text" id="reference" [(ngModel)]="reference" name="reference" required>
+      <button type="submit">Rechercher</button>
+    </form>
+
+    <!-- Message d'erreur si le document n'est pas trouvé -->
+    <p *ngIf="errorMessage">{{ errorMessage }}</p>
+  </div>
+
+  <!-- Afficher le document si la référence est trouvée -->
+  <div *ngIf="documentUrl">
+    <h3>Document :</h3>
+    <iframe [src]="documentUrl" width="100%" height="600px"></iframe>
+  </div>
+
+  <!-- Message d'erreur si la référence est incorrecte -->
+  <p *ngIf="errorMessage">{{ errorMessage }}</p>
+</div>

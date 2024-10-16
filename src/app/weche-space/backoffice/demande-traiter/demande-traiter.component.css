@@ -1,7 +1,12 @@
 .search2{
 
 }
-
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
 .input-group-text {
   background: none;
   border: none;

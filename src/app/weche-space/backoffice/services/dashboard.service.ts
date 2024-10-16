@@ -28,6 +28,7 @@ export class DashboardService implements OnDestroy {
     this.unsubscribe.forEach((sb) => sb.unsubscribe());
   }
 
+
   listDemandes(structureId: string): Observable<NewRequest[]> {
     this.isLoadingSubject.next(true);
     return this.service.getList(structureId).pipe(
@@ -60,7 +61,16 @@ export class DashboardService implements OnDestroy {
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
-
+  searchAdmin(search: string): Observable<CheckRequestStatus[]> {
+    this.isLoadingSubject.next(true);
+    return this.service.searchAdmin(search).pipe(
+      map((response) => response.data),
+      catchError((err) => {
+        return of([]);
+      }),
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
   getRequestDetailBySupAdmin(id: string): Observable<NewRequest | undefined> {
     this.isLoadingSubject.next(true);
     return this.service.getSupAdminDetail(id).pipe(
@@ -149,6 +159,17 @@ export class DashboardService implements OnDestroy {
     );
   }
 
+  approvedThirdRequest(id: string): Observable<NewRequest | undefined> {
+    this.isLoadingSubject.next(true);
+    return this.service.approveRequestByThird(id).pipe(
+      map((response) => response.data),
+      catchError((err) => {
+        return of(undefined);
+      }),
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+
   approveSupAdminRequest(id: string): Observable<NewRequest | undefined> {
     this.isLoadingSubject.next(true);
     return this.service.approveRequestSupAdmin(id).pipe(
@@ -202,6 +223,18 @@ export class DashboardService implements OnDestroy {
     this.isLoadingSubject.next(true);
     const formEncoded: URLSearchParams = getFormEncodedData(request);
     return this.service.updateRequestBySupAdmin(formEncoded).pipe(
+      map((response) => response.data),
+      catchError((err) => {
+        return of(undefined);
+      }),
+      finalize(() => this.isLoadingSubject.next(false))
+    )
+  }
+
+  updateRequestByAdmin(request: { [p: string]: string }): Observable<NewRequest | undefined> {
+    this.isLoadingSubject.next(true);
+    const formEncoded: URLSearchParams = getFormEncodedData(request);
+    return this.service.updateRequestByAdmin(formEncoded).pipe(
       map((response) => response.data),
       catchError((err) => {
         return of(undefined);
@@ -264,7 +297,47 @@ export class DashboardService implements OnDestroy {
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
+  nonRadiation(): Observable<any> {
+    this.isLoadingSubject.next(true);
+    return this.service.nonRadiation().pipe(
+      map((response) => response.data),
+      catchError((err) => {
+        return of([]);
+      }),
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+  checkIfUserHasValidAppAndDnr(): Observable<any> {
+    this.isLoadingSubject.next(true);
+    return this.service.checkIfUserHasValidAppAndDnr().pipe(
+      map((response) => response.data),
+      catchError((err) => {
+        return of([]);
+      }),
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
 
+  checkIfUserHasValidApp(): Observable<any> {
+    this.isLoadingSubject.next(true);
+    return this.service.checkIfUserHasValidApp().pipe(
+      map((response) => response.data),
+      catchError((err) => {
+        return of([]);
+      }),
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+  showRequest(requestNumber: string): Observable<NewRequest | undefined> {
+    this.isLoadingSubject.next(true);
+    return this.service.showRequest(requestNumber).pipe(
+      map((response) => response.data),
+      catchError((err) => {
+        return of(undefined);
+      }),
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
 
 
 }

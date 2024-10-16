@@ -1,55 +1,173 @@
 <section class="container contact-height  ">
   <div class="row top-2">
     <div class="col-md-6 contact-bottom">
-      <h2 class=" title-contact">Nous envoyer un message</h2>
-      <div class="paraph1 ">
-        <p>Vous pouvez nous envoyer vos questions ou demandes d'informations au cas où vous n'avez pas trouvé de reponse
-          à votre
-          préocupation dans notre <span><a href="/home/faq">Foire à question (F.A.Q.)</a></span></p>
+      <h2 class=" title-contact mt-5">Nous envoyer un message</h2>
+      <div class="paraph1 mt-4">
+        <p>Si vous n'avez pas trouvé la réponse à votre question dans notre <a routerLink="/faq">Foire aux Questions (FAQ)</a>, n'hésitez pas à nous envoyer vos demandes ou questions.</p>
+        <p>Veuillez vous connecter pour soumettre vos préoccupations.</p>
+
       </div>
+      <ng-template #formError let-validation="validation" let-message="message" let-control="control">
+        <div *ngIf="control?.hasError(validation) && (control?.dirty || control?.touched)" class="invalid-feedback">
+          {{ message }}
+        </div>
+      </ng-template>
 
-      <form (ngSubmit)="submit()" [formGroup]="contactForm" class="row g-3">
-        <div class="col-md-6 col-6">
-          <input class="form-control" formControlName="serialNumber" id="inputEmail4" placeholder="Matricule"
-                 type="text">
-        </div>
-        <div class="col-md-6 col-6">
-          <input class="form-control" formControlName="name" id="inputPassword4" placeholder="Nom" type="text">
-        </div>
-        <div class="col-md-6 col-6">
-          <input [ngClass]="{
-          'is-invalid': contactForm.controls['phoneNumber'].invalid && (contactForm.controls['phoneNumber'].dirty || contactForm.controls['phoneNumber'].touched),
-          'is-valid': contactForm.controls['phoneNumber'].valid && (contactForm.controls['phoneNumber'].dirty || contactForm.controls['phoneNumber'].touched)
-        }" class="form-control" formControlName="phoneNumber" id="inputAddress" [minlength]="8" [maxlength]="20"
-                 placeholder="(+229) __ __ __ __"
-                 type="number"/>
-          <ng-container [ngTemplateOutletContext]="{ validation: 'required', message: 'Phone number is required', control: contactForm.controls['phoneNumber'] }" [ngTemplateOutlet]="formError"></ng-container>
-          <ng-container [ngTemplateOutletContext]="{ validation: 'minlength', message: 'Phone number must be at least 8 digits long', control: contactForm.controls['phoneNumber'] }" [ngTemplateOutlet]="formError"></ng-container>
-          <ng-container [ngTemplateOutletContext]="{ validation: 'maxlength', message: 'Phone number must be no more than 20 digits long', control: contactForm.controls['phoneNumber'] }" [ngTemplateOutlet]="formError"></ng-container>
-          <ng-container [ngTemplateOutletContext]="{ validation: 'invalidPhoneNumber', message: 'Invalid phone number', control: contactForm.controls['phoneNumber'] }" [ngTemplateOutlet]="formError"></ng-container>
 
-        </div>
-        <div class="col-md-6 col-6">
-          <input class="form-control" formControlName="email" id="inputAddress2" placeholder="Email" type="email">
-        </div>
-        <div class="col-md-12">
-          <input class="form-control" formControlName="subject" id="inputAddress3" placeholder="Objet" type="text">
-        </div>
-        <div class="col-md-12  ">
-          <textarea class="form-control" cols="30" formControlName="message" name="message" placeholder="Message"
-                    required
-                    rows="4"></textarea>
-        </div>
-        <div class="col-12 d-flex justify-content-start">
-          <button [disabled]="contactForm.invalid" class="btn btn-primary " id="bt8" type="submit">Envoyer</button>
-        </div>
-      </form>
+        <div class="form-connect" *ngIf="!isTrue">
+        <!--  <h1><strong routerLink="/connexion">Connexion</strong>  </h1>
+          <p class="form-paraph">Entrez votre identifiant et votre mot de passe, puis connectez-vous.</p>-->
+
+          <form (ngSubmit)="submit2()" [formGroup]="loginForm" class="topForm">
+
+            <div class="mb-3 text-danger">
+              <label class="form-label" for="username">Identifiant <span class="red">*</span></label>
+              <input aria-describedby="emailHelp" class="form-control" formControlName="username" id="username" name="username" placeholder="Numéro Matricule" type="text">
+
+              <ng-container class="text-danger" [ngTemplateOutletContext]="{validation: 'required',message: 'L\'identifiant est requis',control: loginForm.controls['username']}" [ngTemplateOutlet]="formError"></ng-container>
+              <ng-container [ngTemplateOutletContext]="{validation: 'minlength',message: 'L\'identifiant doit avoir minimum 3 caractères',control: loginForm.controls['username']}" [ngTemplateOutlet]="formError"></ng-container>
+              <ng-container [ngTemplateOutletContext]="{validation: 'maxLength',message: 'L\'identifiant should have maximum 100 symbols',control: loginForm.controls['username']}" [ngTemplateOutlet]="formError"></ng-container>
+            </div>
+
+            <div class="mb-3 text-danger">
+              <label class="form-label" for="password">Mot de passe <span  class="red">*</span></label>
+                <input class="form-control" formControlName="password" id="password" name="password" placeholder="******" type="password"/>
+
+              <ng-container class="text-danger" [ngTemplateOutletContext]="{validation: 'required',message: 'Le mot de passe est requis',control: loginForm.controls['password']}" [ngTemplateOutlet]="formError"></ng-container>
+              <ng-container [ngTemplateOutletContext]="{validation: 'minlength',message: 'Le mot de passe doit avoir minimum 3 caractères',control: loginForm.controls['password']}" [ngTemplateOutlet]="formError"></ng-container>
+              <ng-container [ngTemplateOutletContext]="{validation: 'maxLength',message: 'Password should have maximum 100 symbols',control: loginForm.controls['password']}" [ngTemplateOutlet]="formError"></ng-container>
+
+            </div>
+
+    <div *ngIf="hasError" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong style="font-weight: 700;">Mot de passe ou identifiant</strong>    incorrect
 
     </div>
 
+
+
+              <button [disabled]="loginForm.invalid" class="btn btn-primary" id="bt4" type="submit">
+                <ng-container *ngIf="isLoading$ | async"><span [style.display]="'block'" class="indicator-progress">Patientez...
+                  <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                </ng-container>
+                <ng-container *ngIf="(isLoading$ | async) === false">
+                  <span class="indicator-label">Connexion</span>
+                </ng-container>
+              </button>
+
+            <!--          <button type="submit" class="btn btn-primary" id="bt4">Connexion</button> -->
+            <button class="btn btn-primary" id="bt5" type="submit">Mot de passe oublié ?</button>
+          </form>
+
+        </div>
+{{message}}
+      <form (ngSubmit)="submit()" [formGroup]="contactForm" class="row g-3 mt-4"  *ngIf="isTrue">
+        <div class="col-md-6 col-6">
+          <label class="form-label" for="serialNumber">Matricule</label>
+          <input [ngClass]="{
+                  'is-invalid': contactForm.controls['serialNumber'].invalid && (contactForm.controls['serialNumber'].dirty || contactForm.controls['serialNumber'].touched),
+                  'is-valid': contactForm.controls['serialNumber'].valid && (contactForm.controls['serialNumber'].dirty || contactForm.controls['serialNumber'].touched)
+                }"
+                 class="form-control" formControlName="serialNumber" id="serialNumber"  type="text" [placeholder]="user.serialNumber" >
+          <div *ngIf="contactForm.get('serialNumber')?.touched && contactForm.get('serialNumber')?.invalid">
+            <small *ngIf="contactForm.get('serialNumber')?.errors?.['required']">Le matricule est requis.</small>
+            <small *ngIf="contactForm.get('serialNumber')?.errors?.['minlength']">Le matricule doit contenir au moins 3 caractères.</small>
+            <small *ngIf="contactForm.get('serialNumber')?.errors?.['maxlength']">Le matricule ne doit pas dépasser 100 caractères.</small>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-6">
+          <label class="form-label" for="name">Nom</label>
+          <input [ngClass]="{
+                  'is-invalid': contactForm.controls['name'].invalid && (contactForm.controls['name'].dirty || contactForm.controls['name'].touched),
+                  'is-valid': contactForm.controls['name'].valid && (contactForm.controls['name'].dirty || contactForm.controls['name'].touched)
+                }"
+                 class="form-control" formControlName="name" id="name"  type="text" [placeholder]="user.firstname + ' ' + user.lastname">
+          <div *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.invalid">
+            <small *ngIf="contactForm.get('name')?.errors?.['required']">Le nom est requis.</small>
+            <small *ngIf="contactForm.get('name')?.errors?.['minlength']">Le nom doit contenir au moins 3 caractères.</small>
+            <small *ngIf="contactForm.get('name')?.errors?.['maxlength']">Le nom ne doit pas dépasser 100 caractères.</small>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-6">
+          <label class="form-label" for="phoneNumber">N° Téléphone</label>
+          <input [ngClass]="{
+                'is-invalid': contactForm.controls['phoneNumber'].invalid && (contactForm.controls['phoneNumber'].dirty || contactForm.controls['phoneNumber'].touched),
+                'is-valid': contactForm.controls['phoneNumber'].valid && (contactForm.controls['phoneNumber'].dirty || contactForm.controls['phoneNumber'].touched)
+              }"
+                 class="form-control" formControlName="phoneNumber" id="phoneNumber" [minlength]="8" [maxlength]="20"
+                  [placeholder]="user.phoneNumber"
+                 type="text"/>
+          <div *ngIf="contactForm.get('phoneNumber')?.touched && contactForm.get('phoneNumber')?.invalid">
+            <small *ngIf="contactForm.get('phoneNumber')?.errors?.['required']">Le numéro de téléphone est requis.</small>
+            <small *ngIf="contactForm.get('phoneNumber')?.errors?.['minlength']">Le numéro doit contenir au moins 8 chiffres.</small>
+            <small *ngIf="contactForm.get('phoneNumber')?.errors?.['maxlength']">Le numéro ne doit pas dépasser 20 chiffres.</small>
+            <small *ngIf="contactForm.get('phoneNumber')?.errors?.['invalidPhoneNumber']">Numéro de téléphone invalide.</small>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-6">
+          <label class="form-label" for="inputAddress">Email</label>
+          <input
+            class="form-control"
+            formControlName="email"
+            id="inputAddress2"
+            [placeholder]="user.email"
+            type="email"
+            [ngClass]="{
+              'is-invalid': contactForm.controls['email'].invalid && (contactForm.controls['email'].dirty || contactForm.controls['email'].touched),
+              'is-valid': contactForm.controls['email'].valid && (contactForm.controls['email'].dirty || contactForm.controls['email'].touched)
+            }"
+          >
+          <ng-container *ngIf="contactForm.get('email')?.touched && contactForm.get('email')?.invalid">
+            <small *ngIf="contactForm.get('email')?.errors?.['required']">L'email est requis.</small>
+            <small *ngIf="contactForm.get('email')?.errors?.['email']">Veuillez entrer une adresse email valide.</small>
+            <small *ngIf="contactForm.get('email')?.errors?.['minlength']">L'email doit comporter au moins 3 caractères.</small>
+            <small *ngIf="contactForm.get('email')?.errors?.['maxlength']">L'email ne doit pas dépasser 100 caractères.</small>
+          </ng-container>
+        </div>
+
+        <div class="col-md-12">
+          <label class="form-label" for="subject">Objet</label>
+          <input [ngClass]="{
+                  'is-invalid': contactForm.controls['subject'].invalid && (contactForm.controls['subject'].dirty || contactForm.controls['subject'].touched),
+                  'is-valid': contactForm.controls['subject'].valid && (contactForm.controls['subject'].dirty || contactForm.controls['subject'].touched)
+                }"
+                 class="form-control" formControlName="subject" id="subject" placeholder="Objet" type="text">
+          <div *ngIf="contactForm.get('subject')?.touched && contactForm.get('subject')?.invalid">
+            <small *ngIf="contactForm.get('subject')?.errors?.['required']">L'objet est requis.</small>
+            <small *ngIf="contactForm.get('subject')?.errors?.['minlength']">L'objet doit contenir au moins 3 caractères.</small>
+            <small *ngIf="contactForm.get('subject')?.errors?.['maxlength']">L'objet ne doit pas dépasser 100 caractères.</small>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <label class="form-label" for="message">Message</label>
+          <textarea [ngClass]="{
+                  'is-invalid': contactForm.controls['message'].invalid && (contactForm.controls['message'].dirty || contactForm.controls['message'].touched),
+                  'is-valid': contactForm.controls['message'].valid && (contactForm.controls['message'].dirty || contactForm.controls['message'].touched)
+                }"
+                    class="form-control" formControlName="message" id="message" placeholder="Votre message" rows="4"></textarea>
+          <div *ngIf="contactForm.get('message')?.touched && contactForm.get('message')?.invalid">
+            <small *ngIf="contactForm.get('message')?.errors?.['required']">Le message est requis.</small>
+            <small *ngIf="contactForm.get('message')?.errors?.['minlength']">Le message doit contenir au moins 3 caractères.</small>
+            <small *ngIf="contactForm.get('message')?.errors?.['maxlength']">Le message ne doit pas dépasser 100 caractères.</small>
+          </div>
+        </div>
+
+        <div class="col-12 d-flex justify-content-start">
+          <button class="btn btn-primary" id="bt8" type="submit">Envoyer</button>
+        </div>
+      </form>
+      <div class="row g-3 mt-4">
+
+      </div>
+    </div>
+
     <div class="col-md-5  offset-md-1">
-      <h2 class="title-contact ">Nous Contacter</h2>
-      <div class="paraph1 ">
+      <h2 class="title-contact mt-5">Nous Contacter</h2>
+      <div class="paraph1 mt-4">
         <p>Vous pouvez aussi nous appeler ou vous rendre au service de relation avec les usagers du Ministère du Travail
           et de la Fonction Publique.<br>
           Du <span class="spanL">Lundi</span> au <span
@@ -69,10 +187,17 @@
         B, Cadjèjoun, Cotonou</p>
 
     </div>
+    <div class="row g-3 mt-4">
+      <img src="../../../../assets/img/maps.JPG" alt="" style="object-fit:fill">
+    </div>
   </div>
 </section>
 
+<section class="container">
+<div class="row">
 
+</div>
+</section>
 <ng-template #formError let-control="control" let-message="message" let-validation="validation">
   <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
     <div class="fv-plugins-message-container">

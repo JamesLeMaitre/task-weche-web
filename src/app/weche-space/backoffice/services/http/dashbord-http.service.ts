@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BaseHttpService} from "../../../../shared/services/http/base-http.service";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {HttpResponse} from "../../../../shared/models/http-response";
 import {NewRequest} from "../../models/new-request";
@@ -24,6 +24,7 @@ import { UpdateRequest } from '../../models/update-request';
   providedIn: 'root'
 })
 export class DashbordHttpService extends BaseHttpService {
+  errorMessage!: string;
 
   constructor(
     private http: HttpClient
@@ -42,7 +43,11 @@ export class DashbordHttpService extends BaseHttpService {
       headers: this.httpHeaders
     });
   }
-
+searchAdmin(search: string): Observable<HttpResponse<CheckRequestStatus[]>> {
+    return this.http.get<HttpResponse<CheckRequestStatus[]>>(`${this.API_URL}/check-request-status/search-from-user/${search}`, {
+      headers: this.httpHeaders
+    });
+  }
   getAdminRequestDetail(id: string): Observable<HttpResponse<NewRequest>> {
     return this.http.get<HttpResponse<NewRequest>>(`${this.API_URL}/new-request/${id}`, {
       headers: this.httpHeaders
@@ -100,6 +105,12 @@ export class DashbordHttpService extends BaseHttpService {
     });
   }
 
+  approveRequestByThird(id: string): Observable<HttpResponse<NewRequest>> {
+    return this.http.get<HttpResponse<NewRequest>>(`${this.API_URL}/approved-request/store/${id}`, {
+      headers: this.httpHeaders
+    });
+  }
+
 
   approveRequestSupAdmin(id: string): Observable<HttpResponse<NewRequest>> {
     return this.http.get<HttpResponse<NewRequest>>(`${this.API_URL}/approved-request/${id}`, {
@@ -128,6 +139,12 @@ export class DashbordHttpService extends BaseHttpService {
 
   updateRequestBySupAdmin(request: URLSearchParams): Observable<HttpResponse<NewRequest>> {
     return this.http.post<HttpResponse<NewRequest>>(`${this.API_URL}/update-request`, request, {
+      headers: this.httpHeader().set("content-Type", "application/x-www-form-urlencoded")
+    })
+  }
+
+  updateRequestByAdmin(request: URLSearchParams): Observable<HttpResponse<NewRequest>> {
+    return this.http.post<HttpResponse<NewRequest>>(`${this.API_URL}/update-request/store`, request, {
       headers: this.httpHeader().set("content-Type", "application/x-www-form-urlencoded")
     })
   }
@@ -161,14 +178,74 @@ export class DashbordHttpService extends BaseHttpService {
       headers: this.httpHeaders
     });
   }
+  nonRadiation(): Observable<HttpResponse<any>> {
+    return this.http.get<HttpResponse<any>>(`${this.API_URL}/dnrs/check`, {
+      headers: this.httpHeaders
+    });
+  }
+  checkIfUserHasValidApp(): Observable<HttpResponse<any>> {
+    return this.http.get<HttpResponse<any>>(`${this.API_URL}/check-validity/app`, {
+      headers: this.httpHeaders
+    });
+  }
 
+  checkIfUserHasValidAppAndDnr(): Observable<HttpResponse<any>> {
+    return this.http.get<HttpResponse<any>>(`${this.API_URL}/check-validity/both`, {
+      headers: this.httpHeaders
+    });
+  }
   downloadPdf(requestNumber: string) {
     this.http.get(`${this.API_URL}/file/pdf/${requestNumber}`, { responseType: 'blob' })
       .subscribe(response => {
         const blob = new Blob([response], { type: 'application/pdf' });
-        saveAs(blob, 'attastation.pdf');
+        saveAs(blob, 'Attestation_de_Présence_au_Poste.pdf');
       });
   }
+  downloadPdf1(requestNumber: string) {
+    this.http.get(`${this.API_URL}/file/pdf/${requestNumber}`, { responseType: 'blob' })
+      .subscribe(response => {
+        const blob = new Blob([response], { type: 'application/pdf' });
+        saveAs(blob, 'Attestation_de_Présence_au_Poste.pdf');
+      });
+  }
+  searchDocument(requestNumber: string) {
+    // Utiliser HttpParams pour passer la référence en tant que paramètre de requête
+    const params = new HttpParams().set('reference', requestNumber);
+
+    this.http.get(`${this.API_URL}/document-records/search?`, { params, responseType: 'blob' }).subscribe(
+      (data: Blob) => {
+        const url = window.URL.createObjectURL(data);
+        window.open(url); // Ouvre le document dans une nouvelle fenêtre
+      },
+      (error) => {
+        this.errorMessage = "Document non trouvé";
+      }
+    );
+  }
+
+  downloadDnrPdf(){
+    this.http.get(`${this.API_URL}/file/dnr`, { responseType: 'blob' })
+      .subscribe(response => {
+        const blob = new Blob([response], { type: 'application/pdf' });
+        saveAs(blob, 'Certificat_de_Non_Radiation.pdf');
+      });
+  }
+
+  downloadValidityPdf(){
+    this.http.get(`${this.API_URL}/file/validity`, { responseType: 'blob' })
+      .subscribe(response => {
+        const blob = new Blob([response], { type: 'application/pdf' });
+        saveAs(blob, 'Attestation_de_Validité_des_Services.pdf');
+      });
+  }
+
+  showRequest(requestNumber: string): Observable<HttpResponse<NewRequest>> {
+    return this.http.get<HttpResponse<NewRequest>>(`${this.API_URL}/new-request/show/${requestNumber}`, {
+      headers: this.httpHeaders
+    });
+  }
+
+
 
 
 }

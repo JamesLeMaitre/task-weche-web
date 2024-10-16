@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-12">
-    <h5 class="title-dash2">Historique des demande de APP </h5>
+    <h5 class="title-dash2">Historique des demandes d'APPs</h5>
   </div>
   <div class="col-lg-12 col-sm-6">
     <br>
@@ -8,19 +8,19 @@
       <table class="table">
         <thead class="table-light">
         <tr>
-          <th>Date de téléchargement</th>
+          <th>Date de délivrance</th>
           <th>Type de document</th>
           <th>Statut de la demande</th>
           <th>Action</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let checkRequestStatus of checkRequestStatuses">
-          <td>{{ checkRequestStatus.createdAt | customDate }}</td>
-          <td>Attestation de présence au poste </td>
+        <tr *ngFor="let checkRequestStatus of checkRequestStatuses | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+          <td>{{ checkRequestStatus.createByDpafAt | customDate }}</td>
+          <td> {{ newRequest?.beneficiary?.name }}</td>
           <td>
             <span class="status1" *ngIf="checkRequestStatus.requestStatus === 'APPROVED'">Validée</span>
-            <span class="status2" *ngIf="checkRequestStatus.requestStatus === 'REJECTED'">Rejtée</span>
+            <span class="status2" *ngIf="checkRequestStatus.requestStatus === 'REJECTED'">Rejetée</span>
           </td>
           <td>
             <a class="btn-telechager btn " *ngIf="checkRequestStatus.requestStatus === 'APPROVED'" (click)="downloadPdf(checkRequestStatus.requestNumber)"><img
@@ -41,7 +41,17 @@
           <td></td>
         </tr>-->
         </tbody>
-      </table>
+      </table><div class="pagination-container">
+        <div class="items-info">
+          Page {{ p }} / {{ totalPages }}
+        </div>
+        <div class="pagination-controls">
+          <pagination-controls (pageChange)="p = $event"
+                               [directionLinks]="true"
+                               nextLabel=""
+                               previousLabel=""></pagination-controls>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -19,4 +19,8 @@ export class AttestationHttpService extends BaseHttpService {
   save(request: FormData): Observable<HttpResponse<NewRequest>> {
     return this.http.post<HttpResponse<any>>(`${this.API_URL}/new-request`, request, {})
   }
+
+  create(request: FormData): Observable<HttpResponse<NewRequest>> {
+    return this.http.post<HttpResponse<any>>(`${this.API_URL}/new-request/create`, request, {})
+  }
 }

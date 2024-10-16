@@ -59,14 +59,17 @@ export class MenuConnexionComponent implements OnInit, OnDestroy {
     this.hasError = false;
     const data = getResult(this.f);
     const loginSubscr = this.authService.login(data).pipe(first()).subscribe((user: User | undefined) => {
+
+      console.log("user",user)
         if (user) {
           if (user.roles[0].roleName === "ROLE_USER") {
-            this.router.navigate(["/backoffice/demande-app"]);
+            this.router.navigate(["/backoffice/suivi"]);
           }else {
             this.router.navigate(["/backoffice"]);
           }
         } else {
           this.hasError = true;
+          console.log("user",this.hasError)
         }
       });
     this.unsubscribe.push(loginSubscr);

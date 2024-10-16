@@ -15,9 +15,29 @@
       confiance et nous traiterons votre requête dans les plus brefs délais.</p>
     <div class="d-flex justify-content-center align-items-center">
 
-      <a (click)="suivreMaDemande()" class="text-center notif-lien">Suivre ma demande <img
+      <a (click)="suivreMaDemande()" class="rt text-center notif-lien">Suivre ma demande <img
         alt="" src="../../../../assets/img/ic_baseline-arrow-forward.png"></a>
     </div>
+
+  </div>
+  <!-- <div class="modal-footer">
+     <button type="button" class="btn btn-outline-dark" (click)="modal.close('Close click')">Close</button>
+   </div>-->
+</ng-template>
+<ng-template #rejeter let-modal>
+  <!--  <div class="modal-header">
+  <h4 class="modal-title">Modal title</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>-->
+  <div class="modal-body taille-notif-delete position-relative">
+    <div class="d-flex justify-content-center align-items-center">
+      <i (click)="modal.close('Close click')" class="bi bi-x-lg profile-imgd"></i>
+
+    </div>
+    <p class="text-center paraph-notifdelete">{{message}}
+
+      <span
+        class="span-nom"> </span></p>
 
   </div>
   <!-- <div class="modal-footer">
@@ -27,16 +47,17 @@
 <app-suivi *ngIf="user?.hasRequested"></app-suivi>
 <div *ngIf="!user?.hasRequested" class="row">
   <div class="col-lg-12">
-    <h2 class="app-title1">Demande d’attestation de présence au poste (APP)</h2>
+    <h2 class="app-title1">Demande d’Attestation de Présence au Poste (APP)</h2>
     <p class="app-paraph">Remplissez les champs ci-dessous et validez votre demande.</p>
   </div>
 </div>
-<div *ngIf="!user?.hasRequested" class="row">
+<!--<div *ngIf="!user?.hasRequested" class="row">
+
 
 
   <h2 class="app-title2">{{ title }}</h2>
 
-  <!-- Progress Bar -->
+
   <div class="col-lg-6  col-sm-6">
     <div class="progress mb-4">
       <div [attr.aria-valuenow]="step === 1 ? '50' : '100'" [style.width]="step === 1 ? '50%' : '100%'"
@@ -48,17 +69,17 @@
 
   <div class="col-12">
     <form (ngSubmit)="submit()" [formGroup]="attestationForm" enctype="multipart/form-data">
-      <!-- Step 1 -->
+
 
       <div *ngIf="step === 1" class="row g-3" formGroupName="step1">
         <div class="col-md-4">
-          <label class="form-label form-title" for="inputName">Nom <span class="red">*</span></label>
+          <label class="form-label form-title" for="inputName"  ngbTooltip="Votre nom de famille." placement="top">Nom <span class="red"> *</span>   <i class="fas fa-info-circle tooltip-icon" aria-hidden="true"></i></label>
           <input [placeholder]="user.firstname" class="form-control custom-input" formControlName="firstName"
                  id="inputName" readonly
                  type="text">
         </div>
         <div class="col-md-4">
-          <label class="form-label form-title" for="inputLastName">Prénom <span class="red">*</span></label>
+          <label class="form-label form-title" for="inputLastName">Prénom·s <span class="red">*</span></label>
           <input [placeholder]="user.lastname" class="form-control custom-input" formControlName="lastName"
                  id="inputLastName" readonly
                  type="text">
@@ -81,7 +102,7 @@
           </div>
         </div>
         <div class="col-md-4">
-          <label class="form-label form-title" for="inputStartDate">Période de début <span class="red">*</span></label>
+          <label class="form-label form-title" for="inputStartDate" ngbTooltip="Indiquez la période de début de prise en compte de l'attestation de présence au poste." placement="top">Période de début <span class="red">*</span>  <i class="fas fa-info-circle tooltip-icon" aria-hidden="true"></i></label>
           <input class="form-control custom-input" formControlName="startPeriod" id="inputStartDate"
                  placeholder="YYYY-MM-DD"
                  type="date">
@@ -90,19 +111,24 @@
             <small *ngIf="attestationForm.get('step1.startPeriod')?.errors?.['required']" class="text-danger">La période
               de début est requise.</small>
           </div>
+          <div *ngIf="attestationForm.get('step1')?.errors?.['invalidPeriod']">
+            <small class="text-danger">{{ attestationForm.get('step1')?.errors?.['invalidPeriod'] }}</small>
+          </div>
         </div>
         <div class="col-md-4">
-          <label class="form-label form-title" for="inputEndDate">Période de fin <span class="red">*</span></label>
+          <label class="form-label form-title" for="inputEndDate" ngbTooltip="Indiquez la période de fin de prise en compte de l'attestation de présence au poste." placement="top">Période de fin <span class="red">*</span>  <i class="fas fa-info-circle tooltip-icon" aria-hidden="true"></i></label>
           <input class="form-control custom-input" formControlName="endPeriod" id="inputEndDate" type="date">
           <div
             *ngIf="attestationForm.get('step1.endPeriod')?.touched && attestationForm.get('step1.endPeriod')?.invalid">
             <small *ngIf="attestationForm.get('step1.endPeriod')?.errors?.['required']" class="text-danger">La période
               de fin est requise.</small>
+          </div><div *ngIf="attestationForm.get('step1')?.errors?.['invalidPeriod']">
+            <small class="text-danger">{{ attestationForm.get('step1')?.errors?.['invalidPeriod'] }}</small>
           </div>
         </div>
         <div class="col-md-4">
-          <label class="form-label form-title" for="iputDateFild">Date de 1ère prise de service<span
-            class="red">*</span></label>
+          <label class="form-label form-title" for="iputDateFild"  ngbTooltip="Indiquez la date de votre prise de fonction." placement="top">Date de prise de service<span
+            class="red">*</span><i class="fas fa-info-circle tooltip-icon" aria-hidden="true"></i></label>
           <input class="form-control custom-input" formControlName="dateOfFirstEntryService" id="iputDateFild"
                  placeholder="MM/DD/YYY "
                  type="date">
@@ -110,13 +136,15 @@
           <div
             *ngIf="attestationForm.get('step1.dateOfFirstEntryService')?.touched && attestationForm.get('step1.dateOfFirstEntryService')?.invalid">
             <small *ngIf="attestationForm.get('step1.dateOfFirstEntryService')?.errors?.['required']"
-                   class="text-danger">La date de 1ère
+                   class="text-danger">La date de
               prise de service est requise.</small>
           </div>
-
+          <div *ngIf="attestationForm.get('step1')?.errors?.['invalidFirstEntry']">
+            <small class="text-danger">{{ attestationForm.get('step1')?.errors?.['invalidFirstEntry'] }}</small>
+          </div>
         </div>
         <div class="col-md-4">
-          <label class="form-label form-title" for="customFile1">Décret de nomination <span class="red">*</span> (.pdf)
+          <label class="form-label form-title" for="customFile1"  ngbTooltip="Acte administratif par lequel une autorité compétente désigne officiellement une personne à un poste ou une fonction spécifique au sein de l'administration publique ou d'une organisation." >Décret de nomination <span class="red">*</span> (.pdf)<i class="fas fa-info-circle tooltip-icon" aria-hidden="true"></i>
           </label>
           <div class="input-group mb-3 custom-file-input">
             <label class="input-wrapper" for="customFile1">
@@ -133,12 +161,12 @@
             </label>
             <div *ngIf="fileError">
               <small class="text-danger">{{ fileError }}</small>
-            </div>
+            </div> <small>Taille maximale du fichier: 2 MB</small>
           </div>
         </div>
 
         <div class="col-md-4">
-          <label class="form-label form-title" for="customFile2">Passation de service <span class="red">*</span> (.pdf)</label>
+          <label class="form-label form-title"  ngbTooltip="Document ou fiche de passation de service." for="customFile2">Passation de service <span class="red">*</span> (.pdf)<i class="fas fa-info-circle tooltip-icon" aria-hidden="true"></i></label>
           <div class="input-group mb-3 custom-file-input">
             <label class="input-wrapper" for="customFile2">
               <svg fill="none" height="20px" viewBox="0 0 24 24" width="20px" xmlns="http://www.w3.org/2000/svg">
@@ -154,25 +182,25 @@
             </label>
             <div *ngIf="fileError2">
               <small class="text-danger">{{ fileError2 }}</small>
-            </div>
+            </div> <small>Taille maximale du fichier: 2 MB</small>
           </div>
         </div>
 
         <div class="col-12">
           <button (click)="nextStep()" [disabled]="!attestationForm.get('step1')?.valid" class="btn btn-primary"
                   id="btn-app"
-                  type="submit">Continuer
+                  type="submit">Continuez
           </button>
         </div>
       </div>
 
 
-      <!-- Step 2 -->
+
       <div *ngIf="step === 2" class="row g-3" formGroupName="step2">
         <div class="col-md-6">
           <label class="form-label form-title" for="inputName2">Nom<span class="red">*</span></label>
           <input class="form-control custom-input" formControlName="firstNameOfPreviousOfficial" id="inputName2"
-                 placeholder="DOSSOU"
+                 placeholder="Nom du responsable "
                  type="text">
           <div
             *ngIf="attestationForm.get('step2.firstNameOfPreviousOfficial')?.touched && attestationForm.get('step2.firstNameOfPreviousOfficial')?.invalid">
@@ -184,7 +212,7 @@
         <div class="col-md-6">
           <label class="form-label form-title" for="inputName3">Prénom<span class="red">*</span></label>
           <input class="form-control custom-input" formControlName="lastNameOfPreviousOfficial" id="inputName3"
-                 placeholder="Marc Sègblé"
+                 placeholder="Prénom(s) du responsable"
                  type="text">
 
           <div
@@ -203,7 +231,7 @@
 
         </div>
         <div class="col-md-6">
-          <label class="form-label" for="inputGrade">Grade<span class="red">*</span></label>
+          <label class="form-label form-title" for="inputGrade">Grade<span class="red">*</span></label>
           <input class="form-control custom-input" formControlName="gradeOfPreviousOfficial" id="inputGrade"
                  type="text">
 
@@ -248,7 +276,388 @@
     </form>
   </div>
 
+</div>--><div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong style="font-weight: bold;">Infos!</strong> Si vos informations sont incorrectes, vous pouvez demander une mise à jour en cliquant <a routerLink="/backoffice/signaler">ici</a>.
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
+<div *ngIf="!user?.hasRequested" class="row">
+  <h2 class="app-title2">{{ title }}</h2>
+
+  <!-- Progress Bar -->
+  <div class="col-lg-6 col-sm-6">
+    <div class="progress mb-4">
+      <div [attr.aria-valuenow]="step === 1 ? '33' : step === 2 ? '66' : '100'"
+           [style.width]="step === 1 ? '33%' : step === 2 ? '66%' : '100%'"
+           aria-valuemax="100"
+           aria-valuemin="0" class="progress-bar" role="progressbar"></div>
+    </div>
+
+  </div>
+
+  <div class="col-12">
+    <form (ngSubmit)="submit()" [formGroup]="attestationForm" enctype="multipart/form-data">
+
+      <!-- Sélection du type d'agent -->
+
+      <!-- Step 1 - Informations générales -->
+      <div *ngIf="step === 1" class="row g-3" formGroupName="step1">
+        <!-- Bénéficiaire -->
+        <div class="col-md-12">
+          <label class="form-label form-title" for="beneficiaryId">Bénéficiaire <span class="red">*</span></label>
+          <select class="form-control custom-input form-select" formControlName="beneficiaryId" id="floatingSelectGrid">
+            <option value="">Cliquez pour sélectionner le type de Bénéficiaire</option>
+            <option *ngFor="let item of beneficiaries" [value]="item.attribute">{{ item.name }}</option>
+          </select>
+          <small *ngIf="attestationForm.get('step1.beneficiaryId')?.touched && attestationForm.get('step1.beneficiaryId')?.invalid"
+                 class="text-danger">Veuillez sélectionner le type de bénéficiaire.</small>
+        </div>
+
+        <!-- Matricule NPI -->
+        <div class="col-md-4">
+          <label class="form-label form-title" for="matricule">Matricule NPI <span class="red">*</span></label>
+          <input class="form-control custom-input" [placeholder]="user.serialNumber" formControlName="serialNumber" id="matricule" type="text">
+
+        </div>
+
+        <!-- Nom et Prénom -->
+        <div class="col-md-4">
+          <label class="form-label form-title" for="inputName">Nom <span class="red">*</span></label>
+          <input [placeholder]="user.firstname" class="form-control custom-input" formControlName="firstName" id="inputName" type="text">
+
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label form-title" for="inputLastName">Prénom(s)<span class="red">*</span></label>
+          <input class="form-control custom-input" [placeholder]="user.lastname" formControlName="lastName" id="inputLastName" type="text">
+
+        </div>
+
+        <!-- Corps, Grade, Date effet grade -->
+        <div class="col-md-4">
+          <label class="form-label form-title" for="corps">Corps <span class="red">*</span></label>
+          <input class="form-control custom-input" formControlName="body" id="corps" type="text" [placeholder]="user.body">
+          <small *ngIf="attestationForm.get('step1.body')?.touched && attestationForm.get('step1.body')?.invalid"
+                 class="text-danger">Veuillez entrer le corps.</small>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label form-title" for="grade">Grade <span class="red">*</span></label>
+          <input class="form-control custom-input" formControlName="grade" id="grade" type="text" [placeholder]="user.grade">
+          <small *ngIf="attestationForm.get('step1.grade')?.touched && attestationForm.get('step1.grade')?.invalid"
+                 class="text-danger">Veuillez entrer le grade.</small>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label form-title" for="gradeDate">Date de prise d'effet du grade <span class="red">*</span></label>
+          <input class="form-control custom-input" formControlName="gradeDate" id="gradeDate" [placeholder]="user ? formatDate(user.gradeDate) : ''">
+          <small *ngIf="attestationForm.get('step1.gradeDate')?.touched && attestationForm.get('step1.gradeDate')?.invalid"
+                 class="text-danger">Veuillez entrer la date d'effet du grade.</small>
+        </div>
+
+        <!-- Désignation Ministère / Institution et UA -->
+        <div class="col-md-6">
+          <label class="form-label form-title" for="institution">Désignation Ministère / Institution <span class="red">*</span></label>
+          <input class="form-control custom-input" [placeholder]="user.structure.name" formControlName="structureId" id="institution" type="text">
+
+        </div>
+        <div class="col-md-6">
+          <label class="form-label form-title" for="ppsDate">Date PPS <span class="red">*</span></label>
+          <input class="form-control custom-input" formControlName="ppsDate" id="ppsDate"   [placeholder]="user.ppsDate">
+          <small *ngIf="attestationForm.get('step1.ppsDate')?.touched && attestationForm.get('step1.ppsDate')?.invalid"
+          class="text-danger">Veuillez entrer la Date PPS  .</small>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label form-title" for="ua">Désignation de l'unité administrative <span class="red">*</span></label>
+          <input class="form-control custom-input" formControlName="ua" id="ua" type="text" [placeholder]="user.ua">
+          <small *ngIf="attestationForm.get('step1.ua')?.touched && attestationForm.get('step1.ua')?.invalid"
+                 class="text-danger">Veuillez entrer la désignation de l'UA.</small>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label form-title" for="ua">Date de départ à la retraite <span class="red">*</span></label>
+          <input class="form-control custom-input" formControlName="dateRetreat" id="dateRetreat" type="text" [placeholder]="user.dateRetreat">
+          <small *ngIf="attestationForm.get('step1.dateRetreat')?.touched && attestationForm.get('step1.dateRetreat')?.invalid"
+                 class="text-danger">Veuillez entrer la date de départ à la retraite.</small>
+        </div>
+
+
+        <div class="col-12">
+          <button (click)="nextStep()" class="btn btn-primary" id="btn-app" type="button" >Continuez</button>
+        </div>
+      </div>
+
+
+
+
+<!-- Étape 2 : Informations spécifiques selon le type d'agent -->
+<div *ngIf="step === 2" class="row g-3" formGroupName="step2">
+  <!-- Formulaire pour l'étape 2 -->
+
+        <!-- Champs spécifiques pour les agents sans fonction -->
+        <div *ngIf="attestationForm.get('step1.beneficiaryId')?.value === 'sans-fonction' || attestationForm.get('step1.beneficiaryId')?.value === 'sans-fonction-departemental'"  class="row g-3">
+          <!-- Poste de l'agent -->
+          <div class="col-md-6">
+            <label class="form-label form-title" for="poste">Poste de l'agent (pas la fonction) <span class="red">*</span></label>
+            <input class="form-control custom-input" formControlName="positionHeldOfPreviousOfficial" id="poste" type="text">
+            <small *ngIf="attestationForm.get('step2.positionHeldOfPreviousOfficial')?.touched && attestationForm.get('step2.positionHeldOfPreviousOfficial')?.invalid"
+            class="text-danger">Veuillez entrer le Poste de l'agent  .</small>
+          </div>
+          <!-- Date PPS -->
+
+          <!-- Date d'entrée à l'UA -->
+          <div class="col-md-6">
+            <label class="form-label form-title" for="uaDate">Date d'entrée à l'UA <span class="red">*</span></label>
+            <input  [max]="today" class="form-control custom-input" formControlName="uaDate" id="uaDate" type="date">
+            <small *ngIf=" attestationForm.get('step2.uaDate')?.touched && attestationForm.get('step2.uaDate')?.invalid"
+            class="text-danger">Veuillez entrer la date d'entrée à l'UA .</small>
+            <div *ngIf="attestationForm.get('uaDate')?.invalid && attestationForm.get('uaDate')?.touched">
+              La date ne peut pas être dans le futur.
+            </div>
+            <small> La date ne peut pas être supérieure à un mois en arrière.</small>
+          </div>
+        </div>
+
+        <!-- Champs spécifiques pour les agents avec fonction / nommés -->
+        <div *ngIf="attestationForm.get('step1.beneficiaryId')?.value === 'nomme'" class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label form-title" for="inputName2">Nom de l'ancien occupant <span class="red">*</span></label>
+            <input class="form-control custom-input" formControlName="firstNameOfPreviousOfficial" id="inputName2"
+            [placeholder]="user.oldUserLastname"
+                   type="text">
+
+            <div
+              *ngIf=" attestationForm.get('step2.firstNameOfPreviousOfficial')?.invalid">
+              <small *ngIf="attestationForm.get('step2.firstNameOfPreviousOfficial')?.touched && attestationForm.get('step2.firstNameOfPreviousOfficial')?.errors?.['required']"
+                     class="text-danger">Le nom est
+                requis.</small>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label form-title" for="inputName3">Prénom(s) de l'ancien occupant <span class="red">*</span></label>
+            <input class="form-control custom-input" formControlName="lastNameOfPreviousOfficial" id="inputName3"
+            [placeholder]="user.oldUserFirstname"
+                   type="text">
+
+            <div
+              *ngIf="  attestationForm.get('step2.lastNameOfPreviousOfficial')?.invalid">
+              <small *ngIf="attestationForm.get('step2.lastNameOfPreviousOfficial')?.touched && attestationForm.get('step2.lastNameOfPreviousOfficial')?.errors?.['required']"
+                     class="text-danger">Le Prénom(s) est
+                requis.</small>
+            </div>
+          </div>
+          <!-- Intitulé de la fonction -->
+          <div class="col-md-6">
+            <label class="form-label form-title" for="serialNumberOfPreviousOfficial">Matricule ancien occupant (NPI) <span class="red">*</span></label>
+            <input class="form-control custom-input" formControlName="serialNumberOfPreviousOfficial"
+            [placeholder]="user.oldUserSerialNumber" id="serialNumberOfPreviousOfficial" type="text">
+            <small *ngIf="attestationForm.get('step2.serialNumberOfPreviousOfficial')?.touched && attestationForm.get('step2.serialNumberOfPreviousOfficial')?.invalid"
+          class="text-danger">Veuillez entrer le matricule ancien occupant .</small>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label form-title" for="fonction">Intitulé de la fonction <span class="red">*</span></label>
+            <input class="form-control custom-input" formControlName="fonction" id="fonction" type="text">
+            <small *ngIf="attestationForm.get('step2.fonction')?.touched && attestationForm.get('step2.fonction')?.invalid"
+            class="text-danger">Veuillez entrer l'intitulé de la fonction.</small>
+
+          </div>
+          <!-- Date prise de fonction -->
+          <div class="col-md-6">
+            <label class="form-label form-title" for="dateFonction">Date prise de fonction <span class="red">*</span></label>
+            <input [max]="today" class="form-control custom-input" formControlName="dateFonction" id="dateFonction" type="date">
+            <small *ngIf="attestationForm.get('step2.dateFonction')?.touched && attestationForm.get('step2.dateFonction')?.invalid"
+            class="text-danger">Veuillez entrer la Date de prise de fonction  .</small>
+          </div>
+          <!-- Rapport de passation de service -->
+
+            <!-- Matricule ancien occupant (NPI) -->
+
+
+            <div class="col-md-6">
+              <label class="form-label form-title" for="customFile1"  ngbTooltip="Acte administratif par lequel une autorité compétente désigne officiellement une personne à un poste ou une fonction spécifique au sein de l'administration publique ou d'une organisation." >Décret ou l'arrêté de nomination <span class="red">*</span> (.pdf)<i class="fas fa-info-circle tooltip-icon" aria-hidden="true"></i>
+              </label>
+              <div class="input-group mb-3 custom-file-input">
+                <label class="input-wrapper" for="customFile1">
+                  <svg fill="none" height="20px" viewBox="0 0 24 24" width="20px" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M12 14V8.5C12 7.67157 12.6716 7 13.5 7C14.3284 7 15 7.67157 15 8.5V14C15 15.6569 13.6569 17 12 17C10.3431 17 9 15.6569 9 14V10M8.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9265 19.673 20.362C20 19.7202 20 18.8802 20 17.2V6.8C20 5.11984 20 4.27976 19.673 3.63803C19.3854 3.07354 18.9265 2.6146 18.362 2.32698C17.7202 2 16.8802 2 15.2 2H8.8C7.11984 2 6.27976 2 5.63803 2.32698C5.07354 2.6146 4.6146 3.07354 4.32698 3.63803C4 4.27976 4 5.11984 4 6.8V17.2C4 18.8802 4 19.7202 4.32698 20.362C4.6146 20.9265 5.07354 21.3854 5.63803 21.673C6.27976 22 7.11984 22 8.8 22Z"
+                      stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                  </svg>
+                  <span *ngIf="!fileName" class="placeholder">Ajouter le Décret ou l'arrêté de nomination </span>
+                  <span *ngIf="fileName" class="placeholder">{{ fileName }}</span>
+                  <input (change)="onFileChange($event)" accept=".pdf" aria-describedby="inputGroupFileAddon04"
+                         aria-label="Upload" class="form-control custom-input" id="customFile1"
+                         type="file">
+                </label>      <small *ngIf="attestationForm.get('step2.handingOver')?.touched && attestationForm.get('step2.handingOver')?.invalid"
+                class="text-danger">Veuillez ajouter le Décret ou l'arrêté de nomination .</small>
+                <div *ngIf="fileError">
+                  <small class="text-danger">{{ fileError }}</small>
+                </div> <small>Taille maximale du fichier: 2 MB</small>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label form-title"  ngbTooltip="Document ou fiche de passation de service." for="customFile2">Passation de service <span class="red">*</span> (.pdf)<i class="fas fa-info-circle tooltip-icon" aria-hidden="true"></i></label>
+              <div class="input-group mb-3 custom-file-input">
+                <label class="input-wrapper" for="customFile2">
+                  <svg fill="none" height="20px" viewBox="0 0 24 24" width="20px" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M12 14V8.5C12 7.67157 12.6716 7 13.5 7C14.3284 7 15 7.67157 15 8.5V14C15 15.6569 13.6569 17 12 17C10.3431 17 9 15.6569 9 14V10M8.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9265 19.673 20.362C20 19.7202 20 18.8802 20 17.2V6.8C20 5.11984 20 4.27976 19.673 3.63803C19.3854 3.07354 18.9265 2.6146 18.362 2.32698C17.7202 2 16.8802 2 15.2 2H8.8C7.11984 2 6.27976 2 5.63803 2.32698C5.07354 2.6146 4.6146 3.07354 4.32698 3.63803C4 4.27976 4 5.11984 4 6.8V17.2C4 18.8802 4 19.7202 4.32698 20.362C4.6146 20.9265 5.07354 21.3854 5.63803 21.673C6.27976 22 7.11984 22 8.8 22Z"
+                      stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                  </svg>
+                  <span *ngIf="!fileName2" class="placeholder">Ajouter la passation de service </span>
+                  <span *ngIf="fileName2" class="placeholder">{{ fileName2 }}</span>
+                  <input (change)="onFileChange2($event)" accept=".pdf" aria-describedby="inputGroupFile"
+                         aria-label="Upload"
+                         class="form-control custom-input" id="customFile2" type="file">
+                </label> <small *ngIf="attestationForm.get('step2.appointmentDecree')?.touched && attestationForm.get('step2.appointmentDecree')?.invalid"
+                class="text-danger">Veuillez ajouter la passation de service .</small>
+                <div *ngIf="fileError2">
+                  <small class="text-danger">{{ fileError2 }}</small>
+                </div> <small>Taille maximale du fichier: 2 MB</small>
+              </div>
+            </div>
+          </div>
+         <!-- <div class="col-md-6">
+            <label class="form-label form-title" for="passationService">Rapport de passation de service (référence et date) <span class="red">*</span></label>
+            <input class="form-control custom-input" formControlName="passationService" id="passationService" type="text">
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label form-title" for="nomination">Décret / arrêté de nomination (référence, type, date) <span class="red">*</span></label>
+            <input class="form-control custom-input" formControlName="nomination" id="nomination" type="text">
+          </div>-->
+
+
+
+
+  <!-- ... contenu existant ... -->
+  <div class="col-12">
+    <button (click)="previousStep()" class="btn btn-secondary me-1" id="btn-app6">Retour</button>
+    <button (click)="nextStep()" class="btn btn-primary"
+    id="btn-app"  class="btn btn-primary">
+suivant
+    </button>
+  </div>
+</div>
+
+
+<!-- Étape 3 : Récapitulatif -->
+<div *ngIf="step === 3" class="row g-3">
+  <h3 class="app-title2">Récapitulatif</h3>
+
+  <!-- Récapitulatif des informations générales -->
+  <!--<div class="col-md-4">
+    <label class="form-label form-title">Categorie d'Agent :</label>
+    <p>{{ attestationForm.get('step1.beneficiaryId')?.value }}</p>
+  </div>-->
+  <div class="col-md-4">
+    <label class="form-label form-title">Matricule NPI :</label>
+    <p>{{ user.serialNumber}}</p>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label form-title">Nom :</label>
+    <p>{{ user.lastname}} </p>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label form-title">Prénom(s) :</label>
+    <p>{{ user.firstname}} </p>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label form-title">Grade :</label>
+    <p>{{ user.grade}}</p>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label form-title">Corps :</label>
+    <p>{{ user.body}} </p>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label form-title">Date effet grade :</label>
+    <p>{{formatDate(user.gradeDate) }}  </p>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label form-title">Désignation Ministère / Institution:</label>
+    <p>{{ user.structure.name }} </p>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label form-title">Désignation UA:</label>
+    <p>{{ user.ua}} </p>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label form-title">Date PPS :</label>
+    <p>{{formatDate(user.ppsDate) }}   </p>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label form-title">Date de départ à la retraite :</label>
+    <p>{{formatDate(user.dateRetreat) }}   </p>
+  </div>
+  <!-- Ajouter d'autres récapitulatifs pour les champs... -->
+
+  <!-- Champs conditionnels basés sur le type d'agent -->
+  <!-- Ajouter d'autres informations conditionnelles... -->
+
+  <div *ngIf="attestationForm.get('step1.beneficiaryId')?.value === 'nomme'" class="row g-3">
+    <div class="col-md-4">
+      <label class="form-label form-title">Nom de l'ancien occupant :</label>
+      <p> {{ user.oldUserLastname}}</p>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label form-title">Prénom(s) de l'ancien occupant :</label>
+      <p> {{ user.oldUserFirstname}} </p>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label form-title">Intitulé de la fonction :</label>
+      <p>{{ attestationForm.get('step2.fonction')?.value }} </p>
+    </div>
+
+
+    <div class="col-md-4">
+      <label class="form-label form-title">Date prise de fonction :</label>
+      <p>{{ attestationForm.get('step2.dateFonction')?.value }} </p>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label form-title">Matricule ancien occupant (NPI)  :</label>
+      <p>{{ user.oldUserSerialNumber}} </p>
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label form-title">Décret ou arrêté de nomination </label>
+      <p> {{ fileName }} </p>
+    </div>
+    <div class="col-md-4">
+      <label class="form-label form-title">Passation de service :</label>
+      <p> {{ fileName2 }} </p>
+    </div>
+  </div>
+
+  <div    *ngIf="attestationForm.get('step1.beneficiaryId')?.value === 'sans-fonction' || attestationForm.get('step1.beneficiaryId')?.value === 'sans-fonction-departemental'"  >
+    <div class="col-md-6">
+      <label class="form-label form-title">Poste de l'agent (pas la fonction) :</label>
+      <p>{{ attestationForm.get('step2.positionHeldOfPreviousOfficial')?.value }} </p>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label form-title">Date d'entrée à l'UA :</label>
+      <p>{{ attestationForm.get('step2.uaDate')?.value }} </p>
+    </div>
+
+  </div>
+  <div class="col-12">
+    <button (click)="previousStep()" class="btn btn-primary  me-1"
+    id="btn-app6" >Retour</button>
+
+    <button [disabled]="attestationForm.invalid" class="btn btn-primary" type="submit" class="btn btn-primary" id="btn-app">
+      <ng-container *ngIf="isLoading$ | async"><span [style.display]="'block'" class="indicator-progress">Patientez...
+                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+      </ng-container>
+      <ng-container *ngIf="(isLoading$ | async) === false">
+        <span class="indicator-label">Soumettre</span>
+      </ng-container>
+    </button>
+  </div>
+</div>
+
+    </form>
+  </div>
+</div>
+
 <br>
 <!--<div class="row">
   <div class="col-lg-12">
@@ -272,7 +681,7 @@
           <td>Attestation de présence au poste </td>
           <td>
             <span class="status1" *ngIf="checkRequestStatus.requestStatus === 'APPROVED'">Validée</span>
-            <span class="status2" *ngIf="checkRequestStatus.requestStatus === 'REJECTED'">Rejtée</span>
+            <span class="status2" *ngIf="checkRequestStatus.requestStatus === 'REJECTED'">Rejetée</span>
           </td>
           <td>
             <a class="btn-telechager btn " *ngIf="checkRequestStatus.requestStatus === 'APPROVED'" (click)="downloadPdf(checkRequestStatus.requestNumber)"><img

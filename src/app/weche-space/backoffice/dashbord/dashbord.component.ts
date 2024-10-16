@@ -13,6 +13,7 @@ import {AuthService, UserType} from "../../portail/menu-connexion/services/auth.
 })
 export class DashbordComponent implements OnInit, OnDestroy {
   demandes: NewRequest[] = [];
+  newRequest: NewRequest | undefined;
   user!:User;
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
   rejectRequestCount: number = 0;
@@ -21,7 +22,7 @@ export class DashbordComponent implements OnInit, OnDestroy {
   approvedRequestCount: number = 0;
   newRequests: NewRequest[] = [];
   p:number =1;
-  itemsPerPage: number = 1;
+  itemsPerPage: number = 10;
   totalPages: number = 0;
 
   constructor(
@@ -62,6 +63,9 @@ export class DashbordComponent implements OnInit, OnDestroy {
         .pipe(first())
         .subscribe(res => {
         this.demandes = res;
+          this.demandes.forEach(element => {
+            this.getRequest(element.requestNumber);
+          })
         this.totalPages = Math.ceil(this.demandes.length / this.itemsPerPage);
         this.unsubscribe.push(sb);
       })
@@ -118,6 +122,14 @@ export class DashbordComponent implements OnInit, OnDestroy {
         }
       });
     this.unsubscribe.push(dataSubscr);
+  }
+
+  private getRequest(requestNumber: string) {
+    const subscription = this.service.showRequest(requestNumber)
+      .pipe(first()).subscribe((response) => {
+        this.newRequest = response;
+      })
+    this.unsubscribe.push(subscription);
   }
 
 }

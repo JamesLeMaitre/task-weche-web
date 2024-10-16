@@ -1,0 +1,19 @@
+.tooltip-icon {
+  margin-left: 5px;
+  color: #0A3764; /* couleur de l'icône */
+  cursor: pointer;
+}
+
+.form-label.form-title:hover .tooltip-icon {
+  color: #0A3764; /* couleur de l'icône au survol */
+}
+
+.form-label.form-title {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer; /* changer le curseur pour indiquer que c'est interactif */
+}
+
+.rt{
+  cursor: pointer;
+}
